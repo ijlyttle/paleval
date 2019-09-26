@@ -4,7 +4,7 @@
 #'   discrete color palette. Interpolation within a palette is not required to
 #'   be a well-formed idea.
 #'
-#' @return `tibble` with variables `color_A`, `color_B`, `difference`
+#' @return `tbl_df` with variables `color_A`, `color_B`, `difference`
 #' @export
 #'
 pev_data_separation <- function(pal) {
@@ -12,5 +12,6 @@ pev_data_separation <- function(pal) {
   # coerce to hexcolor
   pal <- as_hexcolor(pal)
 
+  tibble::tibble()
 }
 
