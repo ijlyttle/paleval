@@ -9,5 +9,8 @@
 #'
 pev_data_separation <- function(pal) {
 
+  # coerce to hexcolor
+  pal <- as_hexcolor(pal)
+
 }
 
