@@ -27,3 +27,17 @@ pev_data_separation <- function(pal) {
   data
 }
 
+pev_gg_separation <- function(data_pal) {
+
+  g <-
+    ggplot2::ggplot(data_pal) +
+    ggplot2::geom_bar(
+      ggplot2::aes(x = color_a, y = 100, fill = color_a),
+      stat = "identity",
+      position = "identity",
+      width = 0.3
+    ) +
+    scale_fill_identity()
+
+  g
+}

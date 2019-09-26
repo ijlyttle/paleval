@@ -22,7 +22,8 @@ Imports:
     tidyr,
     purrr,
     grDevices,
-    farver
+    farver,
+    ggplot2
 Suggests: 
     testthat (>= 2.1.0),
     covr
