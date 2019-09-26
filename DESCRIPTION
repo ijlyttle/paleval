@@ -21,7 +21,8 @@ Imports:
     colorspace,
     tidyr,
     purrr,
-    grDevices
+    grDevices,
+    farver
 Suggests: 
     testthat (>= 2.1.0),
     covr
