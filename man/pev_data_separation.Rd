@@ -12,7 +12,7 @@ discrete color palette. Interpolation within a palette is not required to
 be a well-formed idea.}
 }
 \value{
-\code{tibble} with variables \code{color_A}, \code{color_B}, \code{difference}
+\code{tbl_df} with variables \code{color_A}, \code{color_B}, \code{difference}
 }
 \description{
 Get perceptual-differences within palette
