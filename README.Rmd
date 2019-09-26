@@ -23,9 +23,9 @@ The goal of paleval is to help you evaluate the effectiveness of color palettes 
 
 For the purpose of this package, we define:
 
-- **palette** an ordered collection of colors intended for use with categorical data. Order is used for familiarity, rather than to imply order among observations of the encoded variable. Interpolation within a palette is not a well-formed idea.
+- **palette**: a collection of colors intended for use with categorical data. Order is used for familiarity, rather than to imply order among observations of the encoded variable. Interpolation within a palette is not required to be a well-formed idea.
 
-- **map** an ordered collection of colors intended for use with numerical data, or for data where we wish to imply order among observations of the encoded variable. We expect to be able to interpolate within a map.
+- **map**: an ordered collection of colors intended for use with numerical data, or for data where we wish to imply order among observations of the encoded variable. We expect to be able to interpolate within a map.
 
 ## Installation
 
