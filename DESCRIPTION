@@ -18,4 +18,5 @@ BugReports: https://github.com/ijlyttle/paleval/issues
 Imports: 
     assertthat
 Suggests: 
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    covr

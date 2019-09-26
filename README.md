@@ -9,6 +9,10 @@
 status](https://www.r-pkg.org/badges/version/paleval)](https://CRAN.R-project.org/package=paleval)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Travis build
+status](https://travis-ci.org/ijlyttle/paleval.svg?branch=master)](https://travis-ci.org/ijlyttle/paleval)
+[![Codecov test
+coverage](https://codecov.io/gh/ijlyttle/paleval/branch/master/graph/badge.svg)](https://codecov.io/gh/ijlyttle/paleval?branch=master)
 <!-- badges: end -->
 
 The goal of paleval is to help you evaluate the effectiveness of color
@@ -19,12 +23,13 @@ package, used to evaluate the perceptual difference between two colors.
 
 For the purpose of this package, we define:
 
-  - **palette** an ordered collection of colors intended for use with
+  - **palette**: a collection of colors intended for use with
     categorical data. Order is used for familiarity, rather than to
     imply order among observations of the encoded variable.
-    Interpolation within a palette is not a well-formed idea.
+    Interpolation within a palette is not required to be a well-formed
+    idea.
 
-  - **map** an ordered collection of colors intended for use with
+  - **map**: an ordered collection of colors intended for use with
     numerical data, or for data where we wish to imply order among
     observations of the encoded variable. We expect to be able to
     interpolate within a map.
