@@ -4,7 +4,7 @@
 #'   discrete color palette. Interpolation within a palette is not required to
 #'   be a well-formed idea.
 #'
-#' @return `tbl_df` with variables `color_A`, `color_B`, `difference`
+#' @return `tbl_df` with variables `color_a`, `color_b`, `difference`
 #' @export
 #'
 pev_data_separation <- function(pal) {
@@ -12,6 +12,18 @@ pev_data_separation <- function(pal) {
   # coerce to hexcolor
   pal <- as_hexcolor(pal)
 
-  tibble::tibble()
+  data <- tidyr::expand_grid(color_a = pal, color_b = pal)
+
+  compare <- function(a, b) {
+
+    rgb_a <- t(grDevices::col2rgb(a))
+    rgb_b <- t(grDevices::col2rgb(b))
+
+    farver::compare_colour(rgb_a, rgb_b, from_space = "rgb", method = "cie2000")
+  }
+
+  data$difference <- purrr::map2_dbl(data$color_a, data$color_b, compare)
+
+  data
 }
 

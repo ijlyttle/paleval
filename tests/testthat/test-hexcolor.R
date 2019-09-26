@@ -1,4 +1,4 @@
-good <- c("#12ab34", "#FFFFFF")
+good <- c("#000000", "#FFFFFF")
 bad <- c("#p2ab34", "#FFFFFF")
 
 list_good <- as.list(good)
