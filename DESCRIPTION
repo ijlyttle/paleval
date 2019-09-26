@@ -17,7 +17,8 @@ URL: https://github.com/ijlyttle/paleval
 BugReports: https://github.com/ijlyttle/paleval/issues
 Imports: 
     assertthat,
-    tibble
+    tibble,
+    colorspace
 Suggests: 
     testthat (>= 2.1.0),
     covr
