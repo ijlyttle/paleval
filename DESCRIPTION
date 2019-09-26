@@ -23,7 +23,8 @@ Imports:
     purrr,
     grDevices,
     farver,
-    ggplot2
+    ggplot2,
+    magrittr
 Suggests: 
     testthat (>= 2.1.0),
     covr

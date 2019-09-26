@@ -4,16 +4,28 @@
 \alias{pev_data_separation}
 \title{Get perceptual-differences within palette}
 \usage{
-pev_data_separation(pal)
+pev_data_separation(pal, method = "cie2000")
 }
 \arguments{
 \item{pal}{\code{character} (coerceable to vector of hex-codes), describes a
 discrete color palette. Interpolation within a palette is not required to
 be a well-formed idea.}
+
+\item{method}{\code{character} method to use for comparison,
+passed to \code{farver::compare_color()}.
+One of: \code{"euclidean"}, \code{"cie1976"}, \code{"cie94"}, \code{"cie2000"}, or \code{"cmc"}.}
 }
 \value{
-\code{tbl_df} with variables \code{color_a}, \code{color_b}, \code{difference}
+\code{tbl_df} with variables \code{cvd}, \code{color_a}, \code{color_b}, \code{difference}
 }
 \description{
 Get perceptual-differences within palette
+}
+\examples{
+  library("colorspace")
+  pal <- qualitative_hcl(n = 5)
+  pev_data_separation(pal)
+}
+\seealso{
+pev_gg_separation
 }

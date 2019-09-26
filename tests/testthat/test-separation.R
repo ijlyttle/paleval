@@ -1,10 +1,10 @@
 library("colorspace")
 
 good <- c("#000000", "#FFFFFF")
+test_good <- pev_data_separation(good)
+plot_good <- pev_gg_separation(test_good)
 
 test_that("separation data works", {
-
-  test_good <- pev_data_separation(good)
 
   expect_is(test_good, "tbl_df")
 
@@ -24,4 +24,8 @@ test_that("separation data works", {
     tolerance = 1.e-5
   )
 
+})
+
+test_that("separation plot works", {
+  expect_is(plot_good, "ggplot")
 })

@@ -47,7 +47,17 @@ install.packages("paleval")
 
 ## Example
 
-Forthcoming.
+```{r}
+library("paleval")
+
+pal <- colorspace::qualitative_hcl(n = 5)
+print(pal)
+
+data_sep <- pev_data_separation(pal)
+print(data_sep)
+
+pev_gg_separation(data_sep)
+```
 
 ## Code of Conduct
 

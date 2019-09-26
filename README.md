@@ -53,7 +53,34 @@ install.packages("paleval")
 
 ## Example
 
-Forthcoming.
+``` r
+library("paleval")
+
+pal <- colorspace::qualitative_hcl(n = 5)
+print(pal)
+#> [1] "#E16A86" "#AA9000" "#00AA5A" "#00A6CA" "#B675E0"
+
+data_sep <- pev_data_separation(pal)
+print(data_sep)
+#> # A tibble: 25 x 3
+#>    color_a color_b difference
+#>    <chr>   <chr>        <dbl>
+#>  1 #E16A86 #E16A86        0  
+#>  2 #E16A86 #AA9000       48.6
+#>  3 #E16A86 #00AA5A       71.4
+#>  4 #E16A86 #00A6CA       60.3
+#>  5 #E16A86 #B675E0       23.0
+#>  6 #AA9000 #E16A86       48.6
+#>  7 #AA9000 #AA9000        0  
+#>  8 #AA9000 #00AA5A       30.4
+#>  9 #AA9000 #00A6CA       47.7
+#> 10 #AA9000 #B675E0       63.9
+#> # … with 15 more rows
+
+pev_gg_separation(data_sep)
+```
+
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ## Code of Conduct
 
