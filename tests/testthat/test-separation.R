@@ -9,18 +9,13 @@ test_that("separation data works", {
   expect_is(test_good, "tbl_df")
 
   expect_identical(
-    test_good$color_a,
-    rep(good, each = length(good))
-  )
-
-  expect_identical(
-    test_good$color_b,
-    rep(good, times = length(good))
+    names(test_good),
+    c("cvd", "color_a", "color_b", "difference")
   )
 
   expect_equal(
     test_good$difference,
-    c(0, 100, 100, 0),
+    c(0, 100, 100, 0, 0, 99.75180, 99.75180, 0, 0, 99.97655, 99.97655, 0, 0, 100, 100, 0),
     tolerance = 1.e-5
   )
 

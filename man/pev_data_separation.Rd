@@ -4,7 +4,7 @@
 \alias{pev_data_separation}
 \title{Get perceptual-differences within palette}
 \usage{
-pev_data_separation(pal, method = "cie2000")
+pev_data_separation(pal, method = "cie2000", include_cvd = TRUE)
 }
 \arguments{
 \item{pal}{\code{character} (coerceable to vector of hex-codes), describes a
@@ -14,6 +14,9 @@ be a well-formed idea.}
 \item{method}{\code{character} method to use for comparison,
 passed to \code{farver::compare_color()}.
 One of: \code{"euclidean"}, \code{"cie1976"}, \code{"cie94"}, \code{"cie2000"}, or \code{"cmc"}.}
+
+\item{include_cvd}{\code{logical}, indicates to include differences
+for color-vision deficiency}
 }
 \value{
 \code{tbl_df} with variables \code{cvd}, \code{color_a}, \code{color_b}, \code{difference}
