@@ -64,7 +64,7 @@ data_sep <- pev_data_separation(pal)
 print(data_sep)
 #> # A tibble: 100 x 4
 #>    cvd   color_a color_b difference
-#>    <chr> <chr>   <chr>        <dbl>
+#>    <chr> <fct>   <chr>        <dbl>
 #>  1 none  #E16A86 #E16A86        0  
 #>  2 none  #E16A86 #AA9000       48.6
 #>  3 none  #E16A86 #00AA5A       71.4

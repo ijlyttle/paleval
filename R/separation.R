@@ -61,6 +61,9 @@ pev_data_separation <- function(pal, method = "cie2000", include_cvd = TRUE) {
     farver::compare_colour(rgb_a, rgb_b, from_space = "rgb", method = method)
   }
 
+  # turn color_a into a factor
+  data$color_a <- factor(data$color_a, levels = pal)
+
   data$difference <- purrr::map2_dbl(data$color_a, data$color_b, compare)
 
   data
