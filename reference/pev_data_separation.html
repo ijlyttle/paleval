@@ -114,7 +114,7 @@
     <p>Get perceptual-differences within palette</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_data_separation</span>(<span class='no'>pal</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>)</pre>
+    <pre class="usage"><span class='fu'>pev_data_separation</span>(<span class='no'>pal</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>, <span class='kw'>include_cvd</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -131,6 +131,11 @@ be a well-formed idea.</p></td>
 passed to <code>farver::compare_color()</code>.
 One of: <code>"euclidean"</code>, <code>"cie1976"</code>, <code>"cie94"</code>, <code>"cie2000"</code>, or <code>"cmc"</code>.</p></td>
     </tr>
+    <tr>
+      <th>include_cvd</th>
+      <td><p><code>logical</code>, indicates to include differences
+for color-vision deficiency</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -143,20 +148,20 @@ One of: <code>"euclidean"</code>, <code>"cie1976"</code>, <code>"cie94"</code>, 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"colorspace"</span>)
   <span class='no'>pal</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://colorspace.R-Forge.R-project.org//reference/hcl_palettes.html'>qualitative_hcl</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>)
-  <span class='fu'>pev_data_separation</span>(<span class='no'>pal</span>)</div><div class='output co'>#&gt; # A tibble: 25 x 3
-#&gt;    color_a color_b difference
-#&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;
-#&gt;  1 #E16A86 #E16A86        0  
-#&gt;  2 #E16A86 #AA9000       48.6
-#&gt;  3 #E16A86 #00AA5A       71.4
-#&gt;  4 #E16A86 #00A6CA       60.3
-#&gt;  5 #E16A86 #B675E0       23.0
-#&gt;  6 #AA9000 #E16A86       48.6
-#&gt;  7 #AA9000 #AA9000        0  
-#&gt;  8 #AA9000 #00AA5A       30.4
-#&gt;  9 #AA9000 #00A6CA       47.7
-#&gt; 10 #AA9000 #B675E0       63.9
-#&gt; # … with 15 more rows</div></pre>
+  <span class='fu'>pev_data_separation</span>(<span class='no'>pal</span>)</div><div class='output co'>#&gt; # A tibble: 100 x 4
+#&gt;    cvd   color_a color_b difference
+#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;
+#&gt;  1 none  #E16A86 #E16A86        0  
+#&gt;  2 none  #E16A86 #AA9000       48.6
+#&gt;  3 none  #E16A86 #00AA5A       71.4
+#&gt;  4 none  #E16A86 #00A6CA       60.3
+#&gt;  5 none  #E16A86 #B675E0       23.0
+#&gt;  6 none  #AA9000 #E16A86       48.6
+#&gt;  7 none  #AA9000 #AA9000        0  
+#&gt;  8 none  #AA9000 #00AA5A       30.4
+#&gt;  9 none  #AA9000 #00A6CA       47.7
+#&gt; 10 none  #AA9000 #B675E0       63.9
+#&gt; # … with 90 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
