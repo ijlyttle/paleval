@@ -23,11 +23,26 @@ knitr::opts_chunk$set(
 
 The goal of paleval is to help you evaluate the effectiveness of color palettes and color maps. It builds from the [colorspace](http://colorspace.r-forge.r-project.org) package, used to design color maps, and the [farver](https://github.com/thomasp85/farver) package, used to evaluate the perceptual difference between two colors.
 
-For the purpose of this package, we define:
+This will have to go into a design-document eventually, but for now, I'll "puke" this here.
 
-- **palette**: a collection of colors intended for use with categorical data. Order is used for familiarity, rather than to imply order among observations of the encoded variable. Interpolation within a palette is not required to be a well-formed idea.
+For the purpose of this package, following ggplot2 usage, we define:
 
-- **map**: an ordered collection of colors intended for use with numerical data, or for data where we wish to imply order among observations of the encoded variable. We expect to be able to interpolate within a map.
+- **`fpal_discrete`**: A (palette) function that, when called with a single integer argument (the number of levels in the scale), returns the (hex-code) values that they should take. Such a function will have a maximum for the argument.
+
+- **`fpal_continuous`**: A (palette) function that, when called with a numeric vector with values between 0 and 1, returns the corresponding (hex-code) values.
+
+There are ways to create continuous-palette functions:
+
+ - hcl, etc. parameters, following the colorspace framework.
+ - composing two continuous-palette functions to create (presumably) a diverging palette-function. It's up to you to make sure the constituent palettes "meet in the middle".
+ - rescaling an existing continuous-palette function. It may make sense to "zoom-in", but "zooming-out" could get you into trouble.
+ 
+There are ways to create discrete-palette functions:
+ 
+ - discretizing a contiuous-palette function, specifying number of colors and discretization method (e.g. panels or posts).
+ - supplying a vector of hex-codes
+ 
+As well, it would be useful to have a function that, given an `fpal_discrete`, returns the maximum-index.
 
 ## Installation
 

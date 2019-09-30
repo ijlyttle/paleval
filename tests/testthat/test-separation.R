@@ -24,3 +24,4 @@ test_that("separation data works", {
 test_that("separation plot works", {
   expect_is(plot_good, "ggplot")
 })
+
