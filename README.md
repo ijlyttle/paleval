@@ -26,29 +26,37 @@ I’ll “puke” this here.
 
 For the purpose of this package, following ggplot2 usage, we define:
 
-  - **`fpal_discrete`**: A (palette) function that, when called with a
+  - **`fpal_cont`**: A (palette) function that, when called with a
+    numeric vector with values between 0 and 1, returns the
+    corresponding (hex-code) values.
+
+  - **`fpal_disc`**: A (palette) function that, when called with a
     single integer argument (the number of levels in the scale), returns
     the (hex-code) values that they should take. Such a function will
     have a maximum for the argument.
 
-  - **`fpal_continuous`**: A (palette) function that, when called with a
-    numeric vector with values between 0 and 1, returns the
-    corresponding (hex-code) values.
+These follow the `palette` argument for
+[`ggplot2::continuous_scale()`](https://ggplot2.tidyverse.org/reference/continuous_scale.html)
+and
+[`ggplot2::discrete_scale()`](https://ggplot2.tidyverse.org/reference/discrete_scale.html)
 
 There are ways to create continuous-palette functions:
 
   - hcl, etc. parameters, following the colorspace framework.
+    `pev_cont_hcl()`
   - composing two continuous-palette functions to create (presumably) a
     diverging palette-function. It’s up to you to make sure the
-    constituent palettes “meet in the middle”.
+    constituent palettes “meet in the middle”. `pev_cont_compose()`
   - rescaling an existing continuous-palette function. It may make sense
     to “zoom-in”, but “zooming-out” could get you into trouble.
+    `pev_cont_rescale()`
 
 There are ways to create discrete-palette functions:
 
   - discretizing a contiuous-palette function, specifying number of
     colors and discretization method (e.g. panels or posts).
-  - supplying a vector of hex-codes
+    `pev_disc_cont()`
+  - supplying a vector of hex-codes. `pev_disc_hex()`
 
 As well, it would be useful to have a function that, given an
 `fpal_discrete`, returns the maximum-index.
