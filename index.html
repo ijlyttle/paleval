@@ -75,19 +75,25 @@
 <p>This will have to go into a design-document eventually, but for now, I’ll “puke” this here.</p>
 <p>For the purpose of this package, following ggplot2 usage, we define:</p>
 <ul>
-<li><p><strong><code>fpal_discrete</code></strong>: A (palette) function that, when called with a single integer argument (the number of levels in the scale), returns the (hex-code) values that they should take. Such a function will have a maximum for the argument.</p></li>
-<li><p><strong><code>fpal_continuous</code></strong>: A (palette) function that, when called with a numeric vector with values between 0 and 1, returns the corresponding (hex-code) values.</p></li>
+<li><p><strong><code>fpal_cont</code></strong>: A (palette) function that, when called with a numeric vector with values between 0 and 1, returns the corresponding (hex-code) values.</p></li>
+<li><p><strong><code>fpal_disc</code></strong>: A (palette) function that, when called with a single integer argument (the number of levels in the scale), returns the (hex-code) values that they should take. Such a function will have a maximum for the argument.</p></li>
 </ul>
+<p>These follow the <code>palette</code> argument for <a href="https://ggplot2.tidyverse.org/reference/continuous_scale.html"><code><a href="https://ggplot2.tidyverse.org/reference/continuous_scale.html">ggplot2::continuous_scale()</a></code></a> and <a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html"><code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html">ggplot2::discrete_scale()</a></code></a></p>
 <p>There are ways to create continuous-palette functions:</p>
 <ul>
-<li>hcl, etc. parameters, following the colorspace framework.</li>
-<li>composing two continuous-palette functions to create (presumably) a diverging palette-function. It’s up to you to make sure the constituent palettes “meet in the middle”.</li>
-<li>rescaling an existing continuous-palette function. It may make sense to “zoom-in”, but “zooming-out” could get you into trouble.</li>
+<li>hcl, etc. parameters, following the colorspace framework. <code>pev_cont_hcl()</code>
+</li>
+<li>composing two continuous-palette functions to create (presumably) a diverging palette-function. It’s up to you to make sure the constituent palettes “meet in the middle”. <code>pev_cont_compose()</code>
+</li>
+<li>rescaling an existing continuous-palette function. It may make sense to “zoom-in”, but “zooming-out” could get you into trouble. <code>pev_cont_rescale()</code>
+</li>
 </ul>
 <p>There are ways to create discrete-palette functions:</p>
 <ul>
-<li>discretizing a contiuous-palette function, specifying number of colors and discretization method (e.g. panels or posts).</li>
-<li>supplying a vector of hex-codes</li>
+<li>discretizing a contiuous-palette function, specifying number of colors and discretization method (e.g. panels or posts). <code>pev_disc_cont()</code>
+</li>
+<li>supplying a vector of hex-codes. <code>pev_disc_hex()</code>
+</li>
 </ul>
 <p>As well, it would be useful to have a function that, given an <code>fpal_discrete</code>, returns the maximum-index.</p>
 <div id="installation" class="section level2">
@@ -167,6 +173,7 @@ install.packages("paleval")
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Ian J Lyttle <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9962-4849" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
