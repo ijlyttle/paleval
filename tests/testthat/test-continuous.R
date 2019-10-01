@@ -26,13 +26,32 @@ test_that("sequential works", {
     name %>%
     hcl_palettes(palette = .) %>%
     pev_map_hcl_param() %>%
-    pluck(1)
+    pluck(name)
 
   fcont <- pev_fcont(hcl_param)
 
   expect_identical(
     fcont(c(0, 0.5, 1)),
     sequential_hcl(3, palette = name, rev = TRUE) # for some reason, order is reversed
+  )
+
+})
+
+
+test_that("diverging works", {
+
+  name <- "Green-Brown"
+  hcl_param <-
+    name %>%
+    hcl_palettes(palette = .) %>%
+    pev_map_hcl_param() %>%
+    pluck(name)
+
+  fcont <- pev_fcont(hcl_param)
+
+  expect_identical(
+    fcont(c(0, 0.25, 0.5, 0.75, 1)),
+    diverging_hcl(5, palette = name) # for some reason, order is reversed
   )
 
 })
