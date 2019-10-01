@@ -35,7 +35,8 @@ Imports:
     ggplot2,
     magrittr,
     rlang,
-    glue
+    glue,
+    stats
 Suggests: 
     testthat (>= 2.1.0),
     covr

@@ -14,21 +14,29 @@ pev_hcl_param <- function(type = c("qualitative", "sequential", "diverging"),
                           l1, l2 = NULL, p1 = NULL, p2 = NULL, cmax = NULL,
                           fixup = TRUE) {
 
-  l2 <- l2 %||% l1
-  p1 <- p1 %||% 1
-  p2 <- p2 %||% 1
-  cmax <- cmax %||% c1
+  `%|na|%` <- function(x, y) {
+    if (is.null(x) || is.na(x)) {
+      return(y)
+    }
+
+    x
+  }
+
+  p1 <- p1 %|na|% 1
+  p2 <- p2 %|na|% p1
+  cmax <- cmax %|na|% c1
 
   if (identical(type, "qualitative")) {
-    h2 <- h2 %||% (h1 + 360)
+    h2 <- h2 %|na|% (h1 + 360)
   } else {
-    h2 <- h2 %||% h1
+    h2 <- h2 %|na|% h1
   }
 
   if (identical(type, "diverging")) {
-    c2 <- c2 %||% 0
+    c2 <- c2 %|na|% NA_real_
   } else {
-    c2 <- c2 %||% c1
+    c2 <- c2 %|na|% c1
+    l2 <- l2 %|na|% l1
   }
 
   pev_hcl_param = structure(
@@ -86,8 +94,22 @@ pev_map_hcl_param <- function(hcl_palettes) {
     msg = "Argument `hcl_palettes` must inherit from colorspace `hcl_palettes`."
   )
 
-  # one element for each row
+  # fix type -> one of "qualitative", "sequential", "diverging"
+  levels(hcl_palettes$type) <-
+    c("qualitative", "sequential", "sequential", "diverging")
 
-  # qualitative: if h2 not set, use h1 + 360
+  hcl_palettes$type <- as.character(hcl_palettes$type)
 
+  # want to convert to named list of lists: one element for each row
+  hcl_list <-
+    stats::setNames(
+      split(hcl_palettes, seq(nrow(hcl_palettes))),
+      rownames(hcl_palettes)
+    )
+
+  hcl_list <- purrr::map(hcl_list, as.list)
+
+  hcl_list <- purrr::map(hcl_list, ~do.call(pev_hcl_param, .x))
+
+  hcl_list
 }

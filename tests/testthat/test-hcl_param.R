@@ -1,3 +1,5 @@
+library("colorspace")
+
 hcl_qual <-
   pev_hcl_param(type = "qualitative", h1 = 0, c1 = 60, l1 = 60)
 
@@ -28,7 +30,7 @@ test_that("we can build an hcl param", {
 
   expect_identical(hcl_seq$h2, 0)
 
-  expect_identical(hcl_div$c2, 0)
+  expect_identical(hcl_div$c2, NA_real_)
 })
 
 test_that("we can print an hcl param", {
@@ -46,6 +48,25 @@ test_that("we can build hcl params from a colorspace palette", {
   expect_error(
     pev_map_hcl_param(1),
     "Argument `hcl_palettes`"
+  )
+
+  # need a function that takes a list
+  pal_names <- c("Pastel 1", "Grays", "Purple-Blue", "Blue-Red")
+
+  hcl_pal <- hcl_palettes(palette = pal_names)
+
+  hcl_param <- pev_map_hcl_param(hcl_pal)
+
+  expect_is(hcl_param, "list")
+  expect_named(hcl_param, pal_names)
+  expect_identical(
+    unname(purrr::map_chr(hcl_param, purrr::pluck, "type")),
+    c("qualitative", "sequential", "sequential", "diverging")
+  )
+
+  purrr::walk(
+    hcl_param,
+    ~expect_is(.x, "pev_hcl_param")
   )
 
 })

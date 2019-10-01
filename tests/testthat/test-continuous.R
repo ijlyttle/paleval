@@ -1,0 +1,38 @@
+library("colorspace")
+library("purrr")
+
+test_that("qualitative works", {
+
+  name <- "Pastel 1"
+  hcl_param <-
+    name %>%
+    hcl_palettes(palette = .) %>%
+    pev_map_hcl_param() %>%
+    pluck(1)
+
+  fcont <- pev_fcont(hcl_param)
+
+  expect_identical(
+    fcont(c(0, 0.5)),
+    qualitative_hcl(2, palette = name)
+  )
+
+})
+
+test_that("sequential works", {
+
+  name <- "Purple-Blue"
+  hcl_param <-
+    name %>%
+    hcl_palettes(palette = .) %>%
+    pev_map_hcl_param() %>%
+    pluck(1)
+
+  fcont <- pev_fcont(hcl_param)
+
+  expect_identical(
+    fcont(c(0, 0.5, 1)),
+    sequential_hcl(3, palette = name, rev = TRUE) # for some reason, order is reversed
+  )
+
+})
