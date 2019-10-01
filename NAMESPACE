@@ -3,4 +3,5 @@
 export("%>%")
 export(pev_data_separation)
 export(pev_gg_separation)
+export(pev_hcl_param)
 importFrom(magrittr,"%>%")
