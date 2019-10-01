@@ -1,5 +1,11 @@
 hcl_qual <-
-  pev_hcl_param(type = "qualitative", h1 = 0, h2 = 360, c1 = 60, l1 = 60)
+  pev_hcl_param(type = "qualitative", h1 = 0, c1 = 60, l1 = 60)
+
+hcl_seq <-
+  pev_hcl_param(type = "sequential", h1 = 0, c1 = 60, l1 = 60)
+
+hcl_div <-
+  pev_hcl_param(type = "diverging", h1 = 0, c1 = 60, l1 = 60)
 
 test_that("we can build an hcl param", {
 
@@ -20,6 +26,9 @@ test_that("we can build an hcl param", {
   expect_identical(hcl_qual$cmax, 60)
   expect_identical(hcl_qual$fixup, TRUE)
 
+  expect_identical(hcl_seq$h2, 0)
+
+  expect_identical(hcl_div$c2, 0)
 })
 
 test_that("we can print an hcl param", {
