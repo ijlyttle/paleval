@@ -114,12 +114,17 @@
     <p>This follows the colorspace scheme.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_hcl_param</span>(<span class='no'>h1</span>, <span class='kw'>h2</span> <span class='kw'>=</span> <span class='no'>h1</span>, <span class='no'>c1</span>, <span class='kw'>c2</span> <span class='kw'>=</span> <span class='no'>c1</span>, <span class='no'>l1</span>, <span class='kw'>l2</span> <span class='kw'>=</span> <span class='no'>l1</span>, <span class='kw'>p1</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>p2</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>cmax</span> <span class='kw'>=</span> <span class='no'>c1</span>, <span class='kw'>fixup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>pev_hcl_param</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"qualitative"</span>, <span class='st'>"sequential"</span>, <span class='st'>"diverging"</span>), <span class='no'>h1</span>,
+  <span class='kw'>h2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>c1</span>, <span class='kw'>c2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>l1</span>, <span class='kw'>l2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cmax</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fixup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>type</th>
+      <td><p>character indicating type of HCL palette.</p></td>
+    </tr>
     <tr>
       <th>h1</th>
       <td><p>hue value in the HCL color description, has to be in [0, 360].</p></td>
