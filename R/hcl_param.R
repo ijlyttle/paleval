@@ -9,11 +9,31 @@
 #'  pev_hcl_param(h1 = 0, h2 = 360, c1 = 60, l1 = 60)
 #' @export
 #'
-pev_hcl_param <- function(h1, h2 = h1, c1, c2 = c1, l1, l2 = l1,
-                          p1 = 1, p2 = 1, cmax = c1, fixup = TRUE) {
+pev_hcl_param <- function(type = c("qualitative", "sequential", "diverging"),
+                          h1, h2 = NULL, c1, c2 = NULL,
+                          l1, l2 = NULL, p1 = NULL, p2 = NULL, cmax = NULL,
+                          fixup = TRUE) {
+
+  l2 <- l2 %||% l1
+  p1 <- p1 %||% 1
+  p2 <- p2 %||% 1
+  cmax <- cmax %||% c1
+
+  if (identical(type, "qualitative")) {
+    h2 <- h2 %||% (h1 + 360)
+  } else {
+    h2 <- h2 %||% h1
+  }
+
+  if (identical(type, "diverging")) {
+    c2 <- c2 %||% 0
+  } else {
+    c2 <- c2 %||% c1
+  }
 
   pev_hcl_param = structure(
     list(
+      type = match.arg(type),
       h1 = h1,
       h2 = h2,
       c1 = c1,
@@ -38,25 +58,26 @@ print.pev_hcl_param <- function(x, ...) {
   print(
     glue::glue(
       "HCL Parameters (colorspace)",
-      "Hue:\t\tstart: {f(x$h1)}\tend: {f(x$h2)}",
-      "Chroma:\t\tstart: {f(x$c1)}\tend: {f(x$c2)}\tmax: {f(x$cmax)}",
-      "Luminance:\tstart: {f(x$l1)}\tend: {f(x$l2)}",
-      "Exponent:\t  [1]: {f(x$p1)}\t[2]: {f(x$p2)}",
+      "Type:\t\t{x$type}",
+      "Hue:\t\t[1]: {f(x$h1)}\t[2]: {f(x$h2)}",
+      "Chroma:\t\t[1]: {f(x$c1)}\t[2]: {f(x$c2)}\tmax: {f(x$cmax)}",
+      "Luminance:\t[1]: {f(x$l1)}\t[2]: {f(x$l2)}",
+      "Exponent:\t[1]: {f(x$p1)}\t[2]: {f(x$p2)}",
       .sep = "\n"
     )
-
   )
-
 
   invisible(x)
 }
 
 #' Create list of HCL parameter-sets
 #'
+#' For each row in the `hcl_palettes` data frame
+#'
 #' @param hcl_palettes Object with S3 class `hcl_palettes`,
 #'   created using [colorspace::hcl_palettes()].
 #'
-#' @return Named list, elements are objects wiht S3 class `pev_hcl_param`
+#' @return Named list, elements are objects with S3 class `pev_hcl_param`
 #'
 pev_map_hcl_param <- function(hcl_palettes) {
 
@@ -65,5 +86,8 @@ pev_map_hcl_param <- function(hcl_palettes) {
     msg = "Argument `hcl_palettes` must inherit from colorspace `hcl_palettes`."
   )
 
-  # qualitative, if h2 not set, use h1 + 360
+  # one element for each row
+
+  # qualitative: if h2 not set, use h1 + 360
+
 }

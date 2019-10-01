@@ -11,8 +11,8 @@ pev_map_hcl_param(hcl_palettes)
 created using \code{\link[colorspace:hcl_palettes]{colorspace::hcl_palettes()}}.}
 }
 \value{
-Named list, elements are objects wiht S3 class \code{pev_hcl_param}
+Named list, elements are objects with S3 class \code{pev_hcl_param}
 }
 \description{
-Create list of HCL parameter-sets
+For each row in the \code{hcl_palettes} data frame
 }

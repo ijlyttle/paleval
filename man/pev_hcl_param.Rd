@@ -4,10 +4,13 @@
 \alias{pev_hcl_param}
 \title{Create HCL parameter-set}
 \usage{
-pev_hcl_param(h1, h2 = h1, c1, c2 = c1, l1, l2 = l1, p1 = 1,
-  p2 = 1, cmax = c1, fixup = TRUE)
+pev_hcl_param(type = c("qualitative", "sequential", "diverging"), h1,
+  h2 = NULL, c1, c2 = NULL, l1, l2 = NULL, p1 = NULL, p2 = NULL,
+  cmax = NULL, fixup = TRUE)
 }
 \arguments{
+\item{type}{character indicating type of HCL palette.}
+
 \item{h1}{hue value in the HCL color description, has to be in [0, 360].}
 
 \item{h2}{hue value in the HCL color description, has to be in [0, 360].}
