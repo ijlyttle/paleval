@@ -1,5 +1,5 @@
 Package: paleval
-Title: What the Package Does (One Line, Title Case)
+Title: Tools to help you design and evaluate color palettes
 Version: 0.0.0.9000
 Authors@R:
     c(
@@ -36,7 +36,8 @@ Imports:
     magrittr,
     rlang,
     glue,
-    stats
+    stats,
+    graphics
 Suggests: 
     testthat (>= 2.1.0),
     covr

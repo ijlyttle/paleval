@@ -14,7 +14,7 @@ test_that("we can build an hcl param", {
   expect_is(hcl_qual, "pev_hcl_param")
   expect_named(
     hcl_qual,
-    c("type", "h1", "h2", "c1", "cmax", "c2", "l1", "l2", "p1", "p2", "fixup")
+    c("type", "h1", "h2", "c1", "c2", "l1", "l2", "p1", "p2", "cmax", "fixup")
   )
   expect_identical(hcl_qual$type, "qualitative")
   expect_identical(hcl_qual$h1, 0)
@@ -25,12 +25,12 @@ test_that("we can build an hcl param", {
   expect_identical(hcl_qual$l2, 60)
   expect_identical(hcl_qual$p1, 1)
   expect_identical(hcl_qual$p2, 1)
-  expect_identical(hcl_qual$cmax, 60)
+  expect_identical(hcl_qual$cmax, NA_real_)
   expect_identical(hcl_qual$fixup, TRUE)
 
   expect_identical(hcl_seq$h2, 0)
 
-  expect_identical(hcl_div$c2, NA_real_)
+  expect_identical(hcl_div$c2, 0)
 })
 
 test_that("we can print an hcl param", {

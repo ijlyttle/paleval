@@ -22,15 +22,17 @@ pev_hcl_param <- function(type = c("qualitative", "sequential", "diverging"),
     x
   }
 
-  p1 <- p1 %|na|% 1
-  p2 <- p2 %|na|% p1
-  cmax <- cmax %|na|% c1
-
   if (identical(type, "qualitative")) {
     h2 <- h2 %|na|% (h1 + 360)
+    c2 <- c2 %|na|% c1
   } else {
     h2 <- h2 %|na|% h1
+    c2 <- c2 %|na|% 0
   }
+
+  l2 <- l2 %|na|% l1
+  p1 <- p1 %|na|% 1
+  p2 <- p2 %|na|% p1
 
   if (identical(type, "diverging")) {
     c2 <- c2 %|na|% NA_real_
@@ -39,18 +41,21 @@ pev_hcl_param <- function(type = c("qualitative", "sequential", "diverging"),
     l2 <- l2 %|na|% l1
   }
 
+  # want to permit NA here
+  cmax <- cmax %||% NA_real_
+
   pev_hcl_param = structure(
     list(
       type = match.arg(type),
       h1 = h1,
       h2 = h2,
       c1 = c1,
-      cmax = cmax,
       c2 = c2,
       l1 = l1,
       l2 = l2,
       p1 = p1,
       p2 = p2,
+      cmax = cmax,
       fixup = fixup
     ),
     class = "pev_hcl_param"
@@ -86,6 +91,7 @@ print.pev_hcl_param <- function(x, ...) {
 #'   created using [colorspace::hcl_palettes()].
 #'
 #' @return Named list, elements are objects with S3 class `pev_hcl_param`
+#' @export
 #'
 pev_map_hcl_param <- function(hcl_palettes) {
 
