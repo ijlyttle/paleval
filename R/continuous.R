@@ -14,10 +14,10 @@
 #' \describe{
 #'   \item{`as_pev_fcont()`}{Coerce function to continuous-palette function}
 #'   \item{[pev_fcont_hcl()]}{Create continuous-palette function from HCL parameters}
-#'   \item{`pev_fcont_cvd`}{Modify output to simulate color-vision deficiency}
-#'   \item{`pev_fcont_rescale`}{Rescale input to continuous-palette function}
-#'   \item{`pev_fcont_reverse`}{Reverse palette-function}
-#'   \item{`pev_fcont_diverging`}{Create a diverging-palette function from two functions}
+#'   \item{[pev_fcont_cvd()]}{Modify output to simulate color-vision deficiency}
+#'   \item{[pev_fcont_rescale()]}{Rescale input to continuous-palette function}
+#'   \item{[pev_fcont_reverse()]}{Reverse palette-function}
+#'   \item{[pev_fcont_diverging()]}{Create a diverging-palette function from two functions}
 #' }
 #'
 #' @param pev_fcont `function`, when called with a numeric vector with values
@@ -49,7 +49,7 @@
 #'   pev_fcont_rescale(fcont_purple, limits = c(0.25, 0.75))
 #'
 #'   # Create diverging-palette function
-#'   fcont_purple_green <- pev_fcont_div(fcont_purple, fcont_green)
+#'   fcont_purple_green <- pev_fcont_diverging(fcont_purple, fcont_green)
 #'   fcont_purple_green
 #'
 #'   # Modify palette function to simulate color-vision deficiency
@@ -72,8 +72,8 @@ as_pev_fcont <- function(pev_fcont) {
 
 #' Create continuous-palette function from HCL parameters
 #'
-#' @param hcl_param Object with S3 class `pev_hcl_param`,
-#'   created using [pev_hcl_param()].
+#' @param hcl_param Object with S3 class `pev_hcl`,
+#'   created using [pev_hcl()].
 #'
 #' @inherit as_pev_fcont return
 #'
@@ -84,7 +84,7 @@ pev_fcont_hcl <- function(hcl_param) {
   # if type is diverging, construct two sequential scales and compose
   if (identical(hcl_param$type, "diverging")) {
 
-    hcl_low <- pev_hcl_param(
+    hcl_low <- pev_hcl(
       type = "sequential",
       h1 = hcl_param$h1,
       c1 = hcl_param$c1,
@@ -97,7 +97,7 @@ pev_fcont_hcl <- function(hcl_param) {
       fixup = hcl_param$fixup
     )
 
-    hcl_high <- pev_hcl_param(
+    hcl_high <- pev_hcl(
       type = "sequential",
       h1 = hcl_param$h2,
       c1 = hcl_param$c1,
@@ -110,7 +110,7 @@ pev_fcont_hcl <- function(hcl_param) {
       fixup = hcl_param$fixup
     )
 
-    f <- pev_fcont_div(pev_fcont_hcl(hcl_low), pev_fcont_hcl(hcl_high))
+    f <- pev_fcont_diverging(pev_fcont_hcl(hcl_low), pev_fcont_hcl(hcl_high))
 
     return(f)
   }
@@ -147,7 +147,7 @@ pev_fcont_hcl <- function(hcl_param) {
 #'
 #' @export
 #'
-pev_fcont_div <- function(pev_fcont_low, pev_fcont_high) {
+pev_fcont_diverging <- function(pev_fcont_low, pev_fcont_high) {
 
   f <- function(x) {
     x_rescale <- abs(x - 0.5) / 0.5
@@ -240,7 +240,7 @@ pev_fcont_cvd <- function(pev_fcont,
 }
 
 
-pev_rescale_div <- function(limit) {
+pev_rescale_diverging <- function(limit) {
 
   assertthat::assert_that(
     assertthat::is.scalar(limit),

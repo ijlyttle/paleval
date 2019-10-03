@@ -31,10 +31,10 @@ The functions are:
 \describe{
 \item{\code{as_pev_fcont()}}{Coerce function to continuous-palette function}
 \item{\code{\link[=pev_fcont_hcl]{pev_fcont_hcl()}}}{Create continuous-palette function from HCL parameters}
-\item{\code{pev_fcont_cvd}}{Modify output to simulate color-vision deficiency}
-\item{\code{pev_fcont_rescale}}{Rescale input to continuous-palette function}
-\item{\code{pev_fcont_reverse}}{Reverse palette-function}
-\item{\code{pev_fcont_diverging}}{Create a diverging-palette function from two functions}
+\item{\code{\link[=pev_fcont_cvd]{pev_fcont_cvd()}}}{Modify output to simulate color-vision deficiency}
+\item{\code{\link[=pev_fcont_rescale]{pev_fcont_rescale()}}}{Rescale input to continuous-palette function}
+\item{\code{\link[=pev_fcont_reverse]{pev_fcont_reverse()}}}{Reverse palette-function}
+\item{\code{\link[=pev_fcont_diverging]{pev_fcont_diverging()}}}{Create a diverging-palette function from two functions}
 }
 }
 \examples{
@@ -59,7 +59,7 @@ The functions are:
   pev_fcont_rescale(fcont_purple, limits = c(0.25, 0.75))
 
   # Create diverging-palette function
-  fcont_purple_green <- pev_fcont_div(fcont_purple, fcont_green)
+  fcont_purple_green <- pev_fcont_diverging(fcont_purple, fcont_green)
   fcont_purple_green
 
   # Modify palette function to simulate color-vision deficiency

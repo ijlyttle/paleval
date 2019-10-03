@@ -90,7 +90,7 @@ test_that("rescale works", {
     diverging_hcl(5, palette = name)[2:4]
   )
 
-  expect_identical(pev_rescale_div(0.5), c(0.25, 0.75))
-  expect_identical(pev_rescale_div(1), c(0, 1))
+  expect_identical(pev_rescale_diverging(0.5), c(0.25, 0.75))
+  expect_identical(pev_rescale_diverging(1), c(0, 1))
 
 })

@@ -1,17 +1,17 @@
 library("colorspace")
 
 hcl_qual <-
-  pev_hcl_param(type = "qualitative", h1 = 0, c1 = 60, l1 = 60)
+  pev_hcl(type = "qualitative", h1 = 0, c1 = 60, l1 = 60)
 
 hcl_seq <-
-  pev_hcl_param(type = "sequential", h1 = 0, c1 = 60, l1 = 60)
+  pev_hcl(type = "sequential", h1 = 0, c1 = 60, l1 = 60)
 
 hcl_div <-
-  pev_hcl_param(type = "diverging", h1 = 0, c1 = 60, l1 = 60)
+  pev_hcl(type = "diverging", h1 = 0, c1 = 60, l1 = 60)
 
 test_that("we can build an hcl param", {
 
-  expect_is(hcl_qual, "pev_hcl_param")
+  expect_is(hcl_qual, "pev_hcl")
   expect_named(
     hcl_qual,
     c("type", "h1", "h2", "c1", "c2", "l1", "l2", "p1", "p2", "cmax", "fixup")
@@ -66,7 +66,7 @@ test_that("we can build hcl params from a colorspace palette", {
 
   purrr::walk(
     hcl_param,
-    ~expect_is(.x, "pev_hcl_param")
+    ~expect_is(.x, "pev_hcl")
   )
 
 })

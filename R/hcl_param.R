@@ -4,12 +4,12 @@
 #'
 #' @inheritParams colorspace::sequential_hcl
 #'
-#' @return Object with S3 class `pev_hcl_param`
+#' @return Object with S3 class `pev_hcl`
 #' @examples
-#'  pev_hcl_param(h1 = 0, h2 = 360, c1 = 60, l1 = 60)
+#'  pev_hcl(h1 = 0, h2 = 360, c1 = 60, l1 = 60)
 #' @export
 #'
-pev_hcl_param <- function(type = c("qualitative", "sequential", "diverging"),
+pev_hcl <- function(type = c("qualitative", "sequential", "diverging"),
                           h1, h2 = NULL, c1, c2 = NULL,
                           l1, l2 = NULL, p1 = NULL, p2 = NULL, cmax = NULL,
                           fixup = TRUE) {
@@ -44,7 +44,7 @@ pev_hcl_param <- function(type = c("qualitative", "sequential", "diverging"),
   # want to permit NA here
   cmax <- cmax %||% NA_real_
 
-  pev_hcl_param = structure(
+  pev_hcl = structure(
     list(
       type = match.arg(type),
       h1 = h1,
@@ -58,12 +58,12 @@ pev_hcl_param <- function(type = c("qualitative", "sequential", "diverging"),
       cmax = cmax,
       fixup = fixup
     ),
-    class = "pev_hcl_param"
+    class = "pev_hcl"
   )
 
 }
 
-print.pev_hcl_param <- function(x, ...) {
+print.pev_hcl <- function(x, ...) {
   f <- function(x) {
     sprintf("% 7.2f", x)
   }
@@ -90,7 +90,7 @@ print.pev_hcl_param <- function(x, ...) {
 #' @param hcl_palettes Object with S3 class `hcl_palettes`,
 #'   created using [colorspace::hcl_palettes()].
 #'
-#' @return Named list, elements are objects with S3 class `pev_hcl_param`
+#' @return Named list, elements are objects with S3 class `pev_hcl`
 #' @export
 #'
 pev_map_hcl_param <- function(hcl_palettes) {
@@ -115,7 +115,7 @@ pev_map_hcl_param <- function(hcl_palettes) {
 
   hcl_list <- purrr::map(hcl_list, as.list)
 
-  hcl_list <- purrr::map(hcl_list, ~do.call(pev_hcl_param, .x))
+  hcl_list <- purrr::map(hcl_list, ~do.call(pev_hcl, .x))
 
   hcl_list
 }

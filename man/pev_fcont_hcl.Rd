@@ -7,8 +7,8 @@
 pev_fcont_hcl(hcl_param)
 }
 \arguments{
-\item{hcl_param}{Object with S3 class \code{pev_hcl_param},
-created using \code{\link[=pev_hcl_param]{pev_hcl_param()}}.}
+\item{hcl_param}{Object with S3 class \code{pev_hcl},
+created using \code{\link[=pev_hcl]{pev_hcl()}}.}
 }
 \value{
 \code{function} with S3 class \code{pev_fcont},
