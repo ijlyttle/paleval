@@ -1,25 +1,32 @@
-#' Create continuous-palette function
+#' Continuous-palette function
 #'
-#' @param hcl_param Object with S3 class `pev_hcl_param`,
-#'   created using [pev_hcl_param()].
+#' A continuous-palette function takes a vector of numbers, each between
+#' 0 and 1, and returns a vector of character strings, each containing the
+#' correpsonding hex-code. You con use a continuous palette-function to
+#' build a custom ggplot2 scale, using [ggplot2::continuous_scale()].
+#'
+#' These functions help you build, modify, and compose continuous-palette
+#' functions. By working with functions, rather than with a finite set of
+#' hex-colors, we can avoid interpolation-errors as we compose and rescale.
+#'
+#' The functions are:
+#'
+#' \describe{
+#'   \item{`as_pev_fcont()`}{Coerce function to continuous-palette function}
+#'   \item{[pev_fcont_hcl()]}{Create continuous-palette function from HCL parameters}
+#'   \item{`pev_fcont_cvd`}{Modify output to simulate color-vision deficiency}
+#'   \item{`pev_fcont_rescale`}{Rescale input to continuous-palette function}
+#'   \item{`pev_fcont_reverse`}{Reverse palette-function}
+#'   \item{`pev_fcont_diverging`}{Create a diverging-palette function from two functions}
+#' }
+#'
 #' @param pev_fcont `function`, when called with a numeric vector with values
 #'   between 0 and 1, returns the corresponding (hex-code) values.
-#' @param pev_fcont_low `function`, similar to `pev_fcont`, used for the
-#'   low end of a diverging scale. Low end of this scale becomes the
-#'   middle of the diverging scale.
-#' @param pev_fcont_high `function`, similar to `pev_fcont`, used for the
-#'   high end of a diverging scale. Low end of this scale becomes the
-#'   middle of the diverging scale.
-#' @param limits `numeric` vector of length 2, rescaling parameters. The input
-#'   values to the returned function, `c(0, 1)`, are mapped to `limits` as
-#'   inputs to the input function.
-#' @param type `character`, describes color-vision deficiency. One of
-#'   `"deutan"`, `"protan"`, `"tritan"`, `"none"`.
-#' @param severity `numeric`, number between 0 (none) and 1 to describe
-#'   the severity of color-vision deficiency.
 #'
-#' @return `function`, when called with a numeric vector with values
-#'  between 0 and 1, returns the corresponding (hex-code) values.
+#' @return `function` with S3 class `pev_fcont`,
+#'  when called with a numeric vector with values between 0 and 1,
+#'  returns the corresponding (hex-code) values.
+#'
 #' @examples
 #'   # Define HCL parameters for palette functions
 #'   pals <- pev_map_hcl_param(
@@ -27,8 +34,13 @@
 #'   )
 #'
 #'   # Create palette functions
-#'   fcont_purple <- pev_fcont(pals[["Purples 3"]])
-#'   fcont_green <- pev_fcont(pals[["Greens 3"]])
+#'   fcont_purple <- pev_fcont_hcl(pals[["Purples 3"]])
+#'   fcont_green <- pev_fcont_hcl(pals[["Greens 3"]])
+#'
+#'   # Use pallete function to return hex-code
+#'   fcont_purple(1)
+#'
+#'   # printing the function prints the palette itself
 #'   fcont_purple
 #'   fcont_green
 #'
@@ -44,7 +56,30 @@
 #'   pev_fcont_cvd(fcont_purple_green, type = "deutan")
 #' @export
 #'
-pev_fcont <- function(hcl_param) {
+as_pev_fcont <- function(pev_fcont) {
+
+  # verify that the function x does what it claims
+  assertthat::assert_that(
+    inherits(pev_fcont, "function"),
+    is_hexcolor(pev_fcont(0)),
+    is_hexcolor(pev_fcont(1))
+  )
+
+  class(pev_fcont) <- unique(c("pev_fcont", class(pev_fcont)))
+
+  pev_fcont
+}
+
+#' Create continuous-palette function from HCL parameters
+#'
+#' @param hcl_param Object with S3 class `pev_hcl_param`,
+#'   created using [pev_hcl_param()].
+#'
+#' @inherit as_pev_fcont return
+#'
+#' @export
+#'
+pev_fcont_hcl <- function(hcl_param) {
 
   # if type is diverging, construct two sequential scales and compose
   if (identical(hcl_param$type, "diverging")) {
@@ -75,7 +110,7 @@ pev_fcont <- function(hcl_param) {
       fixup = hcl_param$fixup
     )
 
-    f <- pev_fcont_div(pev_fcont(hcl_low), pev_fcont(hcl_high))
+    f <- pev_fcont_div(pev_fcont_hcl(hcl_low), pev_fcont_hcl(hcl_high))
 
     return(f)
   }
@@ -96,10 +131,20 @@ pev_fcont <- function(hcl_param) {
     )
   }
 
-  .as_pev_fcont(f)
+  as_pev_fcont(f)
 }
 
-#' @rdname pev_fcont
+#' Create continuous-palette function from HCL parameters
+#'
+#' @param pev_fcont_low `function`, similar to `pev_fcont`, used for the
+#'   low end of a diverging scale. Low end of this scale becomes the
+#'   middle of the diverging scale.
+#' @param pev_fcont_high `function`, similar to `pev_fcont`, used for the
+#'   high end of a diverging scale. Low end of this scale becomes the
+#'   middle of the diverging scale.
+#'
+#' @inherit as_pev_fcont return
+#'
 #' @export
 #'
 pev_fcont_div <- function(pev_fcont_low, pev_fcont_high) {
@@ -114,10 +159,17 @@ pev_fcont_div <- function(pev_fcont_low, pev_fcont_high) {
     )
   }
 
-  .as_pev_fcont(f)
+  as_pev_fcont(f)
 }
 
-#' @rdname pev_fcont
+#' Create continuous-palette function from HCL parameters
+#'
+
+#' @param limits `numeric` vector of length 2, rescaling parameters.
+#'   The input values to the returned function, `c(0, 1)`,
+#'   are mapped to `limits` as inputs to the input function.
+#' @inherit as_pev_fcont return params
+#'
 #' @export
 #'
 pev_fcont_rescale <- function(pev_fcont, limits = c(0, 1)) {
@@ -136,17 +188,29 @@ pev_fcont_rescale <- function(pev_fcont, limits = c(0, 1)) {
     pev_fcont(x_rescale)
   }
 
-  .as_pev_fcont(f)
+  as_pev_fcont(f)
 }
 
-#' @rdname pev_fcont
+#' Create continuous-palette function from HCL parameters
+#'
+#' @inherit as_pev_fcont return params
+#'
 #' @export
 #'
 pev_fcont_reverse <- function(pev_fcont) {
   pev_fcont_rescale(pev_fcont, limits = c(1, 0))
 }
 
-#' @rdname pev_fcont
+#' Create continuous-palette function from HCL parameters
+#'
+#'
+#' @param type `character`, describes color-vision deficiency. One of
+#'   `"deutan"`, `"protan"`, `"tritan"`, `"none"`.
+#' @param severity `numeric`, number between 0 (none) and 1 to describe
+#'   the severity of color-vision deficiency.
+#'
+#' @inherit as_pev_fcont return params
+#'
 #' @export
 #'
 pev_fcont_cvd <- function(pev_fcont,
@@ -172,15 +236,9 @@ pev_fcont_cvd <- function(pev_fcont,
     fcvd(pev_fcont(x))
   }
 
-  .as_pev_fcont(f)
+  as_pev_fcont(f)
 }
 
-# internal function to add `pev_fcont` class
-.as_pev_fcont <- function(x) {
-  class(x) <- unique(c("pev_fcont", class(x)))
-
-  x
-}
 
 pev_rescale_div <- function(limit) {
 

@@ -2,10 +2,11 @@
 
 S3method(print,pev_fcont)
 export("%>%")
+export(as_pev_fcont)
 export(pev_data_separation)
-export(pev_fcont)
 export(pev_fcont_cvd)
 export(pev_fcont_div)
+export(pev_fcont_hcl)
 export(pev_fcont_rescale)
 export(pev_fcont_reverse)
 export(pev_gg_separation)

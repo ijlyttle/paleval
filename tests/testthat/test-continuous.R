@@ -10,7 +10,7 @@ test_that("qualitative works", {
     pev_map_hcl_param() %>%
     pluck(1)
 
-  fcont <- pev_fcont(hcl_param)
+  fcont <- pev_fcont_hcl(hcl_param)
 
   expect_identical(
     fcont(c(0, 0.5)),
@@ -28,7 +28,7 @@ test_that("sequential works", {
     pev_map_hcl_param() %>%
     pluck(name)
 
-  fcont <- pev_fcont(hcl_param)
+  fcont <- pev_fcont_hcl(hcl_param)
 
   expect_identical(
     fcont(c(0, 0.5, 1)),
@@ -47,7 +47,7 @@ test_that("diverging works", {
     pev_map_hcl_param() %>%
     pluck(name)
 
-  fcont <- pev_fcont(hcl_param)
+  fcont <- pev_fcont_hcl(hcl_param)
 
   expect_identical(
     fcont(c(0, 0.25, 0.5, 0.75, 1)),
@@ -65,7 +65,7 @@ test_that("reverse works", {
     pev_map_hcl_param() %>%
     pluck(name)
 
-  fcont <- pev_fcont_reverse(pev_fcont(hcl_param))
+  fcont <- pev_fcont_reverse(pev_fcont_hcl(hcl_param))
 
   expect_identical(
     fcont(c(0, 0.25, 0.5, 0.75, 1)),
@@ -83,7 +83,7 @@ test_that("rescale works", {
     pev_map_hcl_param() %>%
     pluck(name)
 
-  fcont <- pev_fcont_rescale(pev_fcont(hcl_param), c(0.25, 0.75))
+  fcont <- pev_fcont_rescale(pev_fcont_hcl(hcl_param), c(0.25, 0.75))
 
   expect_identical(
     fcont(c(0, 0.5, 1)),
