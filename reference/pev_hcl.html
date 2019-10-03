@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • paleval</title>
+<title>Create HCL parameter-set — pev_hcl • paleval</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Create HCL parameter-set — pev_hcl" />
+<meta property="og:description" content="This follows the colorspace scheme." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -101,96 +103,87 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Create HCL parameter-set</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/hcl_param.R'><code>R/hcl_param.R</code></a></small>
+    <div class="hidden name"><code>pev_hcl.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>This follows the colorspace scheme.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>pev_hcl</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"qualitative"</span>, <span class='st'>"sequential"</span>, <span class='st'>"diverging"</span>), <span class='no'>h1</span>,
+  <span class='kw'>h2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>c1</span>, <span class='kw'>c2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>l1</span>, <span class='kw'>l2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>cmax</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fixup</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="as_pev_fcont.html">as_pev_fcont()</a></code> </p>
-        </td>
-        <td><p>Continuous-palette function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_data_separation.html">pev_data_separation()</a></code> </p>
-        </td>
-        <td><p>Get perceptual-differences within palette</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_cvd.html">pev_fcont_cvd()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_diverging.html">pev_fcont_diverging()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_hcl.html">pev_fcont_hcl()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_rescale.html">pev_fcont_rescale()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_reverse.html">pev_fcont_reverse()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_gg_separation.html">pev_gg_separation()</a></code> </p>
-        </td>
-        <td><p>ggplot for perceptual-differences within palette</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_hcl.html">pev_hcl()</a></code> </p>
-        </td>
-        <td><p>Create HCL parameter-set</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_map_hcl_param.html">pev_map_hcl_param()</a></code> </p>
-        </td>
-        <td><p>Create list of HCL parameter-sets</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>type</th>
+      <td><p>character indicating type of HCL palette.</p></td>
+    </tr>
+    <tr>
+      <th>h1</th>
+      <td><p>hue value in the HCL color description, has to be in [0, 360].</p></td>
+    </tr>
+    <tr>
+      <th>h2</th>
+      <td><p>hue value in the HCL color description, has to be in [0, 360].</p></td>
+    </tr>
+    <tr>
+      <th>c1</th>
+      <td><p>chroma value in the HCL color description.</p></td>
+    </tr>
+    <tr>
+      <th>c2</th>
+      <td><p>chroma value in the HCL color description.</p></td>
+    </tr>
+    <tr>
+      <th>l1</th>
+      <td><p>luminance value in the HCL color description.</p></td>
+    </tr>
+    <tr>
+      <th>l2</th>
+      <td><p>luminance value in the HCL color description.</p></td>
+    </tr>
+    <tr>
+      <th>p1</th>
+      <td><p>control parameter determining how chroma and luminance should
+be increased (1 = linear, 2 = quadratic, etc.).</p></td>
+    </tr>
+    <tr>
+      <th>p2</th>
+      <td><p>control parameter determining how chroma and luminance should
+be increased (1 = linear, 2 = quadratic, etc.).</p></td>
+    </tr>
+    <tr>
+      <th>cmax</th>
+      <td><p>Maximum chroma value in the HCL color description.</p></td>
+    </tr>
+    <tr>
+      <th>fixup</th>
+      <td><p>logical. Should the color be corrected to a valid RGB value?</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Object with S3 class <code>pev_hcl</code></p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'> <span class='fu'>pev_hcl</span>(<span class='kw'>h1</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>h2</span> <span class='kw'>=</span> <span class='fl'>360</span>, <span class='kw'>c1</span> <span class='kw'>=</span> <span class='fl'>60</span>, <span class='kw'>l1</span> <span class='kw'>=</span> <span class='fl'>60</span>)</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
+
   </div>
 </div>
 

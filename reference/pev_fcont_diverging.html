@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • paleval</title>
+<title>Create continuous-palette function from HCL parameters — pev_fcont_diverging • paleval</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Create continuous-palette function from HCL parameters — pev_fcont_diverging" />
+<meta property="og:description" content="Create continuous-palette function from HCL parameters" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -101,96 +103,50 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Create continuous-palette function from HCL parameters</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/continuous.R'><code>R/continuous.R</code></a></small>
+    <div class="hidden name"><code>pev_fcont_diverging.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Create continuous-palette function from HCL parameters</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>pev_fcont_diverging</span>(<span class='no'>pev_fcont_low</span>, <span class='no'>pev_fcont_high</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="as_pev_fcont.html">as_pev_fcont()</a></code> </p>
-        </td>
-        <td><p>Continuous-palette function</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_data_separation.html">pev_data_separation()</a></code> </p>
-        </td>
-        <td><p>Get perceptual-differences within palette</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_cvd.html">pev_fcont_cvd()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_diverging.html">pev_fcont_diverging()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_hcl.html">pev_fcont_hcl()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_rescale.html">pev_fcont_rescale()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_fcont_reverse.html">pev_fcont_reverse()</a></code> </p>
-        </td>
-        <td><p>Create continuous-palette function from HCL parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_gg_separation.html">pev_gg_separation()</a></code> </p>
-        </td>
-        <td><p>ggplot for perceptual-differences within palette</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_hcl.html">pev_hcl()</a></code> </p>
-        </td>
-        <td><p>Create HCL parameter-set</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pev_map_hcl_param.html">pev_map_hcl_param()</a></code> </p>
-        </td>
-        <td><p>Create list of HCL parameter-sets</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pev_fcont_low</th>
+      <td><p><code>function</code>, similar to <code>pev_fcont</code>, used for the
+low end of a diverging scale. Low end of this scale becomes the
+middle of the diverging scale.</p></td>
+    </tr>
+    <tr>
+      <th>pev_fcont_high</th>
+      <td><p><code>function</code>, similar to <code>pev_fcont</code>, used for the
+high end of a diverging scale. Low end of this scale becomes the
+middle of the diverging scale.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p><code>function</code> with S3 class <code>pev_fcont</code>,
+when called with a numeric vector with values between 0 and 1,
+returns the corresponding (hex-code) values.</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
     </ul>
+
   </div>
 </div>
 
