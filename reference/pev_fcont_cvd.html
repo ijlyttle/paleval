@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create continuous-palette function from HCL parameters — pev_fcont_cvd • paleval</title>
+<title>Modify output to simulate color-vision deficiency — pev_fcont_cvd • paleval</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Create continuous-palette function from HCL parameters — pev_fcont_cvd" />
-<meta property="og:description" content="Create continuous-palette function from HCL parameters" />
+<meta property="og:title" content="Modify output to simulate color-vision deficiency — pev_fcont_cvd" />
+<meta property="og:description" content="TODO: URL to explain CVD" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,24 +105,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create continuous-palette function from HCL parameters</h1>
+    <h1>Modify output to simulate color-vision deficiency</h1>
     <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/continuous.R'><code>R/continuous.R</code></a></small>
     <div class="hidden name"><code>pev_fcont_cvd.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create continuous-palette function from HCL parameters</p>
+    <p>TODO: URL to explain CVD</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_fcont_cvd</span>(<span class='no'>pev_fcont</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deutan"</span>, <span class='st'>"protan"</span>, <span class='st'>"tritan"</span>, <span class='st'>"none"</span>),
+    <pre class="usage"><span class='fu'>pev_fcont_cvd</span>(<span class='no'>.fcont</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deutan"</span>, <span class='st'>"protan"</span>, <span class='st'>"tritan"</span>, <span class='st'>"none"</span>),
   <span class='kw'>severity</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pev_fcont</th>
-      <td><p><code>function</code>, when called with a numeric vector with values
+      <th>.fcont</th>
+      <td><p><code>object</code> that can be coerced to <code>pev_fcont</code>,
+when called with a numeric vector with values
 between 0 and 1, returns the corresponding (hex-code) values.</p></td>
     </tr>
     <tr>
@@ -143,12 +144,20 @@ the severity of color-vision deficiency.</p></td>
 when called with a numeric vector with values between 0 and 1,
 returns the corresponding (hex-code) values.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>  <span class='co'># Create diverging-palette function</span>
+  <span class='no'>fcont_purple_green</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Purple-Green"</span>)
+  <span class='no'>fcont_purple_green</span></div><div class='img'><img src='pev_fcont_cvd-1.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='co'># Simulate color-vision deficiency</span>
+  <span class='fu'>pev_fcont_cvd</span>(<span class='no'>fcont_purple_green</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"deutan"</span>)</div><div class='img'><img src='pev_fcont_cvd-2.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

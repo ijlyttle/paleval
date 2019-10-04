@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create continuous-palette function from HCL parameters — pev_fcont_rescale • paleval</title>
+<title>Rescale input to continuous-palette function — pev_fcont_rescale • paleval</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Create continuous-palette function from HCL parameters — pev_fcont_rescale" />
-<meta property="og:description" content="Create continuous-palette function from HCL parameters" />
+<meta property="og:title" content="Rescale input to continuous-palette function — pev_fcont_rescale" />
+<meta property="og:description" content="Rescale input to continuous-palette function" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,23 +105,24 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create continuous-palette function from HCL parameters</h1>
+    <h1>Rescale input to continuous-palette function</h1>
     <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/continuous.R'><code>R/continuous.R</code></a></small>
     <div class="hidden name"><code>pev_fcont_rescale.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create continuous-palette function from HCL parameters</p>
+    <p>Rescale input to continuous-palette function</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_fcont_rescale</span>(<span class='no'>pev_fcont</span>, <span class='kw'>limits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>))</pre>
+    <pre class="usage"><span class='fu'>pev_fcont_rescale</span>(<span class='no'>.fcont</span>, <span class='kw'>limits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pev_fcont</th>
-      <td><p><code>function</code>, when called with a numeric vector with values
+      <th>.fcont</th>
+      <td><p><code>object</code> that can be coerced to <code>pev_fcont</code>,
+when called with a numeric vector with values
 between 0 and 1, returns the corresponding (hex-code) values.</p></td>
     </tr>
     <tr>
@@ -138,12 +139,20 @@ are mapped to <code>limits</code> as inputs to the input function.</p></td>
 when called with a numeric vector with values between 0 and 1,
 returns the corresponding (hex-code) values.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>  <span class='co'># Create sequential-palette function</span>
+  <span class='no'>fcont_purple</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Purples 3"</span>)
+
+  <span class='co'># Rescale palette-function</span>
+  <span class='fu'>pev_fcont_rescale</span>(<span class='no'>fcont_purple</span>, <span class='kw'>limits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.25</span>, <span class='fl'>0.75</span>))</div><div class='img'><img src='pev_fcont_rescale-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
