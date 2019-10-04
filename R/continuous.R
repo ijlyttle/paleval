@@ -157,8 +157,4 @@ pev_rescale_diverging <- function(limit) {
   c(0.5 - limit / 2, 0.5 + limit / 2)
 }
 
-#' @export
-#'
-print.pev_fcont <- function(x, ...) {
-  img_cont_ramp(x)
-}
+

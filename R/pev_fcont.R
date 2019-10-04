@@ -175,3 +175,9 @@ validate_pev_fcont <- function(.fcont) {
 
   invisible(.fcont)
 }
+
+#' @export
+#'
+print.pev_fcont <- function(x, ...) {
+  img_cont_ramp(x)
+}

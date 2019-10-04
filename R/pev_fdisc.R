@@ -122,10 +122,6 @@ pev_fdisc.pev_fdisc <- function(.fdisc, ...) {
   .fdisc
 }
 
-print.pev_fdisc <- function(x, ...) {
-  img_disc(x)
-}
-
 # internal function just to make sure we have the right classes
 new_pev_disc <- function(.fdisc) {
 
@@ -145,4 +141,10 @@ validate_pev_fdisc <- function(.fdisc) {
   )
 
   invisible(.fdisc)
+}
+
+#' @export
+#'
+print.pev_fdisc <- function(x, ...) {
+  img_disc(x)
 }

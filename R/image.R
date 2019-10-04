@@ -8,7 +8,7 @@ img_cont_ramp <- function(pev_fcont, width = 512, height = 32) {
 
   colors <- pev_fcont(seq(0, 1, by = 1 / (width - 1)))
 
-  op <- graphics::par(mar = rep(0, 4))
+  op <- graphics::par(mar = rep(0.5, 4), xaxt = "n", yaxt = "n", bty = "n")
   graphics::image(dat, col = colors, useRaster = TRUE)
   graphics::par(op)
 
@@ -41,7 +41,7 @@ img_disc <- function(pev_fdisc, width_panel = 32, width_gap = 8, height = 32) {
     nrow = nrow
   )
 
-  op <- graphics::par(mar = rep(0, 4))
+  op <- graphics::par(mar = rep(0.5, 4), xaxt = "n", yaxt = "n", bty = "n")
   graphics::image(dat, col = colors, useRaster = TRUE)
   graphics::par(op)
 
