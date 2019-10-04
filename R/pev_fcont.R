@@ -23,7 +23,7 @@
 #' The other functions that return continuous-palette functions are:
 #'
 #' \describe{
-#'   \item{[pev_fcont_cvd()]}{Modify output to simulate color-vision deficiency.}
+#'   \item{[pev_fpal_cvd()]}{Modify output to simulate color-vision deficiency.}
 #'   \item{[pev_fcont_diverging()]}{Create a diverging-palette function from two functions.}
 #'   \item{[pev_fcont_rescale()]}{Rescale input to continuous-palette function.}
 #'   \item{[pev_fcont_reverse()]}{Reverse palette-function.}
