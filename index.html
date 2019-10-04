@@ -75,8 +75,8 @@
 <p>This will have to go into a design-document eventually, but for now, I’ll “puke” this here.</p>
 <p>For the purpose of this package, following ggplot2 usage, we define:</p>
 <ul>
-<li><p><strong><code>fpal_cont</code></strong>: A (palette) function that, when called with a numeric vector with values between 0 and 1, returns the corresponding (hex-code) values.</p></li>
-<li><p><strong><code>fpal_disc</code></strong>: A (palette) function that, when called with a single integer argument (the number of levels in the scale), returns the (hex-code) values that they should take. Such a function will have a maximum for the argument.</p></li>
+<li><p><strong><code>pev_fcont</code></strong>: A (palette) function that, when called with a numeric vector with values between 0 and 1, returns the corresponding (hex-code) values.</p></li>
+<li><p><strong><code>pev_fdisc</code></strong>: A (palette) function that, when called with a single integer argument (the number of levels in the scale), returns the (hex-code) values that they should take. Such a function will have a maximum for the argument.</p></li>
 </ul>
 <p>These follow the <code>palette</code> argument for <a href="https://ggplot2.tidyverse.org/reference/continuous_scale.html"><code><a href="https://ggplot2.tidyverse.org/reference/continuous_scale.html">ggplot2::continuous_scale()</a></code></a> and <a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html"><code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html">ggplot2::discrete_scale()</a></code></a></p>
 <p>There are ways to create continuous-palette functions:</p>

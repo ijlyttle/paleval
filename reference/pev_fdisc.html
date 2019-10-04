@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reverse palette-function — pev_fcont_reverse • paleval</title>
+<title>Coerce to discrete-palette function — pev_fdisc • paleval</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,12 @@
 
 
 
-<meta property="og:title" content="Reverse palette-function — pev_fcont_reverse" />
-<meta property="og:description" content="Reverse palette-function" />
+<meta property="og:title" content="Coerce to discrete-palette function — pev_fdisc" />
+<meta property="og:description" content="A discrete-palette function takes a vector of integers, from 1 to
+the size of the palette, and returns a vector of character strings,
+each containing the correpsonding hex-code.
+You con use a discrete-palette function to
+build a custom ggplot2 scale, using ggplot2::discrete_scale()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,40 +109,102 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Reverse palette-function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/continuous.R'><code>R/continuous.R</code></a></small>
-    <div class="hidden name"><code>pev_fcont_reverse.Rd</code></div>
+    <h1>Coerce to discrete-palette function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/pev_fdisc.R'><code>R/pev_fdisc.R</code></a></small>
+    <div class="hidden name"><code>pev_fdisc.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reverse palette-function</p>
+    <p>A discrete-palette function takes a vector of integers, from 1 to
+the size of the palette, and returns a vector of character strings,
+each containing the correpsonding hex-code.
+You con use a discrete-palette function to
+build a custom ggplot2 scale, using <code><a href='https://ggplot2.tidyverse.org/reference/discrete_scale.html'>ggplot2::discrete_scale()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_fcont_reverse</span>(<span class='no'>.fcont</span>)</pre>
+    <pre class="usage"><span class='fu'>pev_fdisc</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>pev_fdisc</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for character</span>
+<span class='fu'>pev_fdisc</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for pev_fcont</span>
+<span class='fu'>pev_fdisc</span>(<span class='no'>.fdisc</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"post"</span>,
+  <span class='st'>"panel"</span>), <span class='no'>...</span>)
+
+<span class='co'># S3 method for pev_fdisc</span>
+<span class='fu'>pev_fdisc</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.fcont</th>
-      <td><p><code>object</code> that can be coerced to <code>pev_fcont</code>,
-when called with a numeric vector with values
-between 0 and 1, returns the corresponding (hex-code) values.</p></td>
+      <th>.fdisc</th>
+      <td><p><code>object</code> that can be coerced to <code>pev_disc</code>,
+when called with an integer, returns the corresponding (hex-code) values.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>other arguments (not used).</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p>coercible to <code>integer</code>, number colors to put in the palette.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p><code>character</code>, describes how the domain of the continuous palette
+is to be discretized, can be <code>"post"</code> or <code>"panel"</code> (using a fencing analogy).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>function</code> with S3 class <code>pev_fcont</code>,
+    <p><code>function</code> with S3 class <code>pev_disc</code>,
 when called with a numeric vector with values between 0 and 1,
 returns the corresponding (hex-code) values.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>These functions help you build, modify, and compose discrete-palette
+functions.</p>
+<p>A discrete-palette function can be constructed using <code>pev_fdisc()</code>; it takes
+an argument <code>.fdisc</code>, which can be one of:</p>
+<dl class='dl-horizontal'>
+<dt><code>character</code></dt><dd><p>A series of hex-codes.</p></dd>
+<dt><code>pev_fcont</code></dt><dd><p>This will discretize a continuous palette into <code>n</code> colors,
+according to the discretization <code>method</code> (<code>"post"</code> or <code>"panel"</code>).</p></dd>
+<dt><code>pev_fdisc</code></dt><dd><p>If you provide a <code>pev_fdisc</code>, this is a no-op.</p></dd>
+
+</dl>
+
+<p>The print method for a <code>pev_disc</code> function generates a plot of the palette.</p>
+<p>The other functions that return continuous-palette functions are:</p>
+<dl class='dl-horizontal'>
+<dt><code>pev_fpal_cvd()</code></dt><dd><p>Modify output to simulate color-vision deficiency.</p></dd>
+<dt><code>pev_fpal_reverse()</code></dt><dd><p>Reverse palette-function.</p></dd>
+
+</dl>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='co'># Create sequential-palette function</span>
-  <span class='no'>fcont_purple</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Purples 3"</span>)
-  <span class='no'>fcont_purple</span></div><div class='img'><img src='pev_fcont_reverse-1.png' alt='' width='700' height='433' /></div><div class='input'>
-  <span class='co'># Reverse palette-function</span>
-  <span class='fu'>pev_fcont_reverse</span>(<span class='no'>fcont_purple</span>)</div><div class='img'><img src='pev_fcont_reverse-2.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'> <span class='co'># Use a colorspace palette</span>
+ <span class='fu'>pev_fdisc</span>(<span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Blues 2"</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"post"</span>)</div><div class='output co'>#&gt; function (i = NULL) 
+#&gt; {
+#&gt;     if (is.null(i)) {
+#&gt;         return(.fdisc)
+#&gt;     }
+#&gt;     i &lt;- as.integer(i)
+#&gt;     if (any(i &gt; length(.fdisc))) {
+#&gt;         stop("Subscript out of range")
+#&gt;     }
+#&gt;     .fdisc[i]
+#&gt; }
+#&gt; &lt;bytecode: 0x64fbd98&gt;
+#&gt; &lt;environment: 0x64fdc48&gt;
+#&gt; attr(,"class")
+#&gt; [1] "pev_fdisc" "function" </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -146,6 +212,7 @@ returns the corresponding (hex-code) values.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
