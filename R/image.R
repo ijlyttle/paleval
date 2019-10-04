@@ -14,3 +14,36 @@ img_cont_ramp <- function(pev_fcont, width = 512, height = 32) {
 
   invisible(NULL)
 }
+
+img_disc <- function(pev_fdisc, width_panel = 32, width_gap = 8, height = 32) {
+
+  colors <- pev_fdisc()
+  n <- length(colors)
+
+  ncol <- height
+  nrow <- n * width_panel + (n - 1) * width_gap
+
+  strip <- function(i) {
+    rep(i, width_panel)
+  }
+
+  gap <- rep(NA_real_, width_gap)
+
+  strip_gap <- function(i) {
+    c(strip(i), gap)
+  }
+
+  strip_dat <- purrr::reduce(purrr::map(seq(1, n - 1),  strip_gap), c)
+
+  dat <- matrix(
+    rep(c(strip_dat, strip(n)), times = ncol),
+    ncol = ncol,
+    nrow = nrow
+  )
+
+  op <- graphics::par(mar = rep(0, 4))
+  graphics::image(dat, col = colors, useRaster = TRUE)
+  graphics::par(op)
+
+  invisible(NULL)
+}

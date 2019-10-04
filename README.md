@@ -26,11 +26,11 @@ I’ll “puke” this here.
 
 For the purpose of this package, following ggplot2 usage, we define:
 
-  - **`fpal_cont`**: A (palette) function that, when called with a
+  - **`pev_fcont`**: A (palette) function that, when called with a
     numeric vector with values between 0 and 1, returns the
     corresponding (hex-code) values.
 
-  - **`fpal_disc`**: A (palette) function that, when called with a
+  - **`pev_fdisc`**: A (palette) function that, when called with a
     single integer argument (the number of levels in the scale), returns
     the (hex-code) values that they should take. Such a function will
     have a maximum for the argument.

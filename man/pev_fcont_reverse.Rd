@@ -22,6 +22,7 @@ Reverse palette-function
 \examples{
   # Create sequential-palette function
   fcont_purple <- pev_fcont("Purples 3")
+  fcont_purple
 
   # Reverse palette-function
   pev_fcont_reverse(fcont_purple)

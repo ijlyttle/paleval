@@ -2,7 +2,7 @@
 #'
 #' A continuous-palette function takes a vector of numbers, each between
 #' 0 and 1, and returns a vector of character strings, each containing the
-#' correpsonding hex-code. You con use a continuous palette-function to
+#' correpsonding hex-code. You con use a continuous-palette function to
 #' build a custom ggplot2 scale, using [ggplot2::continuous_scale()].
 #'
 #' These functions help you build, modify, and compose continuous-palette
@@ -48,7 +48,7 @@ pev_fcont <- function(.fcont, ...) {
   UseMethod("pev_fcont")
 }
 
-#' @export
+##' @export
 #'
 pev_fcont.default <- function(.fcont, ...) {
   stop(
@@ -57,7 +57,6 @@ pev_fcont.default <- function(.fcont, ...) {
   )
 }
 
-#' @rdname pev_fcont
 #' @export
 #'
 pev_fcont.pev_fcont <- function(.fcont, ...) {
@@ -65,7 +64,6 @@ pev_fcont.pev_fcont <- function(.fcont, ...) {
   .fcont
 }
 
-#' @rdname pev_fcont
 #' @export
 #'
 pev_fcont.function <- function(.fcont, ...) {
@@ -76,7 +74,6 @@ pev_fcont.function <- function(.fcont, ...) {
   f
 }
 
-#' @rdname pev_fcont
 #' @export
 #'
 pev_fcont.character <- function(.fcont, ...) {
@@ -96,7 +93,6 @@ pev_fcont.character <- function(.fcont, ...) {
   f
 }
 
-#' @rdname pev_fcont
 #' @export
 #'
 pev_fcont.pev_hcl <- function(.fcont, ...) {
@@ -173,6 +169,7 @@ validate_pev_fcont <- function(.fcont) {
   # verify that the function does what it claims
   assertthat::assert_that(
     inherits(.fcont, "function"),
+    is_hexcolor(.fcont(1)),
     identical(.fcont(c(0, 0.5)), c(.fcont(0), .fcont(0.5)))
   )
 

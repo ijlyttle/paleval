@@ -26,6 +26,7 @@ Rescale input to continuous-palette function
 \examples{
   # Create sequential-palette function
   fcont_purple <- pev_fcont("Purples 3")
+  fcont_purple
 
   # Rescale palette-function
   pev_fcont_rescale(fcont_purple, limits = c(0.25, 0.75))

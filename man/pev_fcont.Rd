@@ -2,21 +2,9 @@
 % Please edit documentation in R/pev_fcont.R
 \name{pev_fcont}
 \alias{pev_fcont}
-\alias{pev_fcont.pev_fcont}
-\alias{pev_fcont.function}
-\alias{pev_fcont.character}
-\alias{pev_fcont.pev_hcl}
 \title{Coerce to continuous-palette function}
 \usage{
 pev_fcont(.fcont, ...)
-
-\method{pev_fcont}{pev_fcont}(.fcont, ...)
-
-\method{pev_fcont}{function}(.fcont, ...)
-
-\method{pev_fcont}{character}(.fcont, ...)
-
-\method{pev_fcont}{pev_hcl}(.fcont, ...)
 }
 \arguments{
 \item{.fcont}{\code{object} that can be coerced to \code{pev_fcont},
@@ -33,7 +21,7 @@ returns the corresponding (hex-code) values.
 \description{
 A continuous-palette function takes a vector of numbers, each between
 0 and 1, and returns a vector of character strings, each containing the
-correpsonding hex-code. You con use a continuous palette-function to
+correpsonding hex-code. You con use a continuous-palette function to
 build a custom ggplot2 scale, using \code{\link[ggplot2:continuous_scale]{ggplot2::continuous_scale()}}.
 }
 \details{

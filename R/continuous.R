@@ -96,6 +96,7 @@ pev_fcont_diverging <- function(.fcont_low, .fcont_high) {
 #' @examples
 #'   # Create sequential-palette function
 #'   fcont_purple <- pev_fcont("Purples 3")
+#'   fcont_purple
 #'
 #'   # Rescale palette-function
 #'   pev_fcont_rescale(fcont_purple, limits = c(0.25, 0.75))
@@ -130,6 +131,7 @@ pev_fcont_rescale <- function(.fcont, limits = c(0, 1)) {
 #' @examples
 #'   # Create sequential-palette function
 #'   fcont_purple <- pev_fcont("Purples 3")
+#'   fcont_purple
 #'
 #'   # Reverse palette-function
 #'   pev_fcont_reverse(fcont_purple)
