@@ -2,9 +2,21 @@
 % Please edit documentation in R/pev_fcont.R
 \name{pev_fcont}
 \alias{pev_fcont}
+\alias{pev_fcont.default}
+\alias{pev_fcont.pev_fcont}
+\alias{pev_fcont.character}
+\alias{pev_fcont.pev_hcl}
 \title{Coerce to continuous-palette function}
 \usage{
 pev_fcont(.fcont, ...)
+
+\method{pev_fcont}{default}(.fcont, ...)
+
+\method{pev_fcont}{pev_fcont}(.fcont, ...)
+
+\method{pev_fcont}{character}(.fcont, ...)
+
+\method{pev_fcont}{pev_hcl}(.fcont, ...)
 }
 \arguments{
 \item{.fcont}{\code{object} that can be coerced to \code{pev_fcont},

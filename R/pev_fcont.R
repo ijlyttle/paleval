@@ -48,7 +48,8 @@ pev_fcont <- function(.fcont, ...) {
   UseMethod("pev_fcont")
 }
 
-##' @export
+#' @rdname pev_fcont
+#' @export
 #'
 pev_fcont.default <- function(.fcont, ...) {
   stop(
@@ -57,6 +58,7 @@ pev_fcont.default <- function(.fcont, ...) {
   )
 }
 
+#' @rdname pev_fcont
 #' @export
 #'
 pev_fcont.pev_fcont <- function(.fcont, ...) {
@@ -74,6 +76,7 @@ pev_fcont.function <- function(.fcont, ...) {
   f
 }
 
+#' @rdname pev_fcont
 #' @export
 #'
 pev_fcont.character <- function(.fcont, ...) {
@@ -93,6 +96,7 @@ pev_fcont.character <- function(.fcont, ...) {
   f
 }
 
+#' @rdname pev_fcont
 #' @export
 #'
 pev_fcont.pev_hcl <- function(.fcont, ...) {

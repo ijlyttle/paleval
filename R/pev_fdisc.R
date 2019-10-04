@@ -54,9 +54,19 @@ pev_fdisc <- function(.fdisc, ...) {
 #'
 pev_fdisc.default <- function(.fdisc, ...) {
   stop(
-    glue::glue("No method for `pev_fdisc` for class {class(.fcont)}"),
+    glue::glue("No method for `pev_fdisc` for class {class(.fdisc)}"),
     call. = FALSE
   )
+}
+
+#' @export
+#'
+pev_fdisc.function <- function(.fdisc, ...) {
+  # validate & create
+  f <- validate_pev_fdisc(.fdisc)
+  f <- new_pev_disc(f)
+
+  f
 }
 
 #' @rdname pev_fdisc
