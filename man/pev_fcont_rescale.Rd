@@ -2,12 +2,13 @@
 % Please edit documentation in R/continuous.R
 \name{pev_fcont_rescale}
 \alias{pev_fcont_rescale}
-\title{Create continuous-palette function from HCL parameters}
+\title{Rescale input to continuous-palette function}
 \usage{
-pev_fcont_rescale(pev_fcont, limits = c(0, 1))
+pev_fcont_rescale(.fcont, limits = c(0, 1))
 }
 \arguments{
-\item{pev_fcont}{\code{function}, when called with a numeric vector with values
+\item{.fcont}{\code{object} that can be coerced to \code{pev_fcont},
+when called with a numeric vector with values
 between 0 and 1, returns the corresponding (hex-code) values.}
 
 \item{limits}{\code{numeric} vector of length 2, rescaling parameters.
@@ -20,5 +21,13 @@ when called with a numeric vector with values between 0 and 1,
 returns the corresponding (hex-code) values.
 }
 \description{
-Create continuous-palette function from HCL parameters
+Rescale input to continuous-palette function
+}
+\examples{
+  # Create sequential-palette function
+  fcont_purple <- pev_fcont("Purples 3")
+
+  # Rescale palette-function
+  pev_fcont_rescale(fcont_purple, limits = c(0.25, 0.75))
+
 }

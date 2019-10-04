@@ -93,7 +93,7 @@ print.pev_hcl <- function(x, ...) {
 #' @return Named list, elements are objects with S3 class `pev_hcl`
 #' @export
 #'
-pev_map_hcl_param <- function(hcl_palettes) {
+pev_map_hcl <- function(hcl_palettes) {
 
   assertthat::assert_that(
     inherits(hcl_palettes, "hcl_palettes"),

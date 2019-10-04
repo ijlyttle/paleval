@@ -2,12 +2,13 @@
 % Please edit documentation in R/continuous.R
 \name{pev_fcont_reverse}
 \alias{pev_fcont_reverse}
-\title{Create continuous-palette function from HCL parameters}
+\title{Reverse palette-function}
 \usage{
-pev_fcont_reverse(pev_fcont)
+pev_fcont_reverse(.fcont)
 }
 \arguments{
-\item{pev_fcont}{\code{function}, when called with a numeric vector with values
+\item{.fcont}{\code{object} that can be coerced to \code{pev_fcont},
+when called with a numeric vector with values
 between 0 and 1, returns the corresponding (hex-code) values.}
 }
 \value{
@@ -16,5 +17,13 @@ when called with a numeric vector with values between 0 and 1,
 returns the corresponding (hex-code) values.
 }
 \description{
-Create continuous-palette function from HCL parameters
+Reverse palette-function
+}
+\examples{
+  # Create sequential-palette function
+  fcont_purple <- pev_fcont("Purples 3")
+
+  # Reverse palette-function
+  pev_fcont_reverse(fcont_purple)
+
 }

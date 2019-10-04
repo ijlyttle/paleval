@@ -4,16 +4,16 @@
 \alias{pev_fcont_diverging}
 \title{Create continuous-palette function from HCL parameters}
 \usage{
-pev_fcont_diverging(pev_fcont_low, pev_fcont_high)
+pev_fcont_diverging(.fcont_low, .fcont_high)
 }
 \arguments{
-\item{pev_fcont_low}{\code{function}, similar to \code{pev_fcont}, used for the
-low end of a diverging scale. Low end of this scale becomes the
-middle of the diverging scale.}
+\item{.fcont_low}{\code{object} that can be coerced to \code{pev_fcont},
+similar to \code{.fcont}, used for the low end of a diverging scale.
+Low end of this scale becomes the middle of the diverging scale.}
 
-\item{pev_fcont_high}{\code{function}, similar to \code{pev_fcont}, used for the
-high end of a diverging scale. Low end of this scale becomes the
-middle of the diverging scale.}
+\item{.fcont_high}{\code{object} that can be coerced to \code{pev_fcont},
+similar to \code{.fcont}, used for the high end of a diverging scale.
+Low end of this scale becomes the middle of the diverging scale.}
 }
 \value{
 \code{function} with S3 class \code{pev_fcont},
@@ -22,4 +22,12 @@ returns the corresponding (hex-code) values.
 }
 \description{
 Create continuous-palette function from HCL parameters
+}
+\examples{
+  # Create sequential-palette functions
+  fcont_purple <- pev_fcont("Purples 3")
+  fcont_green <- pev_fcont("Greens 3")
+
+  # Create diverging-palette function
+  pev_fcont_diverging(fcont_purple, fcont_green)
 }

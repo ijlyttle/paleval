@@ -43,6 +43,10 @@ tritrj <- function(i, j, p1, p2, pm) ifelse(i <= j,
 
 ## HCL sequence
 seqhcl <- function(i, h1, h2, c1, c2, l1, l2, p1, p2, cmax, fixup, ...) {
+
+  # print(i)
+  # print(lintrj(i, h1, h2))
+
   j <- 1/(1 + abs(cmax - c1) / abs(cmax - c2))
   if (!is.na(j) && (j <= 0 | j >= 1)) j <- NA
   colorspace::hex(colorspace::polarLUV(

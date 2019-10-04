@@ -2,13 +2,14 @@
 % Please edit documentation in R/continuous.R
 \name{pev_fcont_cvd}
 \alias{pev_fcont_cvd}
-\title{Create continuous-palette function from HCL parameters}
+\title{Modify output to simulate color-vision deficiency}
 \usage{
-pev_fcont_cvd(pev_fcont, type = c("deutan", "protan", "tritan", "none"),
+pev_fcont_cvd(.fcont, type = c("deutan", "protan", "tritan", "none"),
   severity = 1)
 }
 \arguments{
-\item{pev_fcont}{\code{function}, when called with a numeric vector with values
+\item{.fcont}{\code{object} that can be coerced to \code{pev_fcont},
+when called with a numeric vector with values
 between 0 and 1, returns the corresponding (hex-code) values.}
 
 \item{type}{\code{character}, describes color-vision deficiency. One of
@@ -23,5 +24,14 @@ when called with a numeric vector with values between 0 and 1,
 returns the corresponding (hex-code) values.
 }
 \description{
-Create continuous-palette function from HCL parameters
+TODO: URL to explain CVD
+}
+\examples{
+  # Create diverging-palette function
+  fcont_purple_green <- pev_fcont("Purple-Green")
+  fcont_purple_green
+
+  # Simulate color-vision deficiency
+  pev_fcont_cvd(fcont_purple_green, type = "deutan")
+
 }
