@@ -20,7 +20,7 @@ pev_fdisc(.fdisc, ...)
 \method{pev_fdisc}{pev_fdisc}(.fdisc, ...)
 }
 \arguments{
-\item{.fdisc}{\code{object} that can be coerced to \code{pev_disc},
+\item{.fdisc}{\code{object} that can be coerced to \code{pev_fdisc},
 when called with an integer, returns the corresponding (hex-code) values.}
 
 \item{...}{other arguments (not used).}

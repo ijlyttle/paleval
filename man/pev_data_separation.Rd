@@ -2,32 +2,31 @@
 % Please edit documentation in R/separation.R
 \name{pev_data_separation}
 \alias{pev_data_separation}
-\title{Get perceptual-differences within palette}
+\title{Get separation within discrete-palette}
 \usage{
-pev_data_separation(pal, method = "cie2000", include_cvd = TRUE)
+pev_data_separation(.fdisc, method = "cie2000", include_cvd = TRUE)
 }
 \arguments{
-\item{pal}{\code{character} (coerceable to vector of hex-codes), describes a
-discrete color palette. Interpolation within a palette is not required to
-be a well-formed idea.}
+\item{.fdisc}{\code{object} that can be coerced to \code{pev_fdisc},
+when called with an integer, returns the corresponding (hex-code) values.}
 
 \item{method}{\code{character} method to use for comparison,
 passed to \code{farver::compare_color()}.
 One of: \code{"euclidean"}, \code{"cie1976"}, \code{"cie94"}, \code{"cie2000"}, or \code{"cmc"}.}
 
-\item{include_cvd}{\code{logical}, indicates to include differences
+\item{include_cvd}{\code{logical}, indicates to include data for
 for color-vision deficiency}
 }
 \value{
 \code{tbl_df} with variables \code{cvd}, \code{color_a}, \code{color_b}, \code{difference}
 }
 \description{
-Get perceptual-differences within palette
+Get separation within discrete-palette
 }
 \examples{
-  library("colorspace")
-  pal <- qualitative_hcl(n = 5)
-  pev_data_separation(pal)
+  fcont <- pev_fcont("Dynamic")
+  fdisc <- pev_fdisc(fcont, n = 7, method = "panel")
+  pev_data_separation(fdisc)
 }
 \seealso{
 pev_gg_separation

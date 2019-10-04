@@ -1,44 +1,41 @@
-#' Get perceptual-differences within palette
+#' Get separation within discrete-palette
 #'
-#' @param pal `character` (coerceable to vector of hex-codes), describes a
-#'   discrete color palette. Interpolation within a palette is not required to
-#'   be a well-formed idea.
+#' @inherit pev_fdisc params
 #' @param method `character` method to use for comparison,
 #'   passed to `farver::compare_color()`.
 #'   One of: `"euclidean"`, `"cie1976"`, `"cie94"`, `"cie2000"`, or `"cmc"`.
-#' @param include_cvd `logical`, indicates to include differences
+#' @param include_cvd `logical`, indicates to include data for
 #'   for color-vision deficiency
 #'
 #' @seealso pev_gg_separation
 #'
 #' @return `tbl_df` with variables `cvd`, `color_a`, `color_b`, `difference`
 #' @examples
-#'   library("colorspace")
-#'   pal <- qualitative_hcl(n = 5)
-#'   pev_data_separation(pal)
+#'   fcont <- pev_fcont("Dynamic")
+#'   fdisc <- pev_fdisc(fcont, n = 7, method = "panel")
+#'   pev_data_separation(fdisc)
 #' @export
 #'
-pev_data_separation <- function(pal, method = "cie2000", include_cvd = TRUE) {
+pev_data_separation <- function(.fdisc, method = "cie2000", include_cvd = TRUE) {
 
-  data_cvd <- tibble::tibble(
-    cvd = "none",
-    pal = list(pal)
-  )
+  # coerce to fdisc
+  .fdisc <- pev_fdisc(.fdisc)
 
-  if (include_cvd) {
-    data_cvd <- tibble::tibble(
-      cvd = c("none", "deutan", "protan", "tritan"),
-      pal = list(
-        pal,
-        colorspace::deutan(pal),
-        colorspace::protan(pal),
-        colorspace::tritan(pal)
-      )
-    )
+  # set up cvd
+  cvd <- c(cvd, "deutan", "protan", "tritan")
+
+  if (!include_cvd) {
+    cvd <- "none"
   }
 
-  data_cvd$diff <- purrr::map(data_cvd$pal, .pev_data_separation, method = method)
-  data_cvd$pal <- NULL
+  # make list of functions, palettes
+  list_fdisc <- purrr::map(cvd, ~pev_fpal_cvd(.fdisc, .x))
+  list_hex <- purrr::map(list_fdisc, pev_fpal_to_hex)
+
+  data_cvd <- tibble::tibble(cvd = cvd, hex = list_hex)
+
+  data_cvd$diff <- purrr::map(data_cvd$hex, .pev_data_separation, method = method)
+  data_cvd$hex <- NULL
 
   data_cvd <- tidyr::unnest(data_cvd, cols = "diff")
 
@@ -46,12 +43,9 @@ pev_data_separation <- function(pal, method = "cie2000", include_cvd = TRUE) {
 }
 
 # implementation for single palette
-.pev_data_separation <- function(pal, method = "cie2000") {
+.pev_data_separation <- function(hex, method = "cie2000") {
 
-  # coerce to hexcolor
-  pal <- as_hexcolor(pal)
-
-  data <- tidyr::expand_grid(color_a = pal, color_b = pal)
+  data <- tidyr::expand_grid(color_a = hex, color_b = hex)
 
   compare <- function(a, b) {
 
@@ -62,7 +56,7 @@ pev_data_separation <- function(pal, method = "cie2000", include_cvd = TRUE) {
   }
 
   # turn color_a into a factor
-  data$color_a <- factor(data$color_a, levels = pal)
+  data$color_a <- factor(data$color_a, levels = hex)
 
   data$difference <- purrr::map2_dbl(data$color_a, data$color_b, compare)
 
@@ -78,9 +72,9 @@ pev_data_separation <- function(pal, method = "cie2000", include_cvd = TRUE) {
 #'
 #' @return `ggplot` object
 #' @examples
-#'   library("colorspace")
-#'   pal <- qualitative_hcl(n = 5)
-#'   data_sep <- pev_data_separation(pal)
+#'   fcont <- pev_fcont("Dynamic")
+#'   fdisc <- pev_fdisc(fcont, n = 7, method = "panel")
+#'   data_sep <- pev_data_separation(fdisc)
 #'   pev_gg_separation(data_sep)
 #' @export
 #'

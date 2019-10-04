@@ -21,8 +21,8 @@ cross-wise ticks}
 ggplot for perceptual-differences within palette
 }
 \examples{
-  library("colorspace")
-  pal <- qualitative_hcl(n = 5)
-  data_sep <- pev_data_separation(pal)
+  fcont <- pev_fcont("Dynamic")
+  fdisc <- pev_fdisc(fcont, n = 7, method = "panel")
+  data_sep <- pev_data_separation(fdisc)
   pev_gg_separation(data_sep)
 }

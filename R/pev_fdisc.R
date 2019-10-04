@@ -28,7 +28,7 @@
 #'   \item{`pev_fpal_reverse()`}{Reverse palette-function.}
 #' }
 #'
-#' @param .fdisc `object` that can be coerced to `pev_disc`,
+#' @param .fdisc `object` that can be coerced to `pev_fdisc`,
 #'   when called with an integer, returns the corresponding (hex-code) values.
 #' @param n coercible to `integer`, number colors to put in the palette.
 #' @param method `character`, describes how the domain of the continuous palette
