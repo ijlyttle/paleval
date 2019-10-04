@@ -55,10 +55,10 @@ The print method for a \code{pev_fcont} function generates a plot of the palette
 The other functions that return continuous-palette functions are:
 
 \describe{
-\item{\code{\link[=pev_fpal_cvd]{pev_fpal_cvd()}}}{Modify output to simulate color-vision deficiency.}
 \item{\code{\link[=pev_fcont_diverging]{pev_fcont_diverging()}}}{Create a diverging-palette function from two functions.}
 \item{\code{\link[=pev_fcont_rescale]{pev_fcont_rescale()}}}{Rescale input to continuous-palette function.}
-\item{\code{\link[=pev_fcont_reverse]{pev_fcont_reverse()}}}{Reverse palette-function.}
+\item{\code{\link[=pev_fpal_cvd]{pev_fpal_cvd()}}}{Modify output to simulate color-vision deficiency.}
+\item{\code{\link[=pev_fpal_reverse]{pev_fpal_reverse()}}}{Reverse palette-function.}
 }
 }
 \examples{

@@ -8,8 +8,11 @@
 #'   `"deutan"`, `"protan"`, `"tritan"`, `"none"`.
 #' @param severity `numeric`, number between 0 (none) and 1 to describe
 #'   the severity of color-vision deficiency.
+#' @param ... Other args (not used)
 #'
-#' @inherit pev_fcont params return
+#' @return Object of of the same type as `.fpal`;
+#'   a palette function, with S3 class `pev_fcont` or `pev_fdisc`.
+#'
 #' @examples
 #'   # Create continuous diverging-palette function
 #'   fcont_purple_green <- pev_fcont("Purple-Green")

@@ -35,7 +35,7 @@ test_that("cvd modification works", {
 
   ## continuous
   expect_identical(
-    pev_fdisc(pev_fpal_cvd(fcont, type = "deutan"), n = n)(),
+    pev_fdisc(pev_fpal_cvd(fcont, type = "deutan"), n = n)(), # get all colors
     colorspace::deutan(colorspace::diverging_hcl(n = n, palette = name))
   )
 

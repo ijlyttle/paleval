@@ -24,7 +24,7 @@ pev_fpal_cvd(.fpal, ...)
 \item{.fpal}{Object with S3 class \code{pev_fcont} or \code{pev_fdisc},
 a continuous or discrete palette-function}
 
-\item{...}{other arguments (not used).}
+\item{...}{Other args (not used)}
 
 \item{type}{\code{character}, describes color-vision deficiency. One of
 \code{"deutan"}, \code{"protan"}, \code{"tritan"}, \code{"none"}.}
@@ -33,9 +33,8 @@ a continuous or discrete palette-function}
 the severity of color-vision deficiency.}
 }
 \value{
-\code{function} with S3 class \code{pev_fcont},
-when called with a numeric vector with values between 0 and 1,
-returns the corresponding (hex-code) values.
+Object of of the same type as \code{.fpal};
+a palette function, with S3 class \code{pev_fcont} or \code{pev_fdisc}.
 }
 \description{
 TODO: URL to explain CVD
