@@ -6,3 +6,28 @@ template:
 
 development:
   mode: auto
+
+reference:
+- title: Continuous-palette functions
+  contents:
+  - pev_fcont
+  - pev_fcont_rescale
+  - pev_fcont_diverging
+  - pev_fpal_cvd
+  - pev_fpal_reverse
+- title: Discrete-palette functions
+  contents:
+  - pev_fdisc
+  - pev_fpal_cvd
+  - pev_fpal_reverse
+- title: Hex-colors
+  contents:
+  - pev_fpal_to_hex
+- title: HCL parameters
+  contents:
+  - pev_hcl
+  - pev_map_hcl
+- title: Color separation
+  contents:
+  - pev_data_separation
+  - pev_gg_separation
