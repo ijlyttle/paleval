@@ -83,26 +83,27 @@ install.packages("paleval")
 ``` r
 library("paleval")
 
-pal <- colorspace::qualitative_hcl(n = 5)
-print(pal)
-#> [1] "#E16A86" "#AA9000" "#00AA5A" "#00A6CA" "#B675E0"
+fcont <- pev_fcont("Dynamic") # continuous palette-function, from colorspace
+fdisc <- pev_fdisc(fcont, n = 7, method = "panel") # discrete palette-function
+pev_fpal_to_hex(fdisc) # get the hex-colors
+#> [1] "#E396A0" "#D796D0" "#9FA8E2" "#4CB9CC" "#50BE9B" "#97B56C" "#CBA56E"
 
-data_sep <- pev_data_separation(pal)
+data_sep <- pev_data_separation(fdisc)
 print(data_sep)
-#> # A tibble: 100 x 4
-#>    cvd   color_a color_b difference
-#>    <chr> <fct>   <chr>        <dbl>
-#>  1 none  #E16A86 #E16A86        0  
-#>  2 none  #E16A86 #AA9000       48.6
-#>  3 none  #E16A86 #00AA5A       71.4
-#>  4 none  #E16A86 #00A6CA       60.3
-#>  5 none  #E16A86 #B675E0       23.0
-#>  6 none  #AA9000 #E16A86       48.6
-#>  7 none  #AA9000 #AA9000        0  
-#>  8 none  #AA9000 #00AA5A       30.4
-#>  9 none  #AA9000 #00A6CA       47.7
-#> 10 none  #AA9000 #B675E0       63.9
-#> # … with 90 more rows
+#> # A tibble: 196 x 5
+#>    cvd   index_a color_a color_b difference
+#>    <chr>   <int> <chr>   <chr>        <dbl>
+#>  1 none        1 #E396A0 #E396A0        0  
+#>  2 none        1 #E396A0 #D796D0       14.9
+#>  3 none        1 #E396A0 #9FA8E2       26.4
+#>  4 none        1 #E396A0 #4CB9CC       53.6
+#>  5 none        1 #E396A0 #50BE9B       53.0
+#>  6 none        1 #E396A0 #97B56C       45.3
+#>  7 none        1 #E396A0 #CBA56E       27.1
+#>  8 none        2 #D796D0 #E396A0       14.9
+#>  9 none        2 #D796D0 #D796D0        0  
+#> 10 none        2 #D796D0 #9FA8E2       18.3
+#> # … with 186 more rows
 
 pev_gg_separation(data_sep)
 ```

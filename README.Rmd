@@ -68,10 +68,11 @@ install.packages("paleval")
 ```{r}
 library("paleval")
 
-pal <- colorspace::qualitative_hcl(n = 5)
-print(pal)
+fcont <- pev_fcont("Dynamic") # continuous palette-function, from colorspace
+fdisc <- pev_fdisc(fcont, n = 7, method = "panel") # discrete palette-function
+pev_fpal_to_hex(fdisc) # get the hex-colors
 
-data_sep <- pev_data_separation(pal)
+data_sep <- pev_data_separation(fdisc)
 print(data_sep)
 
 pev_gg_separation(data_sep)

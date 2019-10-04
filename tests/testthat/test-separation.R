@@ -10,7 +10,7 @@ test_that("separation data works", {
 
   expect_identical(
     names(test_good),
-    c("cvd", "color_a", "color_b", "difference")
+    c("cvd", "index_a", "color_a", "color_b", "difference")
   )
 
   expect_equal(

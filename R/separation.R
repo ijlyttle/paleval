@@ -22,7 +22,7 @@ pev_data_separation <- function(.fdisc, method = "cie2000", include_cvd = TRUE) 
   .fdisc <- pev_fdisc(.fdisc)
 
   # set up cvd
-  cvd <- c(cvd, "deutan", "protan", "tritan")
+  cvd <- c("none", "deutan", "protan", "tritan")
 
   if (!include_cvd) {
     cvd <- "none"
@@ -42,7 +42,7 @@ pev_data_separation <- function(.fdisc, method = "cie2000", include_cvd = TRUE) 
   data_cvd
 }
 
-# implementation for single palette
+# implementation for single set of hex-colors
 .pev_data_separation <- function(hex, method = "cie2000") {
 
   data <- tidyr::expand_grid(color_a = hex, color_b = hex)
@@ -55,12 +55,10 @@ pev_data_separation <- function(.fdisc, method = "cie2000", include_cvd = TRUE) 
     farver::compare_colour(rgb_a, rgb_b, from_space = "rgb", method = method)
   }
 
-  # turn color_a into a factor
-  data$color_a <- factor(data$color_a, levels = hex)
-
+  data$index_a <- as.integer(factor(data$color_a, levels = hex))
   data$difference <- purrr::map2_dbl(data$color_a, data$color_b, compare)
 
-  data
+  data[, c("index_a", "color_a", "color_b", "difference")]
 }
 
 #' ggplot for perceptual-differences within palette
@@ -89,22 +87,22 @@ pev_gg_separation <- function(data_sep, ncol = 2, height_tick = 1) {
   g <-
     ggplot2::ggplot(data_sep) +
     ggplot2::geom_bar(
-      ggplot2::aes_string(x = "color_a", y = Inf, fill = "color_a"),
+      ggplot2::aes_string(x = "index_a", y = Inf, fill = "color_a"),
       stat = "identity",
       position = "identity",
       width = 0.3
     ) +
     ggplot2::geom_tile(
-      ggplot2::aes_string(x = "color_a", y = "difference", fill = "color_b"),
+      ggplot2::aes_string(x = "index_a", y = "difference", fill = "color_b"),
       width = 0.6,
       height = height_tick
     ) +
+    ggplot2::scale_x_discrete() +
     ggplot2::scale_fill_identity() +
     ggplot2::facet_wrap(
       "cvd",
       ncol = ncol,
       labeller = ggplot2::labeller(.rows = ggplot2::label_both),
-      scales = "free_x",
       strip.position = "right"
     ) +
     ggplot2::labs(
