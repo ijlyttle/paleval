@@ -18,7 +18,7 @@ One of: \code{"euclidean"}, \code{"cie1976"}, \code{"cie94"}, \code{"cie2000"}, 
 for color-vision deficiency}
 }
 \value{
-\code{tbl_df} with variables \code{cvd}, \code{color_a}, \code{color_b}, \code{difference}
+\code{tbl_df} with variables \code{cvd}, \code{hex_a}, \code{hex_b}, \code{distance}
 }
 \description{
 Get separation within discrete-palette

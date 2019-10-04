@@ -2,7 +2,7 @@
 % Please edit documentation in R/separation.R
 \name{pev_gg_separation}
 \alias{pev_gg_separation}
-\title{ggplot for perceptual-differences within palette}
+\title{ggplot for perceptual distance within palette}
 \usage{
 pev_gg_separation(data_sep, ncol = 2, height_tick = 1)
 }
@@ -11,14 +11,14 @@ pev_gg_separation(data_sep, ncol = 2, height_tick = 1)
 
 \item{ncol}{\code{numeric}, number of columns in the facet}
 
-\item{height_tick}{\code{numeric}, height (units of \code{difference}) of the
+\item{height_tick}{\code{numeric}, height (units of \code{distance}) of the
 cross-wise ticks}
 }
 \value{
 \code{ggplot} object
 }
 \description{
-ggplot for perceptual-differences within palette
+ggplot for perceptual distance within palette
 }
 \examples{
   fcont <- pev_fcont("Dynamic")

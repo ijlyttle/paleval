@@ -1,7 +1,7 @@
 library("colorspace")
 
 good <- c("#000000", "#FFFFFF")
-test_good <- pev_data_separation(good)
+test_good <- pev_data_separation(good, method = "cie2000")
 plot_good <- pev_gg_separation(test_good)
 
 test_that("separation data works", {
@@ -10,11 +10,11 @@ test_that("separation data works", {
 
   expect_identical(
     names(test_good),
-    c("cvd", "index_a", "color_a", "color_b", "difference")
+    c("cvd", "index_a", "hex_a", "hex_b", "distance")
   )
 
   expect_equal(
-    test_good$difference,
+    test_good$distance,
     c(0, 100, 100, 0, 0, 99.75180, 99.75180, 0, 0, 99.97655, 99.97655, 0, 0, 100, 100, 0),
     tolerance = 1.e-5
   )

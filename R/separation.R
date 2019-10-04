@@ -9,7 +9,7 @@
 #'
 #' @seealso pev_gg_separation
 #'
-#' @return `tbl_df` with variables `cvd`, `color_a`, `color_b`, `difference`
+#' @return `tbl_df` with variables `cvd`, `hex_a`, `hex_b`, `distance`
 #' @examples
 #'   fcont <- pev_fcont("Dynamic")
 #'   fdisc <- pev_fdisc(fcont, n = 7, method = "panel")
@@ -45,27 +45,20 @@ pev_data_separation <- function(.fdisc, method = "cie2000", include_cvd = TRUE) 
 # implementation for single set of hex-colors
 .pev_data_separation <- function(hex, method = "cie2000") {
 
-  data <- tidyr::expand_grid(color_a = hex, color_b = hex)
+  data <- tidyr::expand_grid(hex_a = hex, hex_b = hex)
 
-  compare <- function(a, b) {
+  data$index_a <- as.integer(factor(data$hex_a, levels = hex))
+  data$distance <-
+    purrr::map2_dbl(data$hex_a, data$hex_b, pev_hex_distance, method = method)
 
-    rgb_a <- t(grDevices::col2rgb(a))
-    rgb_b <- t(grDevices::col2rgb(b))
-
-    farver::compare_colour(rgb_a, rgb_b, from_space = "rgb", method = method)
-  }
-
-  data$index_a <- as.integer(factor(data$color_a, levels = hex))
-  data$difference <- purrr::map2_dbl(data$color_a, data$color_b, compare)
-
-  data[, c("index_a", "color_a", "color_b", "difference")]
+  data[, c("index_a", "hex_a", "hex_b", "distance")]
 }
 
-#' ggplot for perceptual-differences within palette
+#' ggplot for perceptual distance within palette
 #'
 #' @param data_sep `data.frame`, created using `pev_data_separation`.
 #' @param ncol `numeric`, number of columns in the facet
-#' @param height_tick `numeric`, height (units of `difference`) of the
+#' @param height_tick `numeric`, height (units of `distance`) of the
 #'   cross-wise ticks
 #'
 #' @return `ggplot` object
@@ -87,13 +80,13 @@ pev_gg_separation <- function(data_sep, ncol = 2, height_tick = 1) {
   g <-
     ggplot2::ggplot(data_sep) +
     ggplot2::geom_bar(
-      ggplot2::aes_string(x = "index_a", y = Inf, fill = "color_a"),
+      ggplot2::aes_string(x = "index_a", y = Inf, fill = "hex_a"),
       stat = "identity",
       position = "identity",
       width = 0.3
     ) +
     ggplot2::geom_tile(
-      ggplot2::aes_string(x = "index_a", y = "difference", fill = "color_b"),
+      ggplot2::aes_string(x = "index_a", y = "distance", fill = "hex_b"),
       width = 0.6,
       height = height_tick
     ) +
@@ -107,7 +100,7 @@ pev_gg_separation <- function(data_sep, ncol = 2, height_tick = 1) {
     ) +
     ggplot2::labs(
       x = NULL,
-      y = "difference"
+      y = "distance"
     ) +
     ggplot2::theme(
       axis.text.x = ggplot2::element_blank(),
@@ -117,4 +110,31 @@ pev_gg_separation <- function(data_sep, ncol = 2, height_tick = 1) {
   g
 }
 
+# vectorize over a and b
+pev_hex_distance <- function(hex_a, hex_b, method = "cie2000") {
 
+  assertthat::assert_that(
+    is_hexcolor(hex_a),
+    is_hexcolor(hex_b),
+    length(hex_a) == length(hex_b),
+    method %in% c("euclidean", "cie1976", "cie94", "cie2000", "cmc")
+  )
+
+  list_rgb <- function(x) {
+    purrr::map(x, ~t(grDevices::col2rgb(.x)))
+  }
+
+  rgb_a <- list_rgb(hex_a)
+  rgb_b <- list_rgb(hex_b)
+
+  distance <-
+    purrr::map2_dbl(
+      rgb_a,
+      rgb_b,
+      farver::compare_colour,
+      from_space = "rgb",
+      method = method
+    )
+
+  distance
+}

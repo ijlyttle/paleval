@@ -91,18 +91,18 @@ pev_fpal_to_hex(fdisc) # get the hex-colors
 data_sep <- pev_data_separation(fdisc)
 print(data_sep)
 #> # A tibble: 196 x 5
-#>    cvd   index_a color_a color_b difference
-#>    <chr>   <int> <chr>   <chr>        <dbl>
-#>  1 none        1 #E396A0 #E396A0        0  
-#>  2 none        1 #E396A0 #D796D0       14.9
-#>  3 none        1 #E396A0 #9FA8E2       26.4
-#>  4 none        1 #E396A0 #4CB9CC       53.6
-#>  5 none        1 #E396A0 #50BE9B       53.0
-#>  6 none        1 #E396A0 #97B56C       45.3
-#>  7 none        1 #E396A0 #CBA56E       27.1
-#>  8 none        2 #D796D0 #E396A0       14.9
-#>  9 none        2 #D796D0 #D796D0        0  
-#> 10 none        2 #D796D0 #9FA8E2       18.3
+#>    cvd   index_a hex_a   hex_b   distance
+#>    <chr>   <int> <chr>   <chr>      <dbl>
+#>  1 none        1 #E396A0 #E396A0      0  
+#>  2 none        1 #E396A0 #D796D0     14.9
+#>  3 none        1 #E396A0 #9FA8E2     26.4
+#>  4 none        1 #E396A0 #4CB9CC     53.6
+#>  5 none        1 #E396A0 #50BE9B     53.0
+#>  6 none        1 #E396A0 #97B56C     45.3
+#>  7 none        1 #E396A0 #CBA56E     27.1
+#>  8 none        2 #D796D0 #E396A0     14.9
+#>  9 none        2 #D796D0 #D796D0      0  
+#> 10 none        2 #D796D0 #9FA8E2     18.3
 #> # … with 186 more rows
 
 pev_gg_separation(data_sep)
