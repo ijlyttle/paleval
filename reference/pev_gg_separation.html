@@ -139,9 +139,9 @@ cross-wise ticks</p></td>
     <p><code>ggplot</code> object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='st'>"colorspace"</span>)
-  <span class='no'>pal</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://colorspace.R-Forge.R-project.org//reference/hcl_palettes.html'>qualitative_hcl</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>5</span>)
-  <span class='no'>data_sep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_data_separation.html'>pev_data_separation</a></span>(<span class='no'>pal</span>)
+    <pre class="examples"><div class='input'>  <span class='no'>fcont</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Dynamic"</span>)
+  <span class='no'>fdisc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fdisc.html'>pev_fdisc</a></span>(<span class='no'>fcont</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"panel"</span>)
+  <span class='no'>data_sep</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_data_separation.html'>pev_data_separation</a></span>(<span class='no'>fdisc</span>)
   <span class='fu'>pev_gg_separation</span>(<span class='no'>data_sep</span>)</div><div class='img'><img src='pev_gg_separation-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
