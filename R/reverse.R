@@ -26,7 +26,7 @@ pev_fpal_reverse <- function(.fpal, ...) {
 #'
 pev_fpal_reverse.default <- function(.fpal, ...) {
   stop(
-    glue::glue("No method for `pev_fcont` for class {class(.fpal)}"),
+    glue::glue("No method for `pev_fpal_reverse` for class {class(.fpal)}"),
     call. = FALSE
   )
 }

@@ -37,7 +37,7 @@ pev_fpal_cvd <- function(.fpal, ...) {
 #'
 pev_fpal_cvd.default <- function(.fpal, ...) {
   stop(
-    glue::glue("No method for `pev_fcont` for class {class(.fpal)}"),
+    glue::glue("No method for `pev_fpal_cvd` for class {class(.fpal)}"),
     call. = FALSE
   )
 }

@@ -5,7 +5,7 @@
 #'
 #' @param x `object` to be coerced
 #'
-#' @return `character` vector of hex-codes
+#' @return `character` vector of hex-colors
 #' @noRd
 #'
 as_hexcolor <- function(x) {
