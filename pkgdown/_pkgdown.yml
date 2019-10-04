@@ -23,6 +23,7 @@ reference:
 - title: Hex-colors
   contents:
   - pev_fpal_to_hex
+  - pev_hex_distance
 - title: HCL parameters
   contents:
   - pev_hcl

@@ -1,9 +1,7 @@
 #' Get separation within discrete-palette
 #'
 #' @inherit pev_fdisc params
-#' @param method `character` method to use for comparison,
-#'   passed to `farver::compare_color()`.
-#'   One of: `"euclidean"`, `"cie1976"`, `"cie94"`, `"cie2000"`, or `"cmc"`.
+#' @inherit pev_hex_distance params
 #' @param include_cvd `logical`, indicates to include data for
 #'   for color-vision deficiency
 #'
@@ -110,31 +108,4 @@ pev_gg_separation <- function(data_sep, ncol = 2, height_tick = 1) {
   g
 }
 
-# vectorize over a and b
-pev_hex_distance <- function(hex_a, hex_b, method = "cie2000") {
 
-  assertthat::assert_that(
-    is_hexcolor(hex_a),
-    is_hexcolor(hex_b),
-    length(hex_a) == length(hex_b),
-    method %in% c("euclidean", "cie1976", "cie94", "cie2000", "cmc")
-  )
-
-  list_rgb <- function(x) {
-    purrr::map(x, ~t(grDevices::col2rgb(.x)))
-  }
-
-  rgb_a <- list_rgb(hex_a)
-  rgb_b <- list_rgb(hex_b)
-
-  distance <-
-    purrr::map2_dbl(
-      rgb_a,
-      rgb_b,
-      farver::compare_colour,
-      from_space = "rgb",
-      method = method
-    )
-
-  distance
-}

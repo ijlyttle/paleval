@@ -10,9 +10,8 @@ pev_data_separation(.fdisc, method = "cie2000", include_cvd = TRUE)
 \item{.fdisc}{\code{object} that can be coerced to \code{pev_fdisc},
 when called with an integer, returns the corresponding (hex-code) values.}
 
-\item{method}{\code{character} method to use for comparison,
-passed to \code{farver::compare_color()}.
-One of: \code{"euclidean"}, \code{"cie1976"}, \code{"cie94"}, \code{"cie2000"}, or \code{"cmc"}.}
+\item{method}{\code{character}, describes how the domain of the continuous palette
+is to be discretized, can be \code{"post"} or \code{"panel"} (using a fencing analogy).}
 
 \item{include_cvd}{\code{logical}, indicates to include data for
 for color-vision deficiency}
