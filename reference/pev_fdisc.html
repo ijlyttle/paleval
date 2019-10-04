@@ -190,21 +190,7 @@ according to the discretization <code>method</code> (<code>"post"</code> or <cod
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'> <span class='co'># Use a colorspace palette</span>
- <span class='fu'>pev_fdisc</span>(<span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Blues 2"</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"post"</span>)</div><div class='output co'>#&gt; function (i = NULL) 
-#&gt; {
-#&gt;     if (is.null(i)) {
-#&gt;         return(.fdisc)
-#&gt;     }
-#&gt;     i &lt;- as.integer(i)
-#&gt;     if (any(i &gt; length(.fdisc))) {
-#&gt;         stop("Subscript out of range")
-#&gt;     }
-#&gt;     .fdisc[i]
-#&gt; }
-#&gt; &lt;bytecode: 0x7268f88&gt;
-#&gt; &lt;environment: 0x72683b8&gt;
-#&gt; attr(,"class")
-#&gt; [1] "pev_fdisc" "function" </div><div class='input'>
+ <span class='fu'>pev_fdisc</span>(<span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Blues 2"</span>), <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"post"</span>)</div><div class='img'><img src='pev_fdisc-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
