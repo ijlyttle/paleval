@@ -52,7 +52,7 @@ test_that("pev_fcont gives us the right answers", {
   purrr::walk(pals_qual, exp_qual)
 
   # sequential
-  pals_seq <- c("Blues 2", "Purple-Blue")
+  pals_seq <- c("Blues 2", "Purple-Blue", "Inferno")
 
   exp_seq <- function(pal) {
     fcont <- pev_fcont(pal)
