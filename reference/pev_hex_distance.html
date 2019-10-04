@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get separation within discrete-palette — pev_data_separation • paleval</title>
+<title>Calculate distance between two (sets of) colors — pev_hex_distance • paleval</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,9 @@
 
 
 
-<meta property="og:title" content="Get separation within discrete-palette — pev_data_separation" />
-<meta property="og:description" content="Get separation within discrete-palette" />
+<meta property="og:title" content="Calculate distance between two (sets of) colors — pev_hex_distance" />
+<meta property="og:description" content="This returns the distance, according to the method,
+between corresponding hex-colors in hex_a and hex_b." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,68 +106,53 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get separation within discrete-palette</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/separation.R'><code>R/separation.R</code></a></small>
-    <div class="hidden name"><code>pev_data_separation.Rd</code></div>
+    <h1>Calculate distance between two (sets of) colors</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/hex-distance.R'><code>R/hex-distance.R</code></a></small>
+    <div class="hidden name"><code>pev_hex_distance.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get separation within discrete-palette</p>
+    <p>This returns the distance, according to the <code>method</code>,
+between corresponding hex-colors in <code>hex_a</code> and <code>hex_b</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_data_separation</span>(<span class='no'>.fdisc</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>, <span class='kw'>include_cvd</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>pev_hex_distance</span>(<span class='no'>hex_a</span>, <span class='no'>hex_b</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.fdisc</th>
-      <td><p><code>object</code> that can be coerced to <code>pev_fdisc</code>,
-when called with an integer, returns the corresponding (hex-code) values.</p></td>
+      <th>hex_a</th>
+      <td><p><code>character</code> vector of hex-colors</p></td>
+    </tr>
+    <tr>
+      <th>hex_b</th>
+      <td><p><code>character</code> vector of hex-colors</p></td>
     </tr>
     <tr>
       <th>method</th>
-      <td><p><code>character</code>, describes how the domain of the continuous palette
-is to be discretized, can be <code>"post"</code> or <code>"panel"</code> (using a fencing analogy).</p></td>
-    </tr>
-    <tr>
-      <th>include_cvd</th>
-      <td><p><code>logical</code>, indicates to include data for
-for color-vision deficiency</p></td>
+      <td><p><code>character</code> method to use for distance calculation,
+passed to <code>farver::compare_color()</code>.
+One of: <code>"euclidean"</code>, <code>"cie1976"</code>, <code>"cie94"</code>, <code>"cie2000"</code>, or <code>"cmc"</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>tbl_df</code> with variables <code>cvd</code>, <code>hex_a</code>, <code>hex_b</code>, <code>distance</code></p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p><code>numerical</code> vector, same length as <code>hex_a</code> and <code>hex_b</code>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <div class='dont-index'><p>pev_gg_separation</p></div>
+    <p>The vectors <code>hex_a</code> and <code>hex_b</code> must be the same length.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='no'>fcont</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Dynamic"</span>)
-  <span class='no'>fdisc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fdisc.html'>pev_fdisc</a></span>(<span class='no'>fcont</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"panel"</span>)
-  <span class='fu'>pev_data_separation</span>(<span class='no'>fdisc</span>)</div><div class='output co'>#&gt; # A tibble: 196 x 5
-#&gt;    cvd   index_a hex_a   hex_b   distance
-#&gt;    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;
-#&gt;  1 none        1 #E396A0 #E396A0      0  
-#&gt;  2 none        1 #E396A0 #D796D0     14.9
-#&gt;  3 none        1 #E396A0 #9FA8E2     26.4
-#&gt;  4 none        1 #E396A0 #4CB9CC     53.6
-#&gt;  5 none        1 #E396A0 #50BE9B     53.0
-#&gt;  6 none        1 #E396A0 #97B56C     45.3
-#&gt;  7 none        1 #E396A0 #CBA56E     27.1
-#&gt;  8 none        2 #D796D0 #E396A0     14.9
-#&gt;  9 none        2 #D796D0 #D796D0      0  
-#&gt; 10 none        2 #D796D0 #9FA8E2     18.3
-#&gt; # … with 186 more rows</div></pre>
+    <pre class="examples"><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>)</div><div class='output co'>#&gt; [1] 100</div><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#000000"</span>))</div><div class='output co'>#&gt; [1]   0 100</div><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>), <span class='st'>"#000000"</span>)</div><div class='output co'>#&gt; [1]   0 100</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
