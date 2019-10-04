@@ -80,3 +80,9 @@ test_that("pev_fcont gives us the right answers", {
   purrr::walk(pals_div, exp_div)
 
 })
+
+test_that("pev_fcont prints", {
+  # this is frustrating because I can't see how to test that a plot
+  # is produced
+  expect_silent(print(fcont))
+})
