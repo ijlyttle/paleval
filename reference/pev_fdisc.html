@@ -36,9 +36,8 @@
 
 
 <meta property="og:title" content="Coerce to discrete-palette function — pev_fdisc" />
-<meta property="og:description" content="A discrete-palette function takes a vector of integers, from 1 to
-the size of the palette, and returns a vector of character strings,
-each containing the correpsonding hex-code.
+<meta property="og:description" content="A discrete-palette function takes an integers, from 1 to
+the maximum size of the palette, and returns a vector of character hex-codes.
 You con use a discrete-palette function to
 build a custom ggplot2 scale, using ggplot2::discrete_scale()." />
 <meta name="twitter:card" content="summary" />
@@ -115,9 +114,8 @@ build a custom ggplot2 scale, using ggplot2::discrete_scale()." />
     </div>
 
     <div class="ref-description">
-    <p>A discrete-palette function takes a vector of integers, from 1 to
-the size of the palette, and returns a vector of character strings,
-each containing the correpsonding hex-code.
+    <p>A discrete-palette function takes an integers, from 1 to
+the maximum size of the palette, and returns a vector of character hex-codes.
 You con use a discrete-palette function to
 build a custom ggplot2 scale, using <code><a href='https://ggplot2.tidyverse.org/reference/discrete_scale.html'>ggplot2::discrete_scale()</a></code>.</p>
     </div>
@@ -131,8 +129,7 @@ build a custom ggplot2 scale, using <code><a href='https://ggplot2.tidyverse.org
 <span class='fu'>pev_fdisc</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for pev_fcont</span>
-<span class='fu'>pev_fdisc</span>(<span class='no'>.fdisc</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>11</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"post"</span>,
-  <span class='st'>"panel"</span>), <span class='no'>...</span>)
+<span class='fu'>pev_fdisc</span>(<span class='no'>.fdisc</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"post"</span>, <span class='st'>"panel"</span>), <span class='no'>...</span>)
 
 <span class='co'># S3 method for pev_fdisc</span>
 <span class='fu'>pev_fdisc</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)</pre>
@@ -150,10 +147,6 @@ when called with an integer, returns the corresponding (hex-code) values.</p></t
       <td><p>other arguments (not used).</p></td>
     </tr>
     <tr>
-      <th>n</th>
-      <td><p>coercible to <code>integer</code>, number colors to put in the palette.</p></td>
-    </tr>
-    <tr>
       <th>method</th>
       <td><p><code>character</code>, describes how the domain of the continuous palette
 is to be discretized, can be <code>"post"</code> or <code>"panel"</code> (using a fencing analogy).</p></td>
@@ -169,12 +162,20 @@ returns the corresponding (hex-code) values.</p>
 
     <p>These functions help you build, modify, and compose discrete-palette
 functions.</p>
+<p>A discrete-palette function can be <em>bounded</em> or <em>unbounded</em>. A bounded
+function has a maxiumum number of possible colors, and is created from a
+series of hex-colors, for example,
+<a href='https://www.tableau.com/about/blog/2016/7/colors-upgrade-tableau-10-56782'>Tableau 10</a>.
+An unbounded function is created from a continuous-palette function, thus has no maximum
+number of possible colors.</p>
 <p>A discrete-palette function can be constructed using <code>pev_fdisc()</code>; it takes
 an argument <code>.fdisc</code>, which can be one of:</p>
 <dl class='dl-horizontal'>
-<dt><code>character</code></dt><dd><p>A series of hex-codes.</p></dd>
-<dt><code>pev_fcont</code></dt><dd><p>This will discretize a continuous palette into <code>n</code> colors,
-according to the discretization <code>method</code> (<code>"post"</code> or <code>"panel"</code>).</p></dd>
+<dt><code>character</code></dt><dd><p>A series of hex-codes,
+returns a <strong>bounded</strong> discrete-palette function.</p></dd>
+<dt><code>pev_fcont</code></dt><dd><p>A continuous-palette function, to be discretized
+according to <code>method</code> (<code>"post"</code> or <code>"panel"</code>).
+This returns an <strong>unbounded</strong> discrete-palette function.</p></dd>
 <dt><code>pev_fdisc</code></dt><dd><p>If you provide a <code>pev_fdisc</code>, this is a no-op.</p></dd>
 
 </dl>
@@ -182,8 +183,8 @@ according to the discretization <code>method</code> (<code>"post"</code> or <cod
 <p>The print method for a <code>pev_disc</code> function generates a plot of the palette.</p>
 <p>The other functions that return continuous-palette functions are:</p>
 <dl class='dl-horizontal'>
-<dt><code><a href='pev_fpal_cvd.html'>pev_fpal_cvd()</a></code></dt><dd><p>Modify output to simulate color-vision deficiency.</p></dd>
-<dt><code><a href='pev_fpal_reverse.html'>pev_fpal_reverse()</a></code></dt><dd><p>Reverse palette-function.</p></dd>
+<dt><code><a href='pev_fcont_cvd.html'>pev_fdisc_cvd()</a></code></dt><dd><p>Modify output to simulate color-vision deficiency.</p></dd>
+<dt><code><a href='pev_fcont_reverse.html'>pev_fdisc_reverse()</a></code></dt><dd><p>Reverse palette-function.</p></dd>
 
 </dl>
 

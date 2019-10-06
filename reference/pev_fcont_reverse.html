@@ -106,7 +106,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Reverse palette-function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/continuous.R'><code>R/continuous.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/reverse.R'><code>R/reverse.R</code></a></small>
     <div class="hidden name"><code>pev_fcont_reverse.Rd</code></div>
     </div>
 
@@ -114,7 +114,24 @@
     <p>Reverse palette-function</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_fcont_reverse</span>(<span class='no'>.fcont</span>)</pre>
+    <pre class="usage"><span class='fu'>pev_fcont_reverse</span>(<span class='no'>.fcont</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>pev_fcont_reverse</span>(<span class='no'>.fcont</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for pev_fcont</span>
+<span class='fu'>pev_fcont_reverse</span>(<span class='no'>.fcont</span>, <span class='no'>...</span>)
+
+<span class='fu'>pev_fdisc_reverse</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'>pev_fdisc_reverse</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for pev_funbounded</span>
+<span class='fu'>pev_fdisc_reverse</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for pev_fbounded</span>
+<span class='fu'>pev_fdisc_reverse</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -125,20 +142,31 @@
 when called with a numeric vector with values
 between 0 and 1, returns the corresponding (hex-code) values.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other args (not used)</p></td>
+    </tr>
+    <tr>
+      <th>.fdisc</th>
+      <td><p><code>object</code> that can be coerced to <code>pev_fdisc</code>,
+when called with an integer, returns the corresponding (hex-code) values.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>function</code> with S3 class <code>pev_fcont</code>,
-when called with a numeric vector with values between 0 and 1,
-returns the corresponding (hex-code) values.</p>
+    <p>Object of of the same type as <code>.fpal</code>;
+a palette function, with S3 class <code>pev_fcont</code> or <code>pev_fdisc</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='co'># Create sequential-palette function</span>
-  <span class='no'>fcont_purple</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Purples 3"</span>)
-  <span class='no'>fcont_purple</span></div><div class='img'><img src='pev_fcont_reverse-1.png' alt='' width='700' height='433' /></div><div class='input'>
-  <span class='co'># Reverse palette-function</span>
-  <span class='fu'>pev_fcont_reverse</span>(<span class='no'>fcont_purple</span>)</div><div class='img'><img src='pev_fcont_reverse-2.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'>  <span class='co'># Create continuous diverging-palette function</span>
+  <span class='no'>fcont_purple_green</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Purple-Green"</span>)
+  <span class='no'>fcont_purple_green</span></div><div class='img'><img src='pev_fcont_reverse-1.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='co'># Create discrete diverging-palette function</span>
+  <span class='no'>fdisc_purple_green</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fdisc.html'>pev_fdisc</a></span>(<span class='no'>fcont_purple_green</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>11</span>)
+  <span class='no'>fdisc_purple_green</span></div><div class='img'><img src='pev_fcont_reverse-2.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='co'># Reverse the palettes</span>
+  <span class='fu'>pev_fcont_reverse</span>(<span class='no'>fcont_purple_green</span>)</div><div class='img'><img src='pev_fcont_reverse-3.png' alt='' width='700' height='433' /></div><div class='input'>  <span class='fu'>pev_fdisc_reverse</span>(<span class='no'>fdisc_purple_green</span>)</div><div class='img'><img src='pev_fcont_reverse-4.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

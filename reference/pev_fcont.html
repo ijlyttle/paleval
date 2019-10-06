@@ -162,7 +162,8 @@ hex-colors, we can avoid interpolation-errors as we compose and rescale.</p>
 <p>A continuous-palette function can be constructed using <code>pev_fcont()</code>; it takes
 a single argument <code>.fcont</code>, which can be one of:</p>
 <dl class='dl-horizontal'>
-<dt><code>character</code></dt><dd><p>Name of a <code>palette</code> used by <a href='http://colorspace.R-Forge.R-project.org//reference/hcl_palettes.html'>colorspace::hcl_palettes</a>.</p></dd>
+<dt><code>character</code></dt><dd><p>(scalar) name of a <code>palette</code>, used by <a href='http://colorspace.R-Forge.R-project.org//reference/hcl_palettes.html'>colorspace::hcl_palettes</a>, or
+(vector) hex-colors, used by <code><a href='https://rdrr.io/pkg/scales/man/colour_ramp.html'>scales::colour_ramp()</a></code></p></dd>
 <dt><code>pev_hcl</code></dt><dd><p>Set of HCL parameters returned by <code><a href='pev_hcl.html'>pev_hcl()</a></code>.</p></dd>
 <dt><code>pev_fcont</code></dt><dd><p>If you provide a <code>pev_fcont</code>, this is a no-op.</p></dd>
 
@@ -171,10 +172,10 @@ a single argument <code>.fcont</code>, which can be one of:</p>
 <p>The print method for a <code>pev_fcont</code> function generates a plot of the palette.</p>
 <p>The other functions that return continuous-palette functions are:</p>
 <dl class='dl-horizontal'>
-<dt><code><a href='pev_fcont_diverging.html'>pev_fcont_diverging()</a></code></dt><dd><p>Create a diverging-palette function from two functions.</p></dd>
+<dt><code><a href='pev_fcont_cvd.html'>pev_fcont_cvd()</a></code></dt><dd><p>Modify output to simulate color-vision deficiency.</p></dd>
 <dt><code><a href='pev_fcont_rescale.html'>pev_fcont_rescale()</a></code></dt><dd><p>Rescale input to continuous-palette function.</p></dd>
-<dt><code><a href='pev_fpal_cvd.html'>pev_fpal_cvd()</a></code></dt><dd><p>Modify output to simulate color-vision deficiency.</p></dd>
-<dt><code><a href='pev_fpal_reverse.html'>pev_fpal_reverse()</a></code></dt><dd><p>Reverse palette-function.</p></dd>
+<dt><code><a href='pev_fcont_reverse.html'>pev_fcont_reverse()</a></code></dt><dd><p>Reverse palette-function.</p></dd>
+<dt><code><a href='pev_fcont_diverging.html'>pev_fcont_diverging()</a></code></dt><dd><p>Create a diverging-palette function from two functions.</p></dd>
 
 </dl>
 

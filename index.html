@@ -73,29 +73,104 @@
 
 <p>The goal of paleval is to help you evaluate the effectiveness of color palettes and color maps. It builds from the <a href="http://colorspace.r-forge.r-project.org">colorspace</a> package, used to design color maps, and the <a href="https://github.com/thomasp85/farver">farver</a> package, used to evaluate the perceptual difference between two colors.</p>
 <p>This will have to go into a design-document eventually, but for now, I’ll “puke” this here.</p>
-<p>For the purpose of this package, following ggplot2 usage, we define:</p>
+<p>For the purpose of this package, following <code>colorRamp</code> and ggplot2 usage, we define some classes:</p>
 <ul>
-<li><p><strong><code>pev_fcont</code></strong>: A (palette) function that, when called with a numeric vector with values between 0 and 1, returns the corresponding (hex-code) values.</p></li>
-<li><p><strong><code>pev_fdisc</code></strong>: A (palette) function that, when called with a single integer argument (the number of levels in the scale), returns the (hex-code) values that they should take. Such a function will have a maximum for the argument.</p></li>
+<li><p><strong><code>pev_fcont</code></strong>: A function that describes a continuous palette. When called with a numeric vector with values between 0 and 1, it returns a vector of the corresponding (hex-code) values.</p></li>
+<li>
+<p><strong><code>pev_fdisc</code></strong>: A function that describes a discrete palette. When called with a single integer argument (the number of levels in the scale), it returns a vector of the (hex-code) value for the entire scale. There are two types of discrete-palette functions:</p>
+<ul>
+<li><p><strong><code>pev_bounded</code></strong>: Indicates that there is an upper-bound on the number of colors it can provide, e.g. <a href="https://www.tableau.com/about/blog/2016/7/colors-upgrade-tableau-10-56782">Tableau 10</a>. You would <em>not</em> think to interpolate between these colors.</p></li>
+<li><p><strong><code>pev_unbounded</code></strong>: Indicates that there is <em>no</em> upper-bound on the number of colors it can provide, e.g. <a href="https://www.tableau.com/about/blog/2016/7/colors-upgrade-tableau-10-56782">Tableau 10</a>. You might think to interpolate between these colors.</p></li>
 </ul>
-<p>These follow the <code>palette</code> argument for <a href="https://ggplot2.tidyverse.org/reference/continuous_scale.html"><code><a href="https://ggplot2.tidyverse.org/reference/continuous_scale.html">ggplot2::continuous_scale()</a></code></a> and <a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html"><code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html">ggplot2::discrete_scale()</a></code></a></p>
+</li>
+</ul>
+<p>These follow the <code>palette</code> argument for <a href="https://ggplot2.tidyverse.org/reference/continuous_scale.html"><code><a href="https://ggplot2.tidyverse.org/reference/continuous_scale.html">ggplot2::continuous_scale()</a></code></a> and <a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html"><code><a href="https://ggplot2.tidyverse.org/reference/discrete_scale.html">ggplot2::discrete_scale()</a></code></a>, as well as <code>graphics::colorRamp()</code> and <code>graphics::colorRampPalette()</code>, respectively.</p>
+<p>I’m suspect I’m doing things in a way that the authors of <code>colorspace</code>, <code>ggplot2</code>, <code>farver</code>, and <code>graphics</code> might prefer not to consider while eating. As much as anything, this package is an attempt to reationalize and harmonize all of these concepts to myself.</p>
 <p>There are ways to create continuous-palette functions:</p>
 <ul>
-<li>hcl, etc. parameters, following the colorspace framework. <code>pev_cont_hcl()</code>
+<li>
+<code><a href="reference/pev_fcont.html">pev_fcont()</a></code>: constructor
+<ul>
+<li>takes a vector (more than one) of hex-colors to be interpolated.</li>
+<li>takes a (one) name of a colorspace palette.</li>
+<li>takes a set of HCL parameters, following the colorspace framework.</li>
+<li>takes a function.</li>
+<li>takes a <code>pev_fcont</code> (no-op).</li>
+</ul>
 </li>
-<li>composing two continuous-palette functions to create (presumably) a diverging palette-function. It’s up to you to make sure the constituent palettes “meet in the middle”. <code>pev_cont_compose()</code>
-</li>
-<li>rescaling an existing continuous-palette function. It may make sense to “zoom-in”, but “zooming-out” could get you into trouble. <code>pev_cont_rescale()</code>
-</li>
+<li>
+<code><a href="reference/pev_fcont_cvd.html">pev_fcont_cvd()</a></code>: modifies the output of the palette function according to color-vision deficiency.</li>
+<li>
+<code><a href="reference/pev_fcont_diverging.html">pev_fcont_diverging()</a></code>: composes two continuous-palette functions to create (presumably) a diverging palette-function. It’s up to you to make sure the constituent palettes “meet in the middle”.</li>
+<li>
+<code><a href="reference/pev_fcont_rescale.html">pev_fcont_rescale()</a></code>: rescaling an existing continuous-palette function. It may make sense to “zoom-in”, but “zooming-out” could get you into trouble.</li>
+<li>
+<code><a href="reference/pev_fcont_reverse.html">pev_fcont_reverse()</a></code>: reverses the sense of the palette function.</li>
 </ul>
 <p>There are ways to create discrete-palette functions:</p>
 <ul>
-<li>discretizing a contiuous-palette function, specifying number of colors and discretization method (e.g. panels or posts). <code>pev_disc_cont()</code>
+<li>
+<p><code><a href="reference/pev_fdisc.html">pev_fdisc()</a></code>: constructor</p>
+<ul>
+<li>takes a vector of hex-colors, returns a <strong>bounded</strong> function.</li>
+<li>takes a <code>pev_fcont</code>, given a discretization <code>method</code> (e.g. <code>"panel"</code> or <code>"post"</code>), returns an <strong>unbounded</strong> function.</li>
+<li>takes a <code>pev_fdisc</code> (no-op).</li>
+</ul>
 </li>
-<li>supplying a vector of hex-codes. <code>pev_disc_hex()</code>
+<li><p><code><a href="reference/pev_fcont_cvd.html">pev_fdisc_cvd()</a></code>: modifies the output of the palette function according to color-vision deficiency.</p></li>
+<li><p><code><a href="reference/pev_fcont_reverse.html">pev_fdisc_reverse()</a></code>: reverses the sense of the palette function.</p></li>
+<li><p><code><a href="https://rdrr.io/r/base/print.html">print()</a></code>: prints a representation of the palette function.</p></li>
+</ul>
+<p>Other functions:</p>
+<ul>
+<li><p><code>pev_nmax()</code>: get the maximum length supported by a discrete-palette function</p></li>
+<li>
+<p><code><a href="reference/pev_hex_distance.html">pev_hex_distance()</a></code>: given two (sets of) hex-colors, <code>hex</code>, <code>hex_ref</code>:</p>
+<ul>
+<li>return the perceptual <code>distance</code> between them</li>
+</ul>
+</li>
+<li>
+<p><code><a href="reference/pev_data_separation.html">pev_data_separation()</a></code>: assess color-separation, given a discrete-palette function,</p>
+<ul>
+<li>return <code>data.frame</code> with <code>cvd</code>, <code>i</code>, <code>hex</code>, <code>hex_ref</code>, <code>distance</code>
 </li>
 </ul>
-<p>As well, it would be useful to have a function that, given an <code>fpal_discrete</code>, returns the maximum-index.</p>
+</li>
+<li><p><code><a href="reference/pev_gg_separation.html">pev_gg_separation()</a></code></p></li>
+<li>
+<p><code>pev_data_derivative()</code>: assess perceptual-derivative, given a continuous-palette function,</p>
+<ul>
+<li>return <code>data.frame</code> with <code>cvd</code>, <code>x</code>, <code>d_distance_d_x</code>
+</li>
+</ul>
+</li>
+<li><p><code>pev_gg_derivative()</code>:</p></li>
+<li>
+<p><code>pev_data_distance()</code>: assess perceptual-distance from a reference-color, given a continuous-palette function,</p>
+<ul>
+<li>return <code>data.frame</code> with <code>cvd</code>, <code>x</code>, <code>hex</code>, <code>hex_ref</code>, <code>distance</code>
+</li>
+</ul>
+</li>
+<li><p><code>pev_gg_distance()</code>:</p></li>
+<li>
+<p><code>pev_data_spectrum()</code>: assess HCL and RGB spectrum for continuous-palette functions, given a continuous-palette function,</p>
+<ul>
+<li>return <code>data.frame</code> with <code>x</code>, <code>hex</code>, <code>hue</code>, <code>chroma</code>, <code>luminance</code>
+</li>
+</ul>
+</li>
+<li>
+<p><code>pev_data_spectrum_hex()</code></p>
+<ul>
+<li>return <code>data.frame</code> with <code>x</code>, <code>hex</code>, <code>hue</code>, <code>chroma</code>, <code>luminance</code>, <code>hex_ref</code>, <code>distance</code>
+</li>
+</ul>
+</li>
+<li><p><code>pev_gg_spectrum()</code></p></li>
+<li><p><code>pev_gg_bloom()</code></p></li>
+</ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -115,28 +190,26 @@ install.packages("paleval")
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"paleval"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">fcont &lt;-<span class="st"> </span><span class="kw"><a href="reference/pev_fcont.html">pev_fcont</a></span>(<span class="st">"Dynamic"</span>) <span class="co"># continuous palette-function, from colorspace</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">fdisc &lt;-<span class="st"> </span><span class="kw"><a href="reference/pev_fdisc.html">pev_fdisc</a></span>(fcont, <span class="dt">n =</span> <span class="dv">7</span>, <span class="dt">method =</span> <span class="st">"panel"</span>) <span class="co"># discrete palette-function</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="reference/pev_fpal_to_hex.html">pev_fpal_to_hex</a></span>(fdisc) <span class="co"># get the hex-colors</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; [1] "#E396A0" "#D796D0" "#9FA8E2" "#4CB9CC" "#50BE9B" "#97B56C" "#CBA56E"</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">data_sep &lt;-<span class="st"> </span><span class="kw"><a href="reference/pev_data_separation.html">pev_data_separation</a></span>(fdisc)</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(data_sep)</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; # A tibble: 196 x 5</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;    cvd   index_a hex_a   hex_b   distance</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  1 none        1 #E396A0 #E396A0      0  </span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  2 none        1 #E396A0 #D796D0     14.9</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt;  3 none        1 #E396A0 #9FA8E2     26.4</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt;  4 none        1 #E396A0 #4CB9CC     53.6</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt;  5 none        1 #E396A0 #50BE9B     53.0</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;  6 none        1 #E396A0 #97B56C     45.3</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;  7 none        1 #E396A0 #CBA56E     27.1</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt;  8 none        2 #D796D0 #E396A0     14.9</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt;  9 none        2 #D796D0 #D796D0      0  </span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="co">#&gt; 10 none        2 #D796D0 #9FA8E2     18.3</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="co">#&gt; # … with 186 more rows</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25"><span class="kw"><a href="reference/pev_gg_separation.html">pev_gg_separation</a></span>(data_sep)</a></code></pre></div>
+<a class="sourceLine" id="cb2-4" data-line-number="4">fdisc &lt;-<span class="st"> </span><span class="kw"><a href="reference/pev_fdisc.html">pev_fdisc</a></span>(fcont, <span class="dt">method =</span> <span class="st">"panel"</span>) <span class="co"># discrete palette-function</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">data_sep &lt;-<span class="st"> </span><span class="kw"><a href="reference/pev_data_separation.html">pev_data_separation</a></span>(<span class="kw">fdisc</span>(<span class="dv">7</span>))</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(data_sep)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; # A tibble: 196 x 5</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;    cvd       i hex     hex_ref distance</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt;    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt;  1 none      1 #E396A0 #E396A0      0  </span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt;  2 none      1 #E396A0 #D796D0     14.9</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt;  3 none      1 #E396A0 #9FA8E2     26.4</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt;  4 none      1 #E396A0 #4CB9CC     53.6</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt;  5 none      1 #E396A0 #50BE9B     53.0</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">#&gt;  6 none      1 #E396A0 #97B56C     45.3</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">#&gt;  7 none      1 #E396A0 #CBA56E     27.1</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">#&gt;  8 none      2 #D796D0 #E396A0     14.9</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">#&gt;  9 none      2 #D796D0 #D796D0      0  </span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">#&gt; 10 none      2 #D796D0 #9FA8E2     18.3</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="co">#&gt; # … with 186 more rows</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="kw"><a href="reference/pev_gg_separation.html">pev_gg_separation</a></span>(data_sep)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
 </div>
 <div id="code-of-conduct" class="section level2">

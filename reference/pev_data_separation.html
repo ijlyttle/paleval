@@ -114,7 +114,8 @@
     <p>Get separation within discrete-palette</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_data_separation</span>(<span class='no'>.fdisc</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>, <span class='kw'>include_cvd</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>pev_data_separation</span>(<span class='no'>.fdisc</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>,
+  <span class='kw'>include_cvd</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -123,6 +124,10 @@
       <th>.fdisc</th>
       <td><p><code>object</code> that can be coerced to <code>pev_fdisc</code>,
 when called with an integer, returns the corresponding (hex-code) values.</p></td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td><p><code>integer</code> number of colors to use for unbounded palette-functions</p></td>
     </tr>
     <tr>
       <th>method</th>
@@ -146,20 +151,20 @@ for color-vision deficiency</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>  <span class='no'>fcont</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Dynamic"</span>)
   <span class='no'>fdisc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fdisc.html'>pev_fdisc</a></span>(<span class='no'>fcont</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"panel"</span>)
-  <span class='fu'>pev_data_separation</span>(<span class='no'>fdisc</span>)</div><div class='output co'>#&gt; # A tibble: 196 x 5
-#&gt;    cvd   index_a hex_a   hex_b   distance
-#&gt;    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;
-#&gt;  1 none        1 #E396A0 #E396A0      0  
-#&gt;  2 none        1 #E396A0 #D796D0     14.9
-#&gt;  3 none        1 #E396A0 #9FA8E2     26.4
-#&gt;  4 none        1 #E396A0 #4CB9CC     53.6
-#&gt;  5 none        1 #E396A0 #50BE9B     53.0
-#&gt;  6 none        1 #E396A0 #97B56C     45.3
-#&gt;  7 none        1 #E396A0 #CBA56E     27.1
-#&gt;  8 none        2 #D796D0 #E396A0     14.9
-#&gt;  9 none        2 #D796D0 #D796D0      0  
-#&gt; 10 none        2 #D796D0 #9FA8E2     18.3
-#&gt; # … with 186 more rows</div></pre>
+  <span class='fu'>pev_data_separation</span>(<span class='no'>fdisc</span>)</div><div class='output co'>#&gt; # A tibble: 484 x 5
+#&gt;    cvd       i hex     hex_ref distance
+#&gt;    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;
+#&gt;  1 none      1 #E19896 #E19896      0  
+#&gt;  2 none      1 #E19896 #E393B8     12.5
+#&gt;  3 none      1 #E19896 #D497D3     19.4
+#&gt;  4 none      1 #E19896 #B3A2E1     24.8
+#&gt;  5 none      1 #E19896 #82AFDE     34.7
+#&gt;  6 none      1 #E19896 #4CB9CC     52.4
+#&gt;  7 none      1 #E19896 #3BBEAE     48.8
+#&gt;  8 none      1 #E19896 #64BC8C     49.0
+#&gt;  9 none      1 #E19896 #91B66F     42.9
+#&gt; 10 none      1 #E19896 #B6AD65     32.7
+#&gt; # … with 474 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
