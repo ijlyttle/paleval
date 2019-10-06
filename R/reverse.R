@@ -1,6 +1,6 @@
 #' Reverse palette-function
 #'
-#' @inherit pev_fpal_cvd params return
+#' @inherit pev_fcont_cvd params return
 #'
 #' @examples
 #'   # Create continuous diverging-palette function
@@ -11,38 +11,72 @@
 #'   fdisc_purple_green <- pev_fdisc(fcont_purple_green, n = 11)
 #'   fdisc_purple_green
 #'
-#'   # Simulate color-vision deficiency
-#'   pev_fpal_reverse(fcont_purple_green)
-#'   pev_fpal_reverse(fdisc_purple_green)
+#'   # Reverse the palettes
+#'   pev_fcont_reverse(fcont_purple_green)
+#'   pev_fdisc_reverse(fdisc_purple_green)
 #'
 #' @export
 #'
-pev_fpal_reverse <- function(.fpal, ...) {
-  UseMethod("pev_fpal_reverse")
+pev_fcont_reverse <- function(.fcont, ...) {
+  UseMethod("pev_fcont_reverse")
 }
 
-#' @rdname pev_fpal_reverse
+#' @rdname pev_fcont_reverse
 #' @export
 #'
-pev_fpal_reverse.default <- function(.fpal, ...) {
+pev_fcont_reverse.default <- function(.fcont, ...) {
   stop(
-    glue::glue("No method for `pev_fpal_reverse` for class {class(.fpal)}"),
+    glue::glue("No method for `pev_fcont_reverse` for class {class(.fcont)}"),
     call. = FALSE
   )
 }
 
-#' @rdname pev_fpal_reverse
+#' @rdname pev_fcont_reverse
 #' @export
 #'
-pev_fpal_reverse.pev_fcont <- function(.fpal, ...) {
-  pev_fcont_rescale(.fpal, limits = c(1, 0))
+pev_fcont_reverse.pev_fcont <- function(.fcont, ...) {
+  pev_fcont_rescale(.fcont, limits = c(1, 0))
 }
 
-#' @rdname pev_fpal_reverse
+#' @rdname pev_fcont_reverse
 #' @export
 #'
-pev_fpal_reverse.pev_fdisc <- function(.fpal, ...) {
-  hex <- .fpal()
+pev_fdisc_reverse <- function(.fdisc, ...) {
+  UseMethod("pev_fdisc_reverse")
+}
 
-  pev_fdisc(rev(hex))
+#' @rdname pev_fcont_reverse
+#' @export
+#'
+pev_fdisc_reverse.default <- function(.fdisc, ...) {
+  stop(
+    glue::glue("No method for `pev_fdisc_reverse` for class {class(.fdisc)}"),
+    call. = FALSE
+  )
+}
+
+#' @rdname pev_fcont_reverse
+#' @export
+#'
+pev_fdisc_reverse.pev_funbounded <- function(.fdisc, ...) {
+
+  f <- function(n) {
+    rev(.fdisc(n))
+  }
+
+  new_pev_funbounded(f)
+}
+
+#' @rdname pev_fcont_reverse
+#' @export
+#'
+pev_fdisc_reverse.pev_fbounded <- function(.fdisc, ...) {
+
+  f <- function(n) {
+    rev(.fdisc(n))
+  }
+
+  attr(f, "n_max") <- attr(.fdisc, "n_max")
+
+  new_pev_fbounded(f)
 }

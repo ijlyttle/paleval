@@ -2,8 +2,8 @@
 #'
 #' TODO: URL to explain CVD
 #'
-#' @param .fpal Object with S3 class `pev_fcont` or `pev_fdisc`,
-#'   a continuous or discrete palette-function
+#' @inheritParams pev_fcont
+#' @inheritParams pev_fdisc
 #' @param type `character`, describes color-vision deficiency. One of
 #'   `"deutan"`, `"protan"`, `"tritan"`, `"none"`.
 #' @param severity `numeric`, number between 0 (none) and 1 to describe
@@ -23,72 +23,103 @@
 #'   fdisc_purple_green
 #'
 #'   # Simulate color-vision deficiency
-#'   pev_fpal_cvd(fcont_purple_green, type = "deutan")
-#'   pev_fpal_cvd(fdisc_purple_green, type = "deutan")
+#'   pev_fcont_cvd(fcont_purple_green, type = "deutan")
+#'   pev_fdisc_cvd(fdisc_purple_green, type = "deutan")
 #'
 #' @export
 #'
-pev_fpal_cvd <- function(.fpal, ...) {
-  UseMethod("pev_fpal_cvd")
+pev_fcont_cvd <- function(.fcont, ...) {
+  UseMethod("pev_fcont_cvd")
 }
 
-#' @rdname pev_fpal_cvd
+#' @rdname pev_fcont_cvd
 #' @export
 #'
-pev_fpal_cvd.default <- function(.fpal, ...) {
+pev_fcont_cvd.default <- function(.fcont, ...) {
   stop(
-    glue::glue("No method for `pev_fpal_cvd` for class {class(.fpal)}"),
+    glue::glue("No method for `pev_fcont_cvd` for class {class(.fcont)}"),
     call. = FALSE
   )
 }
 
-#' @rdname pev_fpal_cvd
+#' @rdname pev_fcont_cvd
 #' @export
 #'
-pev_fpal_cvd.pev_fcont <- function(.fpal,
-                                   type = c("deutan", "protan", "tritan", "none"),
-                                   severity = 1, ...) {
+pev_fcont_cvd.pev_fcont <- function(.fcont,
+                                     type = c("deutan", "protan", "tritan", "none"),
+                                     severity = 1, ...) {
 
-  f <- .pev_fpal_cvd(.fpal, type = type, severity = severity)
+  fcvd <- .pev_cvd(type = type, severity = severity)
+
+  f <- function(x) {
+    fcvd(.fcont(x))
+  }
 
   new_pev_cont(f)
 }
 
-#' @rdname pev_fpal_cvd
+
+#' @rdname pev_fcont_cvd
 #' @export
 #'
-pev_fpal_cvd.pev_fcont <- function(.fpal,
-                                   type = c("deutan", "protan", "tritan", "none"),
-                                   severity = 1, ...) {
-
-  f <- .pev_fpal_cvd(.fpal, type = type, severity = severity)
-
-  new_pev_cont(f)
+pev_fdisc_cvd <- function(.fdisc, ...) {
+  UseMethod("pev_fdisc_cvd")
 }
 
-#' @rdname pev_fpal_cvd
+#' @rdname pev_fcont_cvd
 #' @export
 #'
-pev_fpal_cvd.pev_fdisc <- function(.fpal,
-                                   type = c("deutan", "protan", "tritan", "none"),
-                                   severity = 1, ...) {
+pev_fdisc_cvd.default <- function(.fdisc, ...) {
+  stop(
+    glue::glue("No method for `pev_fdisc_cvd` for class {class(.fdisc)}"),
+    call. = FALSE
+  )
+}
 
-  f <- .pev_fpal_cvd(.fpal, type = type, severity = severity)
+#' @rdname pev_fcont_cvd
+#' @export
+#'
+pev_fdisc_cvd.pev_funbounded <- function(.fdisc,
+                                         type = c("deutan", "protan", "tritan", "none"),
+                                         severity = 1, ...) {
 
-  new_pev_disc(f)
+  fcvd <- .pev_cvd(type = type, severity = severity)
+
+  f <- function(n) {
+    fcvd(.fdisc(n))
+  }
+
+  new_pev_funbounded(f)
+}
+
+#' @rdname pev_fcont_cvd
+#' @export
+#'
+pev_fdisc_cvd.pev_fbounded <- function(.fdisc,
+                                       type = c("deutan", "protan", "tritan", "none"),
+                                       severity = 1, ...) {
+
+  fcvd <- .pev_cvd(type = type, severity = severity)
+
+  f <- function(n) {
+    fcvd(.fdisc(n))
+  }
+
+  attr(f, "n_max") <- attr(.fdisc, "n_max")
+
+  new_pev_fbounded(f)
 }
 
 # internal function, returns generic function
-.pev_fpal_cvd <- function(.fpal,
-                          type = c("deutan", "protan", "tritan", "none"),
-                          severity = 1) {
+.pev_cvd <- function(type = c("deutan", "protan", "tritan", "none"),
+                      severity = 1) {
 
     # validate input
     type <- match.arg(type)
 
     if (identical(type, "none")) {
       # no-op
-      return(.fpal)
+      return(identity)
     }
 
     fcvd_list <- list(
@@ -99,10 +130,6 @@ pev_fpal_cvd.pev_fdisc <- function(.fpal,
 
     fcvd <- fcvd_list[[type]]
 
-    f <- function(x = NULL) {
-      fcvd(.fpal(x))
-    }
-
-    f
+    fcvd
   }
 

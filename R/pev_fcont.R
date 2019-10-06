@@ -13,7 +13,8 @@
 #' a single argument `.fcont`, which can be one of:
 #'
 #' \describe{
-#'   \item{`character`}{Name of a `palette` used by [colorspace::hcl_palettes].}
+#'   \item{`character`}{(scalar) name of a `palette`, used by [colorspace::hcl_palettes], or
+#'     (vector) hex-colors, used by [scales::colour_ramp()] }
 #'   \item{`pev_hcl`}{Set of HCL parameters returned by [pev_hcl()].}
 #'   \item{`pev_fcont`}{If you provide a `pev_fcont`, this is a no-op.}
 #' }
@@ -23,10 +24,10 @@
 #' The other functions that return continuous-palette functions are:
 #'
 #' \describe{
-#'   \item{[pev_fcont_diverging()]}{Create a diverging-palette function from two functions.}
+#'   \item{[pev_fcont_cvd()]}{Modify output to simulate color-vision deficiency.}
 #'   \item{[pev_fcont_rescale()]}{Rescale input to continuous-palette function.}
-#'   \item{[pev_fpal_cvd()]}{Modify output to simulate color-vision deficiency.}
-#'   \item{[pev_fpal_reverse()]}{Reverse palette-function.}
+#'   \item{[pev_fcont_reverse()]}{Reverse palette-function.}
+#'   \item{[pev_fcont_diverging()]}{Create a diverging-palette function from two functions.}
 #' }
 #'
 #' @param .fcont `object` that can be coerced to `pev_fcont`,
@@ -81,17 +82,26 @@ pev_fcont.function <- function(.fcont, ...) {
 #'
 pev_fcont.character <- function(.fcont, ...) {
 
+  # assume this is a colorspace-palette name
+  if (identical(length(.fcont), 1L)) {
+
+    # TODO: trycatch to give better error message
+    pev_hcl_list <- pev_map_hcl(colorspace::hcl_palettes(palette = .fcont))
+    pev_hcl <- pev_hcl_list[[1]]
+
+    f <- pev_fcont(pev_hcl)
+
+    return(f)
+  }
+
+  # assume this is a hex-color sequence
   assertthat::assert_that(
-    assertthat::is.string(.fcont)
+    all(is_hexcolor(.fcont))
   )
 
-  # TODO: trycatch to give better error message
-
-  pev_hcl_list <- pev_map_hcl(colorspace::hcl_palettes(palette = .fcont))
-
-  pev_hcl <- pev_hcl_list[[1]]
-
-  f <- pev_fcont(pev_hcl)
+  f <- scales::colour_ramp(.fcont, alpha = FALSE)
+  f <- validate_pev_fcont(f)
+  f <- new_pev_cont(f)
 
   f
 }
@@ -137,9 +147,9 @@ pev_fcont.pev_hcl <- function(.fcont, ...) {
     return(f)
   }
 
-  f <- function(i) {
+  f <- function(x) {
     seqhcl(
-      i = i,
+      i = x,
       h1 = .fcont$h1,
       h2 = .fcont$h2,
       c1 = .fcont$c1,

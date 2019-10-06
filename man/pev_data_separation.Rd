@@ -4,11 +4,14 @@
 \alias{pev_data_separation}
 \title{Get separation within discrete-palette}
 \usage{
-pev_data_separation(.fdisc, method = "cie2000", include_cvd = TRUE)
+pev_data_separation(.fdisc, n = NULL, method = "cie2000",
+  include_cvd = TRUE)
 }
 \arguments{
 \item{.fdisc}{\code{object} that can be coerced to \code{pev_fdisc},
 when called with an integer, returns the corresponding (hex-code) values.}
+
+\item{n}{\code{integer} number of colors to use for unbounded palette-functions}
 
 \item{method}{\code{character}, describes how the domain of the continuous palette
 is to be discretized, can be \code{"post"} or \code{"panel"} (using a fencing analogy).}

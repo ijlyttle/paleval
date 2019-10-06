@@ -45,7 +45,8 @@ A continuous-palette function can be constructed using \code{\link[=pev_fcont]{p
 a single argument \code{.fcont}, which can be one of:
 
 \describe{
-\item{\code{character}}{Name of a \code{palette} used by \link[colorspace:hcl_palettes]{colorspace::hcl_palettes}.}
+\item{\code{character}}{(scalar) name of a \code{palette}, used by \link[colorspace:hcl_palettes]{colorspace::hcl_palettes}, or
+(vector) hex-colors, used by \code{\link[scales:colour_ramp]{scales::colour_ramp()}} }
 \item{\code{pev_hcl}}{Set of HCL parameters returned by \code{\link[=pev_hcl]{pev_hcl()}}.}
 \item{\code{pev_fcont}}{If you provide a \code{pev_fcont}, this is a no-op.}
 }
@@ -55,10 +56,10 @@ The print method for a \code{pev_fcont} function generates a plot of the palette
 The other functions that return continuous-palette functions are:
 
 \describe{
-\item{\code{\link[=pev_fcont_diverging]{pev_fcont_diverging()}}}{Create a diverging-palette function from two functions.}
+\item{\code{\link[=pev_fcont_cvd]{pev_fcont_cvd()}}}{Modify output to simulate color-vision deficiency.}
 \item{\code{\link[=pev_fcont_rescale]{pev_fcont_rescale()}}}{Rescale input to continuous-palette function.}
-\item{\code{\link[=pev_fpal_cvd]{pev_fpal_cvd()}}}{Modify output to simulate color-vision deficiency.}
-\item{\code{\link[=pev_fpal_reverse]{pev_fpal_reverse()}}}{Reverse palette-function.}
+\item{\code{\link[=pev_fcont_reverse]{pev_fcont_reverse()}}}{Reverse palette-function.}
+\item{\code{\link[=pev_fcont_diverging]{pev_fcont_diverging()}}}{Create a diverging-palette function from two functions.}
 }
 }
 \examples{

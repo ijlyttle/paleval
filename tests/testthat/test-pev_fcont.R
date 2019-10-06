@@ -14,7 +14,12 @@ test_that("pev_fcont works for function", {
 })
 
 test_that("pev_fcont works for character", {
+
+  # colorspace palette
   expect_is(pev_fcont("Blues 2"), "pev_fcont")
+
+  # interpolated from hex-colors
+  expect_is(pev_fcont(c("#FFFFFF", "#000000")), "pev_fcont")
 })
 
 test_that("pev_fcont works for pev_hcl", {
@@ -78,6 +83,15 @@ test_that("pev_fcont gives us the right answers", {
   }
 
   purrr::walk(pals_div, exp_div)
+
+
+  # hex-color interpolation
+  fcont_interp <- pev_fcont(c("#000000", "#FFFFFF"))
+
+  expect_identical(
+    fcont_interp(seq(0, 1, 0.25)),
+    c("#000000", "#3B3B3B", "#777777", "#B9B9B9", "#FFFFFF")
+  )
 
 })
 

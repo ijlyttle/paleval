@@ -15,10 +15,11 @@ img_cont_ramp <- function(pev_fcont, width = 512, height = 32) {
   invisible(NULL)
 }
 
-img_disc <- function(pev_fdisc, width_panel = 32, width_gap = 8, height = 32) {
+img_disc <- function(pev_fdisc, n = NULL, width_panel = 32, width_gap = 8, height = 32) {
 
-  colors <- pev_fdisc()
-  n <- length(colors)
+  n <- n %||% pev_nmax_display(pev_fdisc)
+
+  colors <- pev_fdisc(n)
 
   ncol <- height
   nrow <- n * width_panel + (n - 1) * width_gap

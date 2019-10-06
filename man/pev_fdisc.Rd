@@ -14,8 +14,7 @@ pev_fdisc(.fdisc, ...)
 
 \method{pev_fdisc}{character}(.fdisc, ...)
 
-\method{pev_fdisc}{pev_fcont}(.fdisc, n = 11, method = c("post",
-  "panel"), ...)
+\method{pev_fdisc}{pev_fcont}(.fdisc, method = c("post", "panel"), ...)
 
 \method{pev_fdisc}{pev_fdisc}(.fdisc, ...)
 }
@@ -24,8 +23,6 @@ pev_fdisc(.fdisc, ...)
 when called with an integer, returns the corresponding (hex-code) values.}
 
 \item{...}{other arguments (not used).}
-
-\item{n}{coercible to \code{integer}, number colors to put in the palette.}
 
 \item{method}{\code{character}, describes how the domain of the continuous palette
 is to be discretized, can be \code{"post"} or \code{"panel"} (using a fencing analogy).}
@@ -36,9 +33,8 @@ when called with a numeric vector with values between 0 and 1,
 returns the corresponding (hex-code) values.
 }
 \description{
-A discrete-palette function takes a vector of integers, from 1 to
-the size of the palette, and returns a vector of character strings,
-each containing the correpsonding hex-code.
+A discrete-palette function takes an integers, from 1 to
+the maximum size of the palette, and returns a vector of character hex-codes.
 You con use a discrete-palette function to
 build a custom ggplot2 scale, using \code{\link[ggplot2:discrete_scale]{ggplot2::discrete_scale()}}.
 }
@@ -46,13 +42,22 @@ build a custom ggplot2 scale, using \code{\link[ggplot2:discrete_scale]{ggplot2:
 These functions help you build, modify, and compose discrete-palette
 functions.
 
+A discrete-palette function can be \emph{bounded} or \emph{unbounded}. A bounded
+function has a maxiumum number of possible colors, and is created from a
+series of hex-colors, for example,
+\href{https://www.tableau.com/about/blog/2016/7/colors-upgrade-tableau-10-56782}{Tableau 10}.
+An unbounded function is created from a continuous-palette function, thus has no maximum
+number of possible colors.
+
 A discrete-palette function can be constructed using \code{\link[=pev_fdisc]{pev_fdisc()}}; it takes
 an argument \code{.fdisc}, which can be one of:
 
 \describe{
-\item{\code{character}}{A series of hex-codes.}
-\item{\code{pev_fcont}}{This will discretize a continuous palette into \code{n} colors,
-according to the discretization \code{method} (\code{"post"} or \code{"panel"}).}
+\item{\code{character}}{A series of hex-codes,
+returns a \strong{bounded} discrete-palette function.}
+\item{\code{pev_fcont}}{A continuous-palette function, to be discretized
+according to \code{method} (\code{"post"} or \code{"panel"}).
+This returns an \strong{unbounded} discrete-palette function.}
 \item{\code{pev_fdisc}}{If you provide a \code{pev_fdisc}, this is a no-op.}
 }
 
@@ -61,8 +66,8 @@ The print method for a \code{pev_disc} function generates a plot of the palette.
 The other functions that return continuous-palette functions are:
 
 \describe{
-\item{\code{pev_fpal_cvd()}}{Modify output to simulate color-vision deficiency.}
-\item{\code{pev_fpal_reverse()}}{Reverse palette-function.}
+\item{\code{\link[=pev_fdisc_cvd]{pev_fdisc_cvd()}}}{Modify output to simulate color-vision deficiency.}
+\item{\code{\link[=pev_fdisc_reverse]{pev_fdisc_reverse()}}}{Reverse palette-function.}
 }
 }
 \examples{

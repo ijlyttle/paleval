@@ -4,26 +4,26 @@
 \alias{pev_hex_distance}
 \title{Calculate distance between two (sets of) colors}
 \usage{
-pev_hex_distance(hex_a, hex_b, method = "cie2000")
+pev_hex_distance(hex, hex_ref, method = "cie2000")
 }
 \arguments{
-\item{hex_a}{\code{character} vector of hex-colors}
+\item{hex}{\code{character} vector of hex-colors}
 
-\item{hex_b}{\code{character} vector of hex-colors}
+\item{hex_ref}{\code{character} vector of hex-colors}
 
 \item{method}{\code{character} method to use for distance calculation,
 passed to \code{farver::compare_color()}.
 One of: \code{"euclidean"}, \code{"cie1976"}, \code{"cie94"}, \code{"cie2000"}, or \code{"cmc"}.}
 }
 \value{
-\code{numerical} vector, same length as \code{hex_a} and \code{hex_b}.
+\code{numerical} vector, same length as \code{hex} and \code{hex_ref}.
 }
 \description{
 This returns the distance, according to the \code{method},
-between corresponding hex-colors in \code{hex_a} and \code{hex_b}.
+between corresponding hex-colors in \code{hex} and \code{hex_ref}.
 }
 \details{
-The vectors \code{hex_a} and \code{hex_b} must be the same length.
+The vectors \code{hex} and \code{hex_ref} must be the same length.
 }
 \examples{
   pev_hex_distance("#000000", "#FFFFFF")

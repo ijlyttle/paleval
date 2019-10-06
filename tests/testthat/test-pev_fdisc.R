@@ -15,11 +15,6 @@ test_that("pev_fdisc no-op for pev_disc", {
   expect_identical(pev_fdisc(fdisc_hex), fdisc_hex)
 })
 
-test_that("pev_fdisc works for function", {
-  fn <- unclass(fdisc_hex)
-  expect_identical(pev_fdisc(fn), fdisc_hex)
-})
-
 test_that("pev_fdisc works for hex", {
   expect_is(fdisc_hex, "pev_fdisc")
 })
@@ -30,35 +25,38 @@ test_that("pev_fdisc works for fcont", {
 
 test_that("pev_fdisc gives the right answers", {
 
-  # no arg (NULL) returns all values
-  expect_identical(fdisc_hex(), hex)
-
   # call for each index
   purrr::walk(
     seq_along(hex),
-    ~expect_identical(fdisc_hex(.x), hex[[.x]])
+    ~expect_identical(fdisc_hex(.x), hex[seq_len(.x)])
   )
 
   # call with too-big index
-  expect_error(
+  expect_identical(
     fdisc_hex(length(hex) + 1),
-    "Subscript"
+    c(fdisc_hex(length(hex)), NA_character_)
   )
 
   # we discretize correctly
   vals_post <- c(0, 0.25, 0.5, 0.75, 1.0)
   vals_panel <- c(0.1, 0.3, 0.5, 0.7, 0.9)
 
-  fdisc_post <- pev_fdisc(fcont, n = 5, method = "post")
-  fdisc_panel <- pev_fdisc(fcont, n = 5, method = "panel")
+  fdisc_post <- pev_fdisc(fcont, method = "post")
+  fdisc_panel <- pev_fdisc(fcont, method = "panel")
 
-  expect_identical(fdisc_post(), fcont(vals_post))
-  expect_identical(fdisc_panel(), fcont(vals_panel))
+  expect_identical(fdisc_post(5), fcont(vals_post))
+  expect_identical(fdisc_panel(5), fcont(vals_panel))
 
+})
+
+test_that("pev_nmax works", {
+  expect_identical(pev_nmax(fdisc_hex), n)
+  expect_identical(pev_nmax(fdisc_fn), Inf)
 })
 
 test_that("pev_fdisc prints", {
   # this is frustrating because I can't see how to test that a plot
   # is produced
+  expect_silent(print(fdisc_fn))
   expect_silent(print(fdisc_hex))
 })

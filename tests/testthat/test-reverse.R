@@ -1,23 +1,30 @@
 name <- "Purple-Green"
 n <-  11
 fcont <- pev_fcont(name)
-fdisc <- pev_fdisc(fcont, n = n)
+fdisc_fn <- pev_fdisc(fcont)
+fdisc_hex <- pev_fdisc(fdisc_fn(n))
 
 test_that("reverse works", {
 
-  ## bad class
-  expect_error(pev_fpal_reverse(1), regexp = "^No method")
+  # bad class
+  expect_error(pev_fcont_reverse(1), regexp = "^No method")
+  expect_error(pev_fdisc_reverse(1), regexp = "^No method")
 
   # discrete
   expect_identical(
-    pev_fpal_reverse(fdisc)(),
-    rev(fdisc())
+    pev_fdisc_reverse(fdisc_fn)(n),
+    rev(fdisc_fn(n))
+  )
+
+  expect_identical(
+    pev_fdisc_reverse(fdisc_hex)(n),
+    rev(fdisc_hex(n))
   )
 
   # continuous
   expect_identical(
-    pev_fdisc(pev_fpal_reverse(fcont), n = n)(),
-    rev(pev_fdisc(fcont, n = n)())
+    pev_fdisc(pev_fcont_reverse(fcont))(n),
+    rev(pev_fdisc(fcont)(n))
   )
 
 })

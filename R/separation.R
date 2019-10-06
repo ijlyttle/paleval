@@ -2,6 +2,7 @@
 #'
 #' @inherit pev_fdisc params
 #' @inherit pev_hex_distance params
+#' @param n `integer` number of colors to use for unbounded palette-functions
 #' @param include_cvd `logical`, indicates to include data for
 #'   for color-vision deficiency
 #'
@@ -14,7 +15,7 @@
 #'   pev_data_separation(fdisc)
 #' @export
 #'
-pev_data_separation <- function(.fdisc, method = "cie2000", include_cvd = TRUE) {
+pev_data_separation <- function(.fdisc, n = NULL, method = "cie2000", include_cvd = TRUE) {
 
   # coerce to fdisc
   .fdisc <- pev_fdisc(.fdisc)
@@ -26,9 +27,11 @@ pev_data_separation <- function(.fdisc, method = "cie2000", include_cvd = TRUE) 
     cvd <- "none"
   }
 
+  # determine n
+  n <- n %||% pev_nmax_display(.fdisc)
+
   # make list of functions, palettes
-  list_fdisc <- purrr::map(cvd, ~pev_fpal_cvd(.fdisc, .x))
-  list_hex <- purrr::map(list_fdisc, pev_fpal_to_hex)
+  list_hex <- purrr::map(cvd, ~pev_fdisc_cvd(.fdisc, type = .x)(n))
 
   data_cvd <- tibble::tibble(cvd = cvd, hex = list_hex)
 
@@ -43,13 +46,13 @@ pev_data_separation <- function(.fdisc, method = "cie2000", include_cvd = TRUE) 
 # implementation for single set of hex-colors
 .pev_data_separation <- function(hex, method = "cie2000") {
 
-  data <- tidyr::expand_grid(hex_a = hex, hex_b = hex)
+  data <- tidyr::expand_grid(hex = hex, hex_ref = hex)
 
-  data$index_a <- as.integer(factor(data$hex_a, levels = hex))
+  data$i <- as.integer(factor(data$hex, levels = hex))
   data$distance <-
-    purrr::map2_dbl(data$hex_a, data$hex_b, pev_hex_distance, method = method)
+    purrr::map2_dbl(data$hex, data$hex_ref, pev_hex_distance, method = method)
 
-  data[, c("index_a", "hex_a", "hex_b", "distance")]
+  data[, c("i", "hex", "hex_ref", "distance")]
 }
 
 #' ggplot for perceptual distance within palette
@@ -78,13 +81,13 @@ pev_gg_separation <- function(data_sep, ncol = 2, height_tick = 1) {
   g <-
     ggplot2::ggplot(data_sep) +
     ggplot2::geom_bar(
-      ggplot2::aes_string(x = "index_a", y = Inf, fill = "hex_a"),
+      ggplot2::aes_string(x = "i", y = Inf, fill = "hex"),
       stat = "identity",
       position = "identity",
       width = 0.3
     ) +
     ggplot2::geom_tile(
-      ggplot2::aes_string(x = "index_a", y = "distance", fill = "hex_b"),
+      ggplot2::aes_string(x = "i", y = "distance", fill = "hex_ref"),
       width = 0.6,
       height = height_tick
     ) +

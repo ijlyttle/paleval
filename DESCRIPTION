@@ -37,7 +37,8 @@ Imports:
     rlang,
     glue,
     stats,
-    graphics
+    graphics,
+    scales
 Suggests: 
     testthat (>= 2.1.0),
     covr

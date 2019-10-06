@@ -9,20 +9,21 @@ development:
 
 reference:
 - title: Continuous-palette functions
+  description: Each of these functions returns a continuous-palette function.
   contents:
   - pev_fcont
   - pev_fcont_rescale
   - pev_fcont_diverging
-  - pev_fpal_cvd
-  - pev_fpal_reverse
+  - pev_fcont_cvd
+  - pev_fcont_reverse
 - title: Discrete-palette functions
+  description: Each of these functions returns a discrete-palette function.
   contents:
   - pev_fdisc
-  - pev_fpal_cvd
-  - pev_fpal_reverse
+  - pev_fdisc_cvd
+  - pev_fdisc_reverse
 - title: Hex-colors
   contents:
-  - pev_fpal_to_hex
   - pev_hex_distance
 - title: HCL parameters
   contents:
