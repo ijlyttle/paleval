@@ -114,19 +114,23 @@
     <p>TODO: URL to explain CVD</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_fcont_cvd</span>(<span class='no'>.fcont</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>pev_fcont_cvd</span>(<span class='no'>.fcont</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deutan"</span>, <span class='st'>"protan"</span>, <span class='st'>"tritan"</span>, <span class='st'>"none"</span>),
+  <span class='kw'>severity</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>pev_fcont_cvd</span>(<span class='no'>.fcont</span>, <span class='no'>...</span>)
+<span class='fu'>pev_fcont_cvd</span>(<span class='no'>.fcont</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deutan"</span>, <span class='st'>"protan"</span>,
+  <span class='st'>"tritan"</span>, <span class='st'>"none"</span>), <span class='kw'>severity</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for pev_fcont</span>
 <span class='fu'>pev_fcont_cvd</span>(<span class='no'>.fcont</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deutan"</span>, <span class='st'>"protan"</span>,
   <span class='st'>"tritan"</span>, <span class='st'>"none"</span>), <span class='kw'>severity</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
 
-<span class='fu'>pev_fdisc_cvd</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)
+<span class='fu'>pev_fdisc_cvd</span>(<span class='no'>.fdisc</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deutan"</span>, <span class='st'>"protan"</span>, <span class='st'>"tritan"</span>, <span class='st'>"none"</span>),
+  <span class='kw'>severity</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for default</span>
-<span class='fu'>pev_fdisc_cvd</span>(<span class='no'>.fdisc</span>, <span class='no'>...</span>)
+<span class='fu'>pev_fdisc_cvd</span>(<span class='no'>.fdisc</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deutan"</span>, <span class='st'>"protan"</span>,
+  <span class='st'>"tritan"</span>, <span class='st'>"none"</span>), <span class='kw'>severity</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for pev_funbounded</span>
 <span class='fu'>pev_fdisc_cvd</span>(<span class='no'>.fdisc</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"deutan"</span>,
@@ -146,10 +150,6 @@ when called with a numeric vector with values
 between 0 and 1, returns the corresponding (hex-code) values.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Other args (not used)</p></td>
-    </tr>
-    <tr>
       <th>type</th>
       <td><p><code>character</code>, describes color-vision deficiency. One of
 <code>"deutan"</code>, <code>"protan"</code>, <code>"tritan"</code>, <code>"none"</code>.</p></td>
@@ -158,6 +158,10 @@ between 0 and 1, returns the corresponding (hex-code) values.</p></td>
       <th>severity</th>
       <td><p><code>numeric</code>, number between 0 (none) and 1 to describe
 the severity of color-vision deficiency.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other args (not used)</p></td>
     </tr>
     <tr>
       <th>.fdisc</th>
