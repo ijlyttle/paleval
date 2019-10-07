@@ -20,12 +20,7 @@ pev_data_separation <- function(.fdisc, n = NULL, method = "cie2000", include_cv
   # coerce to fdisc
   .fdisc <- pev_fdisc(.fdisc)
 
-  # set up cvd
-  cvd <- c("none", "deutan", "protan", "tritan")
-
-  if (!include_cvd) {
-    cvd <- "none"
-  }
+  cvd <- get_cvd(include_cvd)
 
   # determine n
   n <- n %||% pev_nmax_display(.fdisc)
@@ -102,7 +97,7 @@ pev_gg_separation <- function(data_sep, ncol = 2, height_tick = 1) {
     ) +
     ggplot2::labs(
       x = NULL,
-      y = "distance"
+      y = "perceptual distance"
     ) +
     ggplot2::theme_light() +
     ggplot2::theme(

@@ -41,7 +41,7 @@ I'm suspect I'm doing things in a way that the authors of `colorspace`, `ggplot2
 
 There are ways to create continuous-palette functions:
 
- - `pev_fcont()`: constructor
+ * `pev_fcont()`: constructor
     * takes a vector (more than one) of hex-colors to be interpolated. 
     * takes a (one) name of a colorspace palette.
     * takes a set of HCL parameters, following the colorspace framework. 
@@ -49,14 +49,14 @@ There are ways to create continuous-palette functions:
     * takes a `pev_fcont` (no-op).
     
  * `pev_fcont_cvd()`: modifies the output of the palette function according to color-vision deficiency.
- - `pev_fcont_diverging()`: composes two continuous-palette functions to create (presumably) a diverging palette-function. 
+ * `pev_fcont_diverging()`: composes two continuous-palette functions to create (presumably) a diverging palette-function. 
    It's up to you to make sure the constituent palettes "meet in the middle". 
  * `pev_fcont_rescale()`: rescaling an existing continuous-palette function. It may make sense to "zoom-in", but "zooming-out" could get you into trouble. 
  * `pev_fcont_reverse()`: reverses the sense of the palette function.
  
 There are ways to create discrete-palette functions:
  
- - `pev_fdisc()`: constructor 
+ * `pev_fdisc()`: constructor 
    * takes a vector of hex-colors, returns a **bounded** function.
    * takes a `pev_fcont`, given a discretization `method` (e.g. `"panel"` or `"post"`), returns an **unbounded** function.
    * takes a `pev_fdisc` (no-op).
@@ -77,13 +77,13 @@ Other functions:
     - return `data.frame` with `cvd`, `i`, `hex`, `hex_ref`, `distance`
 * `pev_gg_separation()`
 
-- `pev_data_derivative()`: assess perceptual-derivative, given a continuous-palette function,
+* `pev_data_derivative()`: assess perceptual-derivative, given a continuous-palette function,
     - return `data.frame` with `cvd`, `x`, `hex`, `d_distance_d_x`
-- `pev_gg_derivative()`
+* `pev_gg_derivative()`
 
-- `pev_data_distance()`: assess perceptual-distance from a reference-color, given a continuous-palette function,
+* `pev_data_distance()`: assess perceptual-distance from a reference-color, given a continuous-palette function,
     - return `data.frame` with `cvd`, `x`, `hex`, `hex_ref`, `distance`
-- `pev_gg_distance()`
+* `pev_gg_distance()`
 
 - `pev_data_spectrum()`: assess HCL and RGB spectrum for continuous-palette functions, given a continuous-palette function,
     - return `data.frame` with `x`, `dimension`, `value`
@@ -127,6 +127,14 @@ data_drv <- pev_data_derivative("Purple-Green")
 data_drv
 
 pev_gg_derivative(data_drv)
+```
+
+
+```{r}
+data_dist <- pev_data_distance("Purple-Green")
+data_dist
+
+pev_gg_distance(data_dist)
 ```
 
 ## Code of Conduct

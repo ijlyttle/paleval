@@ -10,16 +10,20 @@
 \alias{pev_fdisc_cvd.pev_fbounded}
 \title{Modify output to simulate color-vision deficiency}
 \usage{
-pev_fcont_cvd(.fcont, ...)
+pev_fcont_cvd(.fcont, type = c("deutan", "protan", "tritan", "none"),
+  severity = 1, ...)
 
-\method{pev_fcont_cvd}{default}(.fcont, ...)
+\method{pev_fcont_cvd}{default}(.fcont, type = c("deutan", "protan",
+  "tritan", "none"), severity = 1, ...)
 
 \method{pev_fcont_cvd}{pev_fcont}(.fcont, type = c("deutan", "protan",
   "tritan", "none"), severity = 1, ...)
 
-pev_fdisc_cvd(.fdisc, ...)
+pev_fdisc_cvd(.fdisc, type = c("deutan", "protan", "tritan", "none"),
+  severity = 1, ...)
 
-\method{pev_fdisc_cvd}{default}(.fdisc, ...)
+\method{pev_fdisc_cvd}{default}(.fdisc, type = c("deutan", "protan",
+  "tritan", "none"), severity = 1, ...)
 
 \method{pev_fdisc_cvd}{pev_funbounded}(.fdisc, type = c("deutan",
   "protan", "tritan", "none"), severity = 1, ...)
@@ -32,13 +36,13 @@ pev_fdisc_cvd(.fdisc, ...)
 when called with a numeric vector with values
 between 0 and 1, returns the corresponding (hex-code) values.}
 
-\item{...}{Other args (not used)}
-
 \item{type}{\code{character}, describes color-vision deficiency. One of
 \code{"deutan"}, \code{"protan"}, \code{"tritan"}, \code{"none"}.}
 
 \item{severity}{\code{numeric}, number between 0 (none) and 1 to describe
 the severity of color-vision deficiency.}
+
+\item{...}{Other args (not used)}
 
 \item{.fdisc}{\code{object} that can be coerced to \code{pev_fdisc},
 when called with an integer, returns the corresponding (hex-code) values.}

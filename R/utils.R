@@ -11,3 +11,14 @@
 NULL
 
 `%||%` <- rlang::`%||%`
+
+get_cvd <- function(include_cvd = TRUE) {
+  # set up cvd
+  cvd <- c("none", "deutan", "protan", "tritan")
+
+  if (!include_cvd) {
+    cvd <- "none"
+  }
+
+  cvd
+}

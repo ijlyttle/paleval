@@ -28,14 +28,18 @@
 #'
 #' @export
 #'
-pev_fcont_cvd <- function(.fcont, ...) {
+pev_fcont_cvd <- function(.fcont,
+                          type = c("deutan", "protan", "tritan", "none"),
+                          severity = 1, ...) {
   UseMethod("pev_fcont_cvd")
 }
 
 #' @rdname pev_fcont_cvd
 #' @export
 #'
-pev_fcont_cvd.default <- function(.fcont, ...) {
+pev_fcont_cvd.default <- function(.fcont,
+                                  type = c("deutan", "protan", "tritan", "none"),
+                                  severity = 1, ...) {
   stop(
     glue::glue("No method for `pev_fcont_cvd` for class {class(.fcont)}"),
     call. = FALSE
@@ -62,14 +66,18 @@ pev_fcont_cvd.pev_fcont <- function(.fcont,
 #' @rdname pev_fcont_cvd
 #' @export
 #'
-pev_fdisc_cvd <- function(.fdisc, ...) {
+pev_fdisc_cvd <- function(.fdisc,
+                          type = c("deutan", "protan", "tritan", "none"),
+                          severity = 1, ...) {
   UseMethod("pev_fdisc_cvd")
 }
 
 #' @rdname pev_fcont_cvd
 #' @export
 #'
-pev_fdisc_cvd.default <- function(.fdisc, ...) {
+pev_fdisc_cvd.default <- function(.fdisc,
+                                  type = c("deutan", "protan", "tritan", "none"),
+                                  severity = 1, ...) {
   stop(
     glue::glue("No method for `pev_fdisc_cvd` for class {class(.fdisc)}"),
     call. = FALSE
@@ -110,7 +118,7 @@ pev_fdisc_cvd.pev_fbounded <- function(.fdisc,
   new_pev_fbounded(f)
 }
 
-# internal function, returns generic function
+# returns function, given hex-color, return cvd hex-color
 .pev_cvd <- function(type = c("deutan", "protan", "tritan", "none"),
                      severity = 1) {
 

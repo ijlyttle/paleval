@@ -209,6 +209,29 @@ pev_gg_derivative(data_drv)
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
+``` r
+data_dist <- pev_data_distance("Purple-Green")
+data_dist
+#> # A tibble: 164 x 5
+#>    cvd       x hex     hex_ref distance
+#>    <chr> <dbl> <chr>   <chr>      <dbl>
+#>  1 none  0     #492050 #492050     0   
+#>  2 none  0.025 #562A5E #492050     3.59
+#>  3 none  0.05  #65346D #492050     7.58
+#>  4 none  0.075 #733F7C #492050    11.7 
+#>  5 none  0.1   #82498C #492050    16.0 
+#>  6 none  0.125 #90529C #492050    20.1 
+#>  7 none  0.15  #9F5CAB #492050    24.7 
+#>  8 none  0.175 #AE65BB #492050    29.2 
+#>  9 none  0.2   #B574C2 #492050    33.5 
+#> 10 none  0.225 #BD82C9 #492050    38.1 
+#> # … with 154 more rows
+
+pev_gg_distance(data_dist)
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
 ## Code of Conduct
 
 Please note that the ‘paleval’ project is released with a [Contributor

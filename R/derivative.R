@@ -19,12 +19,7 @@ pev_data_derivative <- function(.fcont, n_panel = 40, method = "cie2000",
   # discretize
   x <- seq(0, 1, by = 1 / n_panel)
 
-  # set up cvd
-  cvd <- c("none", "deutan", "protan", "tritan")
-
-  if (!include_cvd) {
-    cvd <- "none"
-  }
+  cvd <- get_cvd(include_cvd)
 
   data_cvd <- tibble::tibble(
     cvd = cvd,
@@ -63,6 +58,7 @@ pev_gg_derivative <- function(data_drv) {
     ggplot2::geom_point(ggplot2::aes_string(color = "hex")) +
     ggplot2::scale_color_identity() +
     ggplot2::ylim(0, NA) +
+    ggplot2::labs(y = "percertual derivative") +
     ggplot2::facet_grid(
       rows = "cvd",
       labeller = ggplot2::labeller(.rows = ggplot2::label_both),
