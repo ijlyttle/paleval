@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate perceptual-distance between two (sets of) colors — pev_hex_distance • paleval</title>
+<title>Calculate perceptual-derivative for sequence of hex-colors — pev_hex_derivative • paleval</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,9 @@
 
 
 
-<meta property="og:title" content="Calculate perceptual-distance between two (sets of) colors — pev_hex_distance" />
-<meta property="og:description" content="This returns the distance, according to the method,
-between corresponding hex-colors in hex and hex_ref." />
+<meta property="og:title" content="Calculate perceptual-derivative for sequence of hex-colors — pev_hex_derivative" />
+<meta property="og:description" content="This assumes that hex reperesents colors on a continuous-scale
+where the domain varies uniformly from 0 to 1." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,27 +106,23 @@ between corresponding hex-colors in hex and hex_ref." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate perceptual-distance between two (sets of) colors</h1>
+    <h1>Calculate perceptual-derivative for sequence of hex-colors</h1>
     <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/hex-distance.R'><code>R/hex-distance.R</code></a></small>
-    <div class="hidden name"><code>pev_hex_distance.Rd</code></div>
+    <div class="hidden name"><code>pev_hex_derivative.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This returns the distance, according to the <code>method</code>,
-between corresponding hex-colors in <code>hex</code> and <code>hex_ref</code>.</p>
+    <p>This assumes that <code>hex</code> reperesents colors on a continuous-scale
+where the domain varies uniformly from 0 to 1.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_hex_distance</span>(<span class='no'>hex</span>, <span class='no'>hex_ref</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>)</pre>
+    <pre class="usage"><span class='fu'>pev_hex_derivative</span>(<span class='no'>hex</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>hex</th>
-      <td><p><code>character</code> vector of hex-colors</p></td>
-    </tr>
-    <tr>
-      <th>hex_ref</th>
       <td><p><code>character</code> vector of hex-colors</p></td>
     </tr>
     <tr>
@@ -139,20 +135,22 @@ One of: <code>"euclidean"</code>, <code>"cie1976"</code>, <code>"cie94"</code>, 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>numerical</code> vector, same length as <code>hex</code> and <code>hex_ref</code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The vectors <code>hex</code> and <code>hex_ref</code> must be the same length.</p>
+    <p><code>numeric</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>)</div><div class='output co'>#&gt; [1] 100</div><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#000000"</span>))</div><div class='output co'>#&gt; [1]   0 100</div><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>), <span class='st'>"#000000"</span>)</div><div class='output co'>#&gt; [1]   0 100</div></pre>
+    <pre class="examples"><div class='input'>  <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Viridis"</span>)(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>1</span>, <span class='kw'>by</span> <span class='kw'>=</span> <span class='fl'>0.025</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'>pev_hex_derivative</span>()</div><div class='output co'>#&gt;  [1] 139.44806 126.50066 121.09807 125.76368 128.39942 125.92805 128.37145
+#&gt;  [8] 129.86009 126.42235 125.93043 124.39282 118.50278  95.39470  86.44091
+#&gt; [15]  89.68236  98.16341 111.65121 117.85282 123.58192 131.61543 141.54127
+#&gt; [22] 135.78138 134.11591 147.46890 147.61106 126.19074 125.16032 129.98156
+#&gt; [29] 128.78150 124.58214 130.59543 159.31153 171.00922 166.81506 152.49545
+#&gt; [36] 137.00919 121.24842 113.08599 104.25259  70.75733  38.69577</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

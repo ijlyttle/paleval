@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate perceptual-distance between two (sets of) colors — pev_hex_distance • paleval</title>
+<title>ggplot for perceptual-derivative of continuous-palette — pev_gg_derivative • paleval</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,8 @@
 
 
 
-<meta property="og:title" content="Calculate perceptual-distance between two (sets of) colors — pev_hex_distance" />
-<meta property="og:description" content="This returns the distance, according to the method,
-between corresponding hex-colors in hex and hex_ref." />
+<meta property="og:title" content="ggplot for perceptual-derivative of continuous-palette — pev_gg_derivative" />
+<meta property="og:description" content="ggplot for perceptual-derivative of continuous-palette" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,53 +105,39 @@ between corresponding hex-colors in hex and hex_ref." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate perceptual-distance between two (sets of) colors</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/hex-distance.R'><code>R/hex-distance.R</code></a></small>
-    <div class="hidden name"><code>pev_hex_distance.Rd</code></div>
+    <h1>ggplot for perceptual-derivative of continuous-palette</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/derivative.R'><code>R/derivative.R</code></a></small>
+    <div class="hidden name"><code>pev_gg_derivative.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This returns the distance, according to the <code>method</code>,
-between corresponding hex-colors in <code>hex</code> and <code>hex_ref</code>.</p>
+    <p>ggplot for perceptual-derivative of continuous-palette</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_hex_distance</span>(<span class='no'>hex</span>, <span class='no'>hex_ref</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>)</pre>
+    <pre class="usage"><span class='fu'>pev_gg_derivative</span>(<span class='no'>data_drv</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>hex</th>
-      <td><p><code>character</code> vector of hex-colors</p></td>
-    </tr>
-    <tr>
-      <th>hex_ref</th>
-      <td><p><code>character</code> vector of hex-colors</p></td>
-    </tr>
-    <tr>
-      <th>method</th>
-      <td><p><code>character</code> method to use for distance calculation,
-passed to <code>farver::compare_color()</code>.
-One of: <code>"euclidean"</code>, <code>"cie1976"</code>, <code>"cie94"</code>, <code>"cie2000"</code>, or <code>"cmc"</code>.</p></td>
+      <th>data_drv</th>
+      <td><p><code>data.frame</code>, created using <code>pev_data_separation</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>numerical</code> vector, same length as <code>hex</code> and <code>hex_ref</code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The vectors <code>hex</code> and <code>hex_ref</code> must be the same length.</p>
+    <p><code>ggplot</code> object</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>)</div><div class='output co'>#&gt; [1] 100</div><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#000000"</span>))</div><div class='output co'>#&gt; [1]   0 100</div><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>), <span class='st'>"#000000"</span>)</div><div class='output co'>#&gt; [1]   0 100</div></pre>
+    <pre class="examples"><div class='input'>  <span class='no'>data_drv</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_data_derivative.html'>pev_data_derivative</a></span>(<span class='st'>"Viridis"</span>)
+  <span class='fu'>pev_gg_derivative</span>(<span class='no'>data_drv</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (geom_point).</span></div><div class='img'><img src='pev_gg_derivative-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

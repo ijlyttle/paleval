@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get separation within discrete-palette — pev_data_separation • paleval</title>
+<title>Get perceptual-separation within discrete-palette — pev_data_separation • paleval</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Get separation within discrete-palette — pev_data_separation" />
-<meta property="og:description" content="Get separation within discrete-palette" />
+<meta property="og:title" content="Get perceptual-separation within discrete-palette — pev_data_separation" />
+<meta property="og:description" content="Get perceptual-separation within discrete-palette" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,13 +105,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get separation within discrete-palette</h1>
+    <h1>Get perceptual-separation within discrete-palette</h1>
     <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/separation.R'><code>R/separation.R</code></a></small>
     <div class="hidden name"><code>pev_data_separation.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get separation within discrete-palette</p>
+    <p>Get perceptual-separation within discrete-palette</p>
     </div>
 
     <pre class="usage"><span class='fu'>pev_data_separation</span>(<span class='no'>.fdisc</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>,
@@ -149,9 +149,9 @@ for color-vision deficiency</p></td>
     <div class='dont-index'><p>pev_gg_separation</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='no'>fcont</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Dynamic"</span>)
-  <span class='no'>fdisc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_fdisc.html'>pev_fdisc</a></span>(<span class='no'>fcont</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"panel"</span>)
-  <span class='fu'>pev_data_separation</span>(<span class='no'>fdisc</span>)</div><div class='output co'>#&gt; # A tibble: 484 x 5
+    <pre class="examples"><div class='input'>  <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Dynamic"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='pev_fdisc.html'>pev_fdisc</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"panel"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>pev_data_separation</span>()</div><div class='output co'>#&gt; # A tibble: 484 x 5
 #&gt;    cvd       i hex     hex_ref distance
 #&gt;    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;
 #&gt;  1 none      1 #E19896 #E19896      0  

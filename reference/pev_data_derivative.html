@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate perceptual-distance between two (sets of) colors — pev_hex_distance • paleval</title>
+<title>Get perceptual-derivative of continuous-palette — pev_data_derivative • paleval</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,8 @@
 
 
 
-<meta property="og:title" content="Calculate perceptual-distance between two (sets of) colors — pev_hex_distance" />
-<meta property="og:description" content="This returns the distance, according to the method,
-between corresponding hex-colors in hex and hex_ref." />
+<meta property="og:title" content="Get perceptual-derivative of continuous-palette — pev_data_derivative" />
+<meta property="og:description" content="Get perceptual-derivative of continuous-palette" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,53 +105,69 @@ between corresponding hex-colors in hex and hex_ref." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate perceptual-distance between two (sets of) colors</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/hex-distance.R'><code>R/hex-distance.R</code></a></small>
-    <div class="hidden name"><code>pev_hex_distance.Rd</code></div>
+    <h1>Get perceptual-derivative of continuous-palette</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/derivative.R'><code>R/derivative.R</code></a></small>
+    <div class="hidden name"><code>pev_data_derivative.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This returns the distance, according to the <code>method</code>,
-between corresponding hex-colors in <code>hex</code> and <code>hex_ref</code>.</p>
+    <p>Get perceptual-derivative of continuous-palette</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_hex_distance</span>(<span class='no'>hex</span>, <span class='no'>hex_ref</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>)</pre>
+    <pre class="usage"><span class='fu'>pev_data_derivative</span>(<span class='no'>.fcont</span>, <span class='kw'>n_panel</span> <span class='kw'>=</span> <span class='fl'>40</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"cie2000"</span>,
+  <span class='kw'>include_cvd</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>hex</th>
-      <td><p><code>character</code> vector of hex-colors</p></td>
+      <th>.fcont</th>
+      <td><p><code>object</code> that can be coerced to <code>pev_fcont</code>,
+when called with a numeric vector with values
+between 0 and 1, returns the corresponding (hex-code) values.</p></td>
     </tr>
     <tr>
-      <th>hex_ref</th>
-      <td><p><code>character</code> vector of hex-colors</p></td>
+      <th>n_panel</th>
+      <td><p><code>numeric</code>, number of panels into which to discretize the
+palette-function.</p></td>
     </tr>
     <tr>
       <th>method</th>
-      <td><p><code>character</code> method to use for distance calculation,
-passed to <code>farver::compare_color()</code>.
-One of: <code>"euclidean"</code>, <code>"cie1976"</code>, <code>"cie94"</code>, <code>"cie2000"</code>, or <code>"cmc"</code>.</p></td>
+      <td><p><code>character</code>, describes how the domain of the continuous palette
+is to be discretized, can be <code>"post"</code> or <code>"panel"</code> (using a fencing analogy).</p></td>
+    </tr>
+    <tr>
+      <th>include_cvd</th>
+      <td><p><code>logical</code>, indicates to include data for
+for color-vision deficiency</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>numerical</code> vector, same length as <code>hex</code> and <code>hex_ref</code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The vectors <code>hex</code> and <code>hex_ref</code> must be the same length.</p>
+    <p><code>data.frame</code> with variables <code>cvd</code>, <code>x</code>, <code>hex</code>, <code>d_distance_d_x</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>)</div><div class='output co'>#&gt; [1] 100</div><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#000000"</span>))</div><div class='output co'>#&gt; [1]   0 100</div><div class='input'>  <span class='fu'>pev_hex_distance</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#000000"</span>, <span class='st'>"#FFFFFF"</span>), <span class='st'>"#000000"</span>)</div><div class='output co'>#&gt; [1]   0 100</div></pre>
+    <pre class="examples"><div class='input'>  <span class='fu'>pev_data_derivative</span>(<span class='st'>"Viridis"</span>)</div><div class='output co'>#&gt; # A tibble: 164 x 4
+#&gt;    cvd       x hex     d_distance_d_x
+#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;
+#&gt;  1 none  0     #FDE333           139.
+#&gt;  2 none  0.025 #EFE32D           127.
+#&gt;  3 none  0.05  #E1E22B           121.
+#&gt;  4 none  0.075 #D2E02E           126.
+#&gt;  5 none  0.1   #C2DE34           128.
+#&gt;  6 none  0.125 #B2DC3C           126.
+#&gt;  7 none  0.15  #A2D945           128.
+#&gt;  8 none  0.175 #90D74E           130.
+#&gt;  9 none  0.2   #7ED357           126.
+#&gt; 10 none  0.225 #6AD05F           126.
+#&gt; # … with 154 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

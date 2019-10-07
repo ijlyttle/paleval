@@ -139,13 +139,13 @@
 </li>
 <li><p><code><a href="reference/pev_gg_separation.html">pev_gg_separation()</a></code></p></li>
 <li>
-<p><code>pev_data_derivative()</code>: assess perceptual-derivative, given a continuous-palette function,</p>
+<p><code><a href="reference/pev_data_derivative.html">pev_data_derivative()</a></code>: assess perceptual-derivative, given a continuous-palette function,</p>
 <ul>
-<li>return <code>data.frame</code> with <code>cvd</code>, <code>x</code>, <code>d_distance_d_x</code>
+<li>return <code>data.frame</code> with <code>cvd</code>, <code>x</code>, <code>hex</code>, <code>d_distance_d_x</code>
 </li>
 </ul>
 </li>
-<li><p><code>pev_gg_derivative()</code>:</p></li>
+<li><p><code><a href="reference/pev_gg_derivative.html">pev_gg_derivative()</a></code></p></li>
 <li>
 <p><code>pev_data_distance()</code>: assess perceptual-distance from a reference-color, given a continuous-palette function,</p>
 <ul>
@@ -153,18 +153,18 @@
 </li>
 </ul>
 </li>
-<li><p><code>pev_gg_distance()</code>:</p></li>
+<li><p><code>pev_gg_distance()</code></p></li>
 <li>
 <p><code>pev_data_spectrum()</code>: assess HCL and RGB spectrum for continuous-palette functions, given a continuous-palette function,</p>
 <ul>
-<li>return <code>data.frame</code> with <code>x</code>, <code>hex</code>, <code>hue</code>, <code>chroma</code>, <code>luminance</code>
+<li>return <code>data.frame</code> with <code>x</code>, <code>dimension</code>, <code>value</code>
 </li>
 </ul>
 </li>
 <li>
 <p><code>pev_data_spectrum_hex()</code></p>
 <ul>
-<li>return <code>data.frame</code> with <code>x</code>, <code>hex</code>, <code>hue</code>, <code>chroma</code>, <code>luminance</code>, <code>hex_ref</code>, <code>distance</code>
+<li>return <code>data.frame</code> with <code>x</code>, <code>dimension</code>, <code>value</code>, <code>hex_ref</code>
 </li>
 </ul>
 </li>
@@ -211,6 +211,25 @@ install.packages("paleval")
 <a class="sourceLine" id="cb2-22" data-line-number="22"></a>
 <a class="sourceLine" id="cb2-23" data-line-number="23"><span class="kw"><a href="reference/pev_gg_separation.html">pev_gg_separation</a></span>(data_sep)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">data_drv &lt;-<span class="st"> </span><span class="kw"><a href="reference/pev_data_derivative.html">pev_data_derivative</a></span>(<span class="st">"Purple-Green"</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">data_drv</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; # A tibble: 164 x 4</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;    cvd       x hex     d_distance_d_x</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;  1 none  0     #492050           136.</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;  2 none  0.025 #562A5E           152.</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;  3 none  0.05  #65346D           162.</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;  4 none  0.075 #733F7C           169.</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;  5 none  0.1   #82498C           172.</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;  6 none  0.125 #90529C           178.</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;  7 none  0.15  #9F5CAB           187.</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;  8 none  0.175 #AE65BB           170.</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt;  9 none  0.2   #B574C2           167.</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; 10 none  0.225 #BD82C9           158.</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; # … with 154 more rows</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="kw"><a href="reference/pev_gg_derivative.html">pev_gg_derivative</a></span>(data_drv)</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%"></p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
