@@ -75,6 +75,10 @@ pev_hex_distance <- function(hex, hex_ref, method = "cie2000") {
 pev_hex_derivative <- function(hex, method = "cie2000") {
 
   # validate arguments
+  assertthat::assert_that(
+    all(is_hexcolor(hex)),
+    method %in% c("euclidean", "cie1976", "cie94", "cie2000", "cmc")
+  )
 
   n <- length(hex)
 

@@ -22,14 +22,21 @@ reference:
   - pev_fdisc
   - pev_fdisc_cvd
   - pev_fdisc_reverse
+- title: Perceptual separation
+  description: Consider the perceptual-separation within a discrete-palette.
+  contents:
+  - pev_data_separation
+  - pev_gg_separation
+- title: Perceptual derivative
+  description: Consider the perceptual-derivative for a continuous-palette.
+  contents:
+  - pev_data_derivative
+  - pev_gg_derivative
 - title: Hex-colors
   contents:
   - pev_hex_distance
+  - pev_hex_derivative
 - title: HCL parameters
   contents:
   - pev_hcl
   - pev_map_hcl
-- title: Color separation
-  contents:
-  - pev_data_separation
-  - pev_gg_separation

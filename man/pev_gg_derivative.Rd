@@ -7,7 +7,7 @@
 pev_gg_derivative(data_drv)
 }
 \arguments{
-\item{data_drv}{\code{data.frame}, created using \code{pev_data_separation}.}
+\item{data_drv}{\code{data.frame}, created using \code{\link[=pev_data_derivative]{pev_data_derivative()}}.}
 }
 \value{
 \code{ggplot} object

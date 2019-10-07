@@ -57,7 +57,7 @@ pev_data_separation <- function(.fdisc, n = NULL, method = "cie2000", include_cv
 
 #' ggplot for perceptual-distance within discrete-palette
 #'
-#' @param data_sep `data.frame`, created using `pev_data_separation`.
+#' @param data_sep `data.frame`, created using [pev_data_separation()].
 #' @param ncol `numeric`, number of columns in the facet
 #' @param height_tick `numeric`, height (units of `distance`) of the
 #'   cross-wise ticks

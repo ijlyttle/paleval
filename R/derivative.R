@@ -42,7 +42,7 @@ pev_data_derivative <- function(.fcont, n_panel = 40, method = "cie2000",
 
 #' ggplot for perceptual-derivative of continuous-palette
 #'
-#' @param data_drv `data.frame`, created using `pev_data_separation`.
+#' @param data_drv `data.frame`, created using [pev_data_derivative()].
 #'
 #' @return `ggplot` object
 #' @examples

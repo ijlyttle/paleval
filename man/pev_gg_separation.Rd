@@ -7,7 +7,7 @@
 pev_gg_separation(data_sep, ncol = 2, height_tick = 1)
 }
 \arguments{
-\item{data_sep}{\code{data.frame}, created using \code{pev_data_separation}.}
+\item{data_sep}{\code{data.frame}, created using \code{\link[=pev_data_separation]{pev_data_separation()}}.}
 
 \item{ncol}{\code{numeric}, number of columns in the facet}
 
