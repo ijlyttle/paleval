@@ -70,20 +70,20 @@ Other functions:
 
 - `pev_nmax()`: get the maximum length supported by a discrete-palette function
 
-- `pev_hex_distance()`: given two (sets of) hex-colors, `hex`, `hex_ref`:
+* `pev_hex_distance()`: given two (sets of) hex-colors, `hex`, `hex_ref`:
     - return the perceptual `distance` between them 
     
-- `pev_data_separation()`: assess color-separation, given a discrete-palette function,
+* `pev_data_separation()`: assess color-separation, given a discrete-palette function,
     - return `data.frame` with `cvd`, `i`, `hex`, `hex_ref`, `distance`
-- `pev_gg_separation()`
+* `pev_gg_separation()`
 
 - `pev_data_derivative()`: assess perceptual-derivative, given a continuous-palette function,
-    - return `data.frame` with `cvd`, `x`, `d_distance_d_x`
-- `pev_gg_derivative()`:
+    - return `data.frame` with `cvd`, `x`, `hex`, `d_distance_d_x`
+- `pev_gg_derivative()`
 
 - `pev_data_distance()`: assess perceptual-distance from a reference-color, given a continuous-palette function,
     - return `data.frame` with `cvd`, `x`, `hex`, `hex_ref`, `distance`
-- `pev_gg_distance()`:
+- `pev_gg_distance()`
 
 - `pev_data_spectrum()`: assess HCL and RGB spectrum for continuous-palette functions, given a continuous-palette function,
     - return `data.frame` with `x`, `dimension`, `value`
@@ -120,6 +120,13 @@ data_sep <- pev_data_separation(fdisc(7))
 print(data_sep)
 
 pev_gg_separation(data_sep)
+```
+
+```{r}
+data_drv <- pev_data_derivative("Purple-Green")
+data_drv
+
+pev_gg_derivative(data_drv)
 ```
 
 ## Code of Conduct

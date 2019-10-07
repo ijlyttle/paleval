@@ -112,7 +112,7 @@ pev_fdisc_cvd.pev_fbounded <- function(.fdisc,
 
 # internal function, returns generic function
 .pev_cvd <- function(type = c("deutan", "protan", "tritan", "none"),
-                      severity = 1) {
+                     severity = 1) {
 
     # validate input
     type <- match.arg(type)

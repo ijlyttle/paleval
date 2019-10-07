@@ -1,4 +1,4 @@
-#' Get separation within discrete-palette
+#' Get perceptual-separation within discrete-palette
 #'
 #' @inherit pev_fdisc params
 #' @inherit pev_hex_distance params
@@ -10,9 +10,9 @@
 #'
 #' @return `tbl_df` with variables `cvd`, `hex_a`, `hex_b`, `distance`
 #' @examples
-#'   fcont <- pev_fcont("Dynamic")
-#'   fdisc <- pev_fdisc(fcont, n = 7, method = "panel")
-#'   pev_data_separation(fdisc)
+#'   pev_fcont("Dynamic") %>%
+#'     pev_fdisc(n = 7, method = "panel") %>%
+#'     pev_data_separation()
 #' @export
 #'
 pev_data_separation <- function(.fdisc, n = NULL, method = "cie2000", include_cvd = TRUE) {
@@ -55,7 +55,7 @@ pev_data_separation <- function(.fdisc, n = NULL, method = "cie2000", include_cv
   data[, c("i", "hex", "hex_ref", "distance")]
 }
 
-#' ggplot for perceptual distance within palette
+#' ggplot for perceptual-distance within discrete-palette
 #'
 #' @param data_sep `data.frame`, created using `pev_data_separation`.
 #' @param ncol `numeric`, number of columns in the facet
@@ -64,9 +64,10 @@ pev_data_separation <- function(.fdisc, n = NULL, method = "cie2000", include_cv
 #'
 #' @return `ggplot` object
 #' @examples
-#'   fcont <- pev_fcont("Dynamic")
-#'   fdisc <- pev_fdisc(fcont, n = 7, method = "panel")
-#'   data_sep <- pev_data_separation(fdisc)
+#'   data_sep <-
+#'     pev_fcont("Dynamic") %>%
+#'     pev_fdisc(n = 7, method = "panel") %>%
+#'     pev_data_separation()
 #'   pev_gg_separation(data_sep)
 #' @export
 #'
@@ -103,6 +104,7 @@ pev_gg_separation <- function(data_sep, ncol = 2, height_tick = 1) {
       x = NULL,
       y = "distance"
     ) +
+    ggplot2::theme_light() +
     ggplot2::theme(
       axis.text.x = ggplot2::element_blank(),
       axis.ticks.x = ggplot2::element_blank()

@@ -2,7 +2,7 @@
 % Please edit documentation in R/separation.R
 \name{pev_gg_separation}
 \alias{pev_gg_separation}
-\title{ggplot for perceptual distance within palette}
+\title{ggplot for perceptual-distance within discrete-palette}
 \usage{
 pev_gg_separation(data_sep, ncol = 2, height_tick = 1)
 }
@@ -18,11 +18,12 @@ cross-wise ticks}
 \code{ggplot} object
 }
 \description{
-ggplot for perceptual distance within palette
+ggplot for perceptual-distance within discrete-palette
 }
 \examples{
-  fcont <- pev_fcont("Dynamic")
-  fdisc <- pev_fdisc(fcont, n = 7, method = "panel")
-  data_sep <- pev_data_separation(fdisc)
+  data_sep <-
+    pev_fcont("Dynamic") \%>\%
+    pev_fdisc(n = 7, method = "panel") \%>\%
+    pev_data_separation()
   pev_gg_separation(data_sep)
 }

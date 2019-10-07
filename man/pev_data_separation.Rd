@@ -2,7 +2,7 @@
 % Please edit documentation in R/separation.R
 \name{pev_data_separation}
 \alias{pev_data_separation}
-\title{Get separation within discrete-palette}
+\title{Get perceptual-separation within discrete-palette}
 \usage{
 pev_data_separation(.fdisc, n = NULL, method = "cie2000",
   include_cvd = TRUE)
@@ -23,12 +23,12 @@ for color-vision deficiency}
 \code{tbl_df} with variables \code{cvd}, \code{hex_a}, \code{hex_b}, \code{distance}
 }
 \description{
-Get separation within discrete-palette
+Get perceptual-separation within discrete-palette
 }
 \examples{
-  fcont <- pev_fcont("Dynamic")
-  fdisc <- pev_fdisc(fcont, n = 7, method = "panel")
-  pev_data_separation(fdisc)
+  pev_fcont("Dynamic") \%>\%
+    pev_fdisc(n = 7, method = "panel") \%>\%
+    pev_data_separation()
 }
 \seealso{
 pev_gg_separation

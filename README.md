@@ -114,9 +114,9 @@ Other functions:
   - `pev_data_derivative()`: assess perceptual-derivative, given a
     continuous-palette function,
     
-      - return `data.frame` with `cvd`, `x`, `d_distance_d_x`
+      - return `data.frame` with `cvd`, `x`, `hex`, `d_distance_d_x`
 
-  - `pev_gg_derivative()`:
+  - `pev_gg_derivative()`
 
   - `pev_data_distance()`: assess perceptual-distance from a
     reference-color, given a continuous-palette function,
@@ -124,18 +124,16 @@ Other functions:
       - return `data.frame` with `cvd`, `x`, `hex`, `hex_ref`,
         `distance`
 
-  - `pev_gg_distance()`:
+  - `pev_gg_distance()`
 
   - `pev_data_spectrum()`: assess HCL and RGB spectrum for
     continuous-palette functions, given a continuous-palette function,
     
-      - return `data.frame` with `x`, `hex`, `hue`, `chroma`,
-        `luminance`
+      - return `data.frame` with `x`, `dimension`, `value`
 
   - `pev_data_spectrum_hex()`
     
-      - return `data.frame` with `x`, `hex`, `hue`, `chroma`,
-        `luminance`, `hex_ref`, `distance`
+      - return `data.frame` with `x`, `dimension`, `value`, `hex_ref`
 
   - `pev_gg_spectrum()`
 
@@ -187,6 +185,29 @@ pev_gg_separation(data_sep)
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+
+``` r
+data_drv <- pev_data_derivative("Purple-Green")
+data_drv
+#> # A tibble: 164 x 4
+#>    cvd       x hex     d_distance_d_x
+#>    <chr> <dbl> <chr>            <dbl>
+#>  1 none  0     #492050           136.
+#>  2 none  0.025 #562A5E           152.
+#>  3 none  0.05  #65346D           162.
+#>  4 none  0.075 #733F7C           169.
+#>  5 none  0.1   #82498C           172.
+#>  6 none  0.125 #90529C           178.
+#>  7 none  0.15  #9F5CAB           187.
+#>  8 none  0.175 #AE65BB           170.
+#>  9 none  0.2   #B574C2           167.
+#> 10 none  0.225 #BD82C9           158.
+#> # … with 154 more rows
+
+pev_gg_derivative(data_drv)
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
 ## Code of Conduct
 

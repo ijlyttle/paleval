@@ -2,7 +2,7 @@
 % Please edit documentation in R/hex-distance.R
 \name{pev_hex_distance}
 \alias{pev_hex_distance}
-\title{Calculate distance between two (sets of) colors}
+\title{Calculate perceptual-distance between two (sets of) colors}
 \usage{
 pev_hex_distance(hex, hex_ref, method = "cie2000")
 }
