@@ -75,3 +75,7 @@ test_that("bloom implementations are equivalent", {
   )
 
 })
+
+test_that("bloom errors", {
+  expect_error(pev_data_bloom(1), "No method")
+})
