@@ -22,3 +22,16 @@ get_cvd <- function(include_cvd = TRUE) {
 
   cvd
 }
+
+pev_nmax_display <- function(.fpal) {
+
+  if (inherits(.fpal, "pev_funbounded") || inherits(.fpal, "pev_fcont")) {
+    n <- 11
+  }
+
+  if (inherits(.fpal, "pev_fbounded")) {
+    n <- pev_nmax(.fpal)
+  }
+
+  n
+}

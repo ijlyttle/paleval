@@ -91,7 +91,7 @@ Other functions:
     - return `data.frame` with `x`, `dimension`, `value`, `hex_ref`
 - `pev_gg_spectrum()`
 
-- `pev_data_bloom()`: given `hex`, return `x`, `hex`, `hue`, `chroma`, `lumiance` 
+* `pev_data_bloom()`: given `hex`, return `cvd`, `x`, `hex`, `hue`, `chroma`, `lumiance` 
 - `pev_gg_bloom()`
  
 ## Installation

@@ -27,7 +27,10 @@ pev_data_bloom.character <- function(hex, n = NULL, include_cvd = TRUE, ...) {
 
   # case: name of colorspace
   if (identical(length(hex), 1L) && !is_hexcolor(hex)) {
-    pev_data_bloom(hex, n = n, include_cvd = include_cvd)
+    fcont <- pev_fcont(hex)
+    data_bloom <- pev_data_bloom.pev_fcont(fcont, n = n, include_cvd = include_cvd)
+
+    return(data_bloom)
   }
 
   # case: error
@@ -55,6 +58,8 @@ pev_data_bloom.character <- function(hex, n = NULL, include_cvd = TRUE, ...) {
 
   data_bloom <- tidyr::unnest(data_bloom, cols = c("hex", "data"))
 
+  data_bloom <- data_bloom[c("cvd", "x", "hex", "hue", "chroma", "luminance")]
+
   data_bloom
 }
 
@@ -63,20 +68,30 @@ pev_data_bloom.character <- function(hex, n = NULL, include_cvd = TRUE, ...) {
 #'
 pev_data_bloom.pev_fcont <- function(hex, n = NULL, include_cvd = TRUE, ...) {
 
+  # rename for clarity
+  fcont <- hex
+
+  # call as unbounded discrete function
+  fdisc <- pev_fdisc(fcont, method = "post")
+
+  pev_data_bloom(fdisc, n = n, include_cvd = include_cvd)
 }
 
 #' @rdname pev_data_bloom
 #' @export
 #'
-pev_data_bloom.pev_funbounded <- function(hex, n = NULL, include_cvd = TRUE, ...) {
+pev_data_bloom.pev_fdisc <- function(hex, n = NULL, include_cvd = TRUE, ...) {
 
-}
+  # rename for clarity
+  fdisc <- hex
 
-#' @rdname pev_data_bloom
-#' @export
-#'
-pev_data_bloom.pev_fbounded <- function(hex, include_cvd = TRUE, ...) {
+  n <- n %||% pev_nmax_display(fdisc)
 
+  # get hex-colors from palette-function
+  hex_new <- fdisc(n)
+
+  # call as hex
+  pev_data_bloom(hex_new, include_cvd = include_cvd)
 }
 
 .hcl <- function(hex) {

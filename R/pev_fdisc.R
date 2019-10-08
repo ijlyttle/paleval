@@ -134,19 +134,6 @@ pev_nmax <- function(.fdisc) {
   n_max
 }
 
-pev_nmax_display <- function(.fdisc) {
-
-  if (inherits(.fdisc, "pev_funbounded")) {
-    n <- 11
-  }
-
-  if (inherits(.fdisc, "pev_fbounded")) {
-    n <- pev_nmax(.fdisc)
-  }
-
-  n
-}
-
 # internal function
 new_pev_fbounded <- function(.fdisc) {
 

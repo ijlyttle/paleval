@@ -5,8 +5,7 @@
 \alias{pev_data_bloom.default}
 \alias{pev_data_bloom.character}
 \alias{pev_data_bloom.pev_fcont}
-\alias{pev_data_bloom.pev_funbounded}
-\alias{pev_data_bloom.pev_fbounded}
+\alias{pev_data_bloom.pev_fdisc}
 \title{Get HCL data for a series of hex-colors}
 \usage{
 pev_data_bloom(hex, include_cvd = TRUE, ...)
@@ -19,10 +18,8 @@ pev_data_bloom(hex, include_cvd = TRUE, ...)
 \method{pev_data_bloom}{pev_fcont}(hex, n = NULL, include_cvd = TRUE,
   ...)
 
-\method{pev_data_bloom}{pev_funbounded}(hex, n = NULL,
-  include_cvd = TRUE, ...)
-
-\method{pev_data_bloom}{pev_fbounded}(hex, include_cvd = TRUE, ...)
+\method{pev_data_bloom}{pev_fdisc}(hex, n = NULL, include_cvd = TRUE,
+  ...)
 }
 \arguments{
 \item{hex}{\code{character} vector of hex-colors}
