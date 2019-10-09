@@ -92,7 +92,7 @@ Other functions:
 - `pev_gg_spectrum()`
 
 * `pev_data_bloom()`: given `hex`, return `cvd`, `x`, `hex`, `hue`, `chroma`, `lumiance` 
-- `pev_gg_bloom()`
+* `pev_gg_bloom()`
  
 ## Installation
 
@@ -137,6 +137,18 @@ data_dist <- pev_data_distance("Purple-Green")
 data_dist
 
 pev_gg_distance(data_dist)
+```
+
+
+```{r}
+data_bloom <- pev_data_bloom("Viridis")
+data_bloom
+
+pev_gg_bloom(data_bloom)
+```
+
+```{r}
+pev_data_bloom("Dynamic", n = 12) %>% pev_gg_bloom()
 ```
 
 ## Code of Conduct

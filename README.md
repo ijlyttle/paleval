@@ -137,6 +137,9 @@ Other functions:
 
   - `pev_gg_spectrum()`
 
+  - `pev_data_bloom()`: given `hex`, return `cvd`, `x`, `hex`, `hue`,
+    `chroma`, `lumiance`
+
   - `pev_gg_bloom()`
 
 ## Installation
@@ -231,6 +234,35 @@ pev_gg_distance(data_dist)
 ```
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+
+``` r
+data_bloom <- pev_data_bloom("Viridis")
+data_bloom
+#> # A tibble: 44 x 6
+#>    cvd       x hex       hue chroma luminance
+#>    <chr> <dbl> <chr>   <dbl>  <dbl>     <dbl>
+#>  1 none    0   #FDE333  74.8   94.9      89.9
+#>  2 none    0.1 #C2DE34  97.5   89.4      83.9
+#>  3 none    0.2 #7ED357 120.    83.6      77.1
+#>  4 none    0.3 #00C475 142.    77.7      70.0
+#>  5 none    0.4 #00B28A 159.    58.1      64.7
+#>  6 none    0.5 #009B95 186.    45.5      57.7
+#>  7 none    0.6 #008298 217.    45.1      49.8
+#>  8 none    0.7 #006791 237.    50.1      40.8
+#>  9 none    0.8 #274983 255.    51.1      31.4
+#> 10 none    0.9 #44286E 277.    45.8      23.2
+#> # … with 34 more rows
+
+pev_gg_bloom(data_bloom)
+```
+
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+
+``` r
+pev_data_bloom("Dynamic", n = 12) %>% pev_gg_bloom()
+```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 ## Code of Conduct
 

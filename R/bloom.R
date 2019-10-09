@@ -1,4 +1,4 @@
-#' Get HCL data for a series of hex-colors
+#' Get HCL data on series of hex-colors
 #'
 #' @inheritParams pev_data_separation
 #' @inheritParams pev_hex_distance
@@ -6,7 +6,12 @@
 #'
 #' @return `data.frame` with variables `cvd`, `x`, `hex`, `hue`, `chroma`, `luminance`
 #'
-pev_data_bloom  <- function(hex, include_cvd = TRUE, ...) {
+#' @examples
+#'   pev_data_bloom("Viridis")
+#'   pev_data_bloom(grDevices::heat.colors(10))
+#' @export
+#'
+pev_data_bloom  <- function(hex, ...) {
   UseMethod("pev_data_bloom")
 }
 
@@ -33,10 +38,7 @@ pev_data_bloom.character <- function(hex, n = NULL, include_cvd = TRUE, ...) {
     return(data_bloom)
   }
 
-  # case: error
-  if (!all(is_hexcolor(hex))) {
-    stop("cannot process character", call. = FALSE)
-  }
+  hex <- as_hexcolor(hex)
 
   # case: hex-colors
   cvd <- get_cvd(include_cvd)

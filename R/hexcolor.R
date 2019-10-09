@@ -15,6 +15,8 @@ as_hexcolor <- function(x) {
   x <- unname(x)
   x <- as.character(x)
 
+  x <- remove_alpha(x)
+
   assertthat::assert_that(
     is_hexcolor(x),
     msg = "object not coercible to hexcolor"
@@ -31,4 +33,9 @@ is_hexcolor <- function(x) {
   regex <- "^#[A-Fa-f0-9]{6}$"
 
   all(grepl(regex, x))
+}
+
+remove_alpha <- function(x) {
+  # some hex-colors have an alpha channel, this removes that
+  sub("^(#[A-Fa-f0-9]{6})[A-Fa-f0-9]{2}$", "\\1", x)
 }

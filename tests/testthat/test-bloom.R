@@ -76,6 +76,14 @@ test_that("bloom implementations are equivalent", {
 
 })
 
+test_that("bloom ggplot works", {
+  data_bloom <- pev_data_bloom("Viridis")
+  expect_is(pev_gg_bloom_target(data_bloom), "gg")
+  expect_is(pev_gg_bloom_lum(data_bloom), "gg")
+  expect_is(pev_gg_bloom(data_bloom), "gg")
+  expect_is(pev_gg_bloom(data_bloom, label = TRUE), "gg")
+})
+
 test_that("bloom errors", {
   expect_error(pev_data_bloom(1), "No method")
 })

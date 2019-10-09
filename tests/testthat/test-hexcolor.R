@@ -16,3 +16,10 @@ test_that("can validate hexcolor", {
 
   expect_error(as_hexcolor(bad), "hexcolor")
 })
+
+test_that("can remove alpha", {
+  expect_identical(
+    remove_alpha(c("#11223344", "#55667788", "#AABBCC")),
+    c("#112233", "#556677", "#AABBCC")
+  )
+})

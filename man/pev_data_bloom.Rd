@@ -6,9 +6,9 @@
 \alias{pev_data_bloom.character}
 \alias{pev_data_bloom.pev_fcont}
 \alias{pev_data_bloom.pev_fdisc}
-\title{Get HCL data for a series of hex-colors}
+\title{Get HCL data on series of hex-colors}
 \usage{
-pev_data_bloom(hex, include_cvd = TRUE, ...)
+pev_data_bloom(hex, ...)
 
 \method{pev_data_bloom}{default}(hex, ...)
 
@@ -24,16 +24,20 @@ pev_data_bloom(hex, include_cvd = TRUE, ...)
 \arguments{
 \item{hex}{\code{character} vector of hex-colors}
 
-\item{include_cvd}{\code{logical}, indicates to include data for
-for color-vision deficiency}
-
 \item{...}{other args (not used)}
 
 \item{n}{\code{integer} number of colors to use for unbounded palette-functions}
+
+\item{include_cvd}{\code{logical}, indicates to include data for
+for color-vision deficiency}
 }
 \value{
 \code{data.frame} with variables \code{cvd}, \code{x}, \code{hex}, \code{hue}, \code{chroma}, \code{luminance}
 }
 \description{
-Get HCL data for a series of hex-colors
+Get HCL data on series of hex-colors
+}
+\examples{
+  pev_data_bloom("Viridis")
+  pev_data_bloom(grDevices::heat.colors(10))
 }

@@ -39,7 +39,8 @@ Imports:
     stats,
     graphics,
     scales,
-    methods
+    methods,
+    cowplot
 Suggests: 
     testthat (>= 2.1.0),
     covr
