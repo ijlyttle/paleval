@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get HCL data on series of hex-colors — pev_data_bloom • paleval</title>
+<title>ggplot for HCL data on series of hex-colors — pev_gg_bloom • paleval</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Get HCL data on series of hex-colors — pev_data_bloom" />
-<meta property="og:description" content="Get HCL data on series of hex-colors" />
+<meta property="og:title" content="ggplot for HCL data on series of hex-colors — pev_gg_bloom" />
+<meta property="og:description" content="Create a plot like Tableau made here." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,92 +105,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get HCL data on series of hex-colors</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/bloom.R'><code>R/bloom.R</code></a></small>
-    <div class="hidden name"><code>pev_data_bloom.Rd</code></div>
+    <h1>ggplot for HCL data on series of hex-colors</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ijlyttle/paleval/blob/master/R/bloom-gg.R'><code>R/bloom-gg.R</code></a></small>
+    <div class="hidden name"><code>pev_gg_bloom.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get HCL data on series of hex-colors</p>
+    <p>Create a plot like Tableau made <a href='https://www.tableau.com/about/blog/2016/7/colors-upgrade-tableau-10-56782'>here</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pev_data_bloom</span>(<span class='no'>hex</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>pev_gg_bloom</span>(<span class='no'>data_bloom</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>max_chroma</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
-<span class='co'># S3 method for default</span>
-<span class='fu'>pev_data_bloom</span>(<span class='no'>hex</span>, <span class='no'>...</span>)
+<span class='fu'>pev_gg_bloom_target</span>(<span class='no'>data_bloom</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>max_chroma</span> <span class='kw'>=</span> <span class='fl'>200</span>)
 
-<span class='co'># S3 method for character</span>
-<span class='fu'>pev_data_bloom</span>(<span class='no'>hex</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>include_cvd</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>)
-
-<span class='co'># S3 method for pev_fcont</span>
-<span class='fu'>pev_data_bloom</span>(<span class='no'>hex</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>include_cvd</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>)
-
-<span class='co'># S3 method for pev_fdisc</span>
-<span class='fu'>pev_data_bloom</span>(<span class='no'>hex</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>include_cvd</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>)</pre>
+<span class='fu'>pev_gg_bloom_lum</span>(<span class='no'>data_bloom</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>hex</th>
-      <td><p><code>character</code> vector of hex-colors</p></td>
+      <th>data_bloom</th>
+      <td><p><code>data.frame</code> created using <code>pev_data_bloom</code>.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>other args (not used)</p></td>
+      <th>label</th>
+      <td><p><code>logical</code> indicates to use axes labels, titles, etc.</p></td>
     </tr>
     <tr>
-      <th>n</th>
-      <td><p><code>integer</code> number of colors to use for unbounded palette-functions</p></td>
-    </tr>
-    <tr>
-      <th>include_cvd</th>
-      <td><p><code>logical</code>, indicates to include data for
-for color-vision deficiency</p></td>
+      <th>max_chroma</th>
+      <td><p><code>numeric</code> upper-limit for the chroma scale</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p><code>data.frame</code> with variables <code>cvd</code>, <code>x</code>, <code>hex</code>, <code>hue</code>, <code>chroma</code>, <code>luminance</code></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='fu'>pev_data_bloom</span>(<span class='st'>"Viridis"</span>)</div><div class='output co'>#&gt; # A tibble: 44 x 6
-#&gt;    cvd       x hex       hue chroma luminance
-#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 none    0   #FDE333  74.8   94.9      89.9
-#&gt;  2 none    0.1 #C2DE34  97.5   89.4      83.9
-#&gt;  3 none    0.2 #7ED357 120.    83.6      77.1
-#&gt;  4 none    0.3 #00C475 142.    77.7      70.0
-#&gt;  5 none    0.4 #00B28A 159.    58.1      64.7
-#&gt;  6 none    0.5 #009B95 186.    45.5      57.7
-#&gt;  7 none    0.6 #008298 217.    45.1      49.8
-#&gt;  8 none    0.7 #006791 237.    50.1      40.8
-#&gt;  9 none    0.8 #274983 255.    51.1      31.4
-#&gt; 10 none    0.9 #44286E 277.    45.8      23.2
-#&gt; # … with 34 more rows</div><div class='input'>  <span class='fu'>pev_data_bloom</span>(<span class='kw pkg'>grDevices</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>heat.colors</a></span>(<span class='fl'>10</span>))</div><div class='output co'>#&gt; # A tibble: 40 x 6
-#&gt;    cvd       x hex       hue chroma luminance
-#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 none  0     #FF0000  12.2  179.       53.2
-#&gt;  2 none  0.111 #FF2400  13.5  172.       54.6
-#&gt;  3 none  0.222 #FF4900  17.3  156.       58.1
-#&gt;  4 none  0.333 #FF6D00  24.5  134.       63.5
-#&gt;  5 none  0.444 #FF9200  36.6  113.       70.7
-#&gt;  6 none  0.556 #FFB600  52.7  101.       78.9
-#&gt;  7 none  0.667 #FFDB00  70.8   99.1      87.9
-#&gt;  8 none  0.778 #FFFF00  85.9  107.       97.1
-#&gt;  9 none  0.889 #FFFF40  85.9  100.       97.3
-#&gt; 10 none  1     #FFFFBF  85.9   45.6      98.6
-#&gt; # … with 30 more rows</div></pre>
+    <pre class="examples"><div class='input'>  <span class='co'># without color-vision deficiency, with labels</span>
+  <span class='no'>data_no_cvd</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='pev_data_bloom.html'>pev_data_bloom</a></span>(<span class='st'>"Viridis"</span>, <span class='kw'>include_cvd</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'>pev_gg_bloom</span>(<span class='no'>data_no_cvd</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='pev_gg_bloom-1.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='co'># without color-vision deficiency, without labels</span>
+  <span class='fu'><a href='pev_data_bloom.html'>pev_data_bloom</a></span>(<span class='st'>"Viridis"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>pev_gg_bloom</span>()</div><div class='img'><img src='pev_gg_bloom-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
