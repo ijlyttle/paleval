@@ -31,7 +31,7 @@ reference:
   description: Consider the perceptual-derivative for a continuous-palette.
   contents:
   - pev_data_derivative
-  - pev_gg_derivative-
+  - pev_gg_derivative
 - title: Perceptual distance
   description: Consider the perceptual-distance for a continuous-palette.
   contents:

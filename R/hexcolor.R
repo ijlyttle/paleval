@@ -39,3 +39,21 @@ remove_alpha <- function(x) {
   # some hex-colors have an alpha channel, this removes that
   sub("^(#[A-Fa-f0-9]{6})[A-Fa-f0-9]{2}$", "\\1", x)
 }
+
+# determines if hexcolor is on an RGB boundary
+is_rgb_limit <- function(x) {
+
+  # works on a single RGB vector
+  is_b <- function(.rgb) {
+
+    rgb_num <- .rgb@coords[1, ]
+
+    any(rgb_num == 0) | any(rgb_num == 1)
+  }
+
+  rgb <- purrr::map(x, colorspace::hex2RGB)
+
+  result <- purrr::map_lgl(rgb, is_b)
+
+  result
+}

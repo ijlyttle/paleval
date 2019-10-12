@@ -33,7 +33,7 @@ For the purpose of this package, following `colorRamp` and ggplot2 usage, we def
 
   - **`pev_bounded`**: Indicates that there is an upper-bound on the number of colors it can provide, e.g. [Tableau 10](https://www.tableau.com/about/blog/2016/7/colors-upgrade-tableau-10-56782). You would *not* think to interpolate between these colors.
   
-  - **`pev_unbounded`**: Indicates that there is *no* upper-bound on the number of colors it can provide, e.g. [Tableau 10](https://www.tableau.com/about/blog/2016/7/colors-upgrade-tableau-10-56782). You might think to interpolate between these colors.
+  - **`pev_unbounded`**: Indicates that there is *no* upper-bound on the number of colors it can provide, e.g. `"Pastel"`. You might think to interpolate between these colors.
 
 These follow the `palette` argument for [`ggplot2::continuous_scale()`](https://ggplot2.tidyverse.org/reference/continuous_scale.html) and [`ggplot2::discrete_scale()`](https://ggplot2.tidyverse.org/reference/discrete_scale.html), as well as `graphics::colorRamp()` and `graphics::colorRampPalette()`, respectively. 
 
@@ -85,14 +85,13 @@ Other functions:
     - return `data.frame` with `cvd`, `x`, `hex`, `hex_ref`, `distance`
 * `pev_gg_distance()`
 
-- `pev_data_spectrum()`: assess HCL and RGB spectrum for continuous-palette functions, given a continuous-palette function,
-    - return `data.frame` with `x`, `dimension`, `value`
-- `pev_data_spectrum_hex()`
-    - return `data.frame` with `x`, `dimension`, `value`, `hex_ref`
-- `pev_gg_spectrum()`
+* `pev_data_hcl()`: given `hex`, return `cvd`, `x`, `hex`, `hue`, `chroma`, `luminance`, `is_boundary`
+* `pev_data_hcl_ref()`: given `fpal`, `hex_ref`, return `cvd`, `x_nearest`, `distance_nearest`, `hex`, `chroma`, `luminance`
+* `pev_gg_hcl_bloom()`: given `data_hcl`, `data_hcl_ref`
+- `pev_gg_hcl_plane()`: given `data_hcl`, `data_hcl_ref`
+- `pev_gg_hcl_spectrum()`: given `data_hcl`, `data_hcl_ref`
 
-* `pev_data_bloom()`: given `hex`, return `cvd`, `x`, `hex`, `hue`, `chroma`, `lumiance` 
-* `pev_gg_bloom()`
+Here's a [reference on delta E](http://zschuessler.github.io/DeltaE/learn/) - can we find something more definitive?
  
 ## Installation
 
@@ -141,14 +140,14 @@ pev_gg_distance(data_dist)
 
 
 ```{r}
-data_bloom <- pev_data_bloom("Viridis")
-data_bloom
+data_hcl <- pev_data_hcl("Viridis")
+data_hcl
 
-pev_gg_bloom(data_bloom)
+pev_gg_hcl_bloom(data_hcl)
 ```
 
 ```{r}
-pev_data_bloom("Dynamic", n = 12) %>% pev_gg_bloom()
+pev_data_hcl("Dynamic", n = 12) %>% pev_gg_hcl_bloom()
 ```
 
 ## Code of Conduct

@@ -23,3 +23,10 @@ test_that("can remove alpha", {
     c("#112233", "#556677", "#AABBCC")
   )
 })
+
+test_that("we can detect an RGB limit", {
+  expect_identical(
+    is_rgb_limit(c("#111111", "#001111", "#000011", "#1111FF")),
+    c(FALSE, TRUE, TRUE, TRUE)
+  )
+})
