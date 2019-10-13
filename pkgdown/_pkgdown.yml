@@ -39,6 +39,7 @@ reference:
   - pev_gg_distance
 - title: HCL space
   description: Consider a palette in HCL space.
+  contents:
   - pev_data_bloom
   - pev_gg_bloom
 - title: Hex-colors

@@ -23,6 +23,9 @@ pev_gg_hcl_bloom_lum(data_hcl, data_hcl_ref = NULL, label = FALSE)
 
 \item{max_chroma}{\code{numeric} upper-limit for the chroma scale}
 }
+\value{
+Object with S3 class \code{gg} (ggplot).
+}
 \description{
 Create a plot like Tableau made \href{https://www.tableau.com/about/blog/2016/7/colors-upgrade-tableau-10-56782}{here}.
 }

@@ -7,6 +7,8 @@
 #' @param label `logical` indicates to use axes labels, titles, etc.
 #' @param max_chroma `numeric` upper-limit for the chroma scale
 #'
+#' @return Object with S3 class `gg` (ggplot).
+#'
 #' @examples
 #'   # without color-vision deficiency, with labels
 #'   data_no_cvd <- pev_data_hcl("Viridis", include_cvd = FALSE)
@@ -20,7 +22,6 @@ pev_gg_hcl_bloom <- function(data_hcl, data_hcl_ref = NULL, label = FALSE,
                              max_chroma = NULL) {
 
   # preprocess data
-
   data_hcl$cvd <- factor(data_hcl$cvd, levels = get_cvd())
 
   # make our ceiling for the chroma scale (need to do this here)
