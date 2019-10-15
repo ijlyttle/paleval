@@ -158,7 +158,7 @@
 <li><p><code><a href="reference/pev_data_hcl_ref.html">pev_data_hcl_ref()</a></code>: given <code>fpal</code>, <code>hex_ref</code>, return <code>cvd</code>, <code>x_nearest</code>, <code>distance_nearest</code>, <code>hex</code>, <code>chroma</code>, <code>luminance</code></p></li>
 <li><p><code><a href="reference/pev_gg_hcl_bloom.html">pev_gg_hcl_bloom()</a></code>: given <code>data_hcl</code>, <code>data_hcl_ref</code></p></li>
 <li><p><code><a href="reference/pev_gg_hcl_plane.html">pev_gg_hcl_plane()</a></code>: given <code>data_hcl</code>, <code>data_hcl_ref</code></p></li>
-<li><p><code>pev_gg_hcl_spectrum()</code>: given <code>data_hcl</code>, <code>data_hcl_ref</code></p></li>
+<li><p><code><a href="reference/pev_gg_hcl_spectrum.html">pev_gg_hcl_spectrum()</a></code>: given <code>data_hcl</code>, <code>data_hcl_ref</code></p></li>
 </ul>
 <p>Here’s a <a href="http://zschuessler.github.io/DeltaE/learn/">reference on delta E</a> - can we find something more definitive?</p>
 <div id="installation" class="section level2">
@@ -239,27 +239,33 @@ install.packages("paleval")
 <a class="sourceLine" id="cb4-17" data-line-number="17"></a>
 <a class="sourceLine" id="cb4-18" data-line-number="18"><span class="kw"><a href="reference/pev_gg_distance.html">pev_gg_distance</a></span>(data_dist)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">data_hcl &lt;-<span class="st"> </span><span class="kw"><a href="reference/pev_data_hcl.html">pev_data_hcl</a></span>(<span class="st">"Viridis"</span>)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">data_hcl &lt;-<span class="st"> </span><span class="kw"><a href="reference/pev_data_hcl.html">pev_data_hcl</a></span>(<span class="st">"Viridis"</span>, <span class="dt">n =</span> <span class="dv">41</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">data_hcl</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; # A tibble: 44 x 7</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; # A tibble: 164 x 7</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;    cvd       x hex       hue chroma luminance is_rgb_limit</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;lgl&gt;       </span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  1 none    0   #FDE333  74.8   94.9      89.9 FALSE       </span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  2 none    0.1 #C2DE34  97.5   89.4      83.9 FALSE       </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  3 none    0.2 #7ED357 120.    83.6      77.1 FALSE       </span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  4 none    0.3 #00C475 142.    77.7      70.0 TRUE        </span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  5 none    0.4 #00B28A 159.    58.1      64.7 TRUE        </span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  6 none    0.5 #009B95 186.    45.5      57.7 TRUE        </span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  7 none    0.6 #008298 217.    45.1      49.8 TRUE        </span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  8 none    0.7 #006791 237.    50.1      40.8 TRUE        </span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;  9 none    0.8 #274983 255.    51.1      31.4 FALSE       </span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 10 none    0.9 #44286E 277.    45.8      23.2 FALSE       </span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; # … with 34 more rows</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  1 none  0     #FDE333  74.8   94.9      89.9 FALSE       </span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;  2 none  0.025 #EFE32D  80.8   93.6      88.7 FALSE       </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;  3 none  0.05  #E1E22B  86.3   92.4      87.3 FALSE       </span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;  4 none  0.075 #D2E02E  91.7   90.8      85.6 FALSE       </span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;  5 none  0.1   #C2DE34  97.5   89.4      83.9 FALSE       </span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;  6 none  0.125 #B2DC3C 103.    88.2      82.4 FALSE       </span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt;  7 none  0.15  #A2D945 109.    86.5      80.6 FALSE       </span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt;  8 none  0.175 #90D74E 115.    85.7      79.1 FALSE       </span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;  9 none  0.2   #7ED357 120.    83.6      77.1 FALSE       </span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 10 none  0.225 #6AD05F 126.    82.6      75.5 FALSE       </span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; # … with 154 more rows</span></a>
 <a class="sourceLine" id="cb5-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="kw"><a href="reference/pev_gg_hcl_bloom.html">pev_gg_hcl_bloom</a></span>(data_hcl)</a></code></pre></div>
+<a class="sourceLine" id="cb5-18" data-line-number="18">data_hcl_ref &lt;-<span class="st"> </span><span class="kw"><a href="reference/pev_data_hcl_ref.html">pev_data_hcl_ref</a></span>(<span class="st">"Viridis"</span>, <span class="kw"><a href="reference/pev_fcont.html">pev_fcont</a></span>(<span class="st">"Viridis"</span>)(<span class="fl">0.55</span>))</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="kw"><a href="reference/pev_gg_hcl_bloom.html">pev_gg_hcl_bloom</a></span>(data_hcl, data_hcl_ref)</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/pev_data_hcl.html">pev_data_hcl</a></span>(<span class="st">"Dynamic"</span>, <span class="dt">n =</span> <span class="dv">12</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/pev_gg_hcl_bloom.html">pev_gg_hcl_bloom</a></span>()</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/pev_gg_hcl_plane.html">pev_gg_hcl_plane</a></span>(data_hcl, data_hcl_ref)</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/pev_gg_hcl_spectrum.html">pev_gg_hcl_spectrum</a></span>(data_hcl, data_hcl_ref)</a></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-7-2.png" width="100%"></p>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
