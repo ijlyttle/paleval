@@ -235,24 +235,26 @@ pev_gg_distance(data_dist)
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 ``` r
-data_hcl <- pev_data_hcl("Viridis")
+data_hcl <- pev_data_hcl("Viridis", n = 41)
 data_hcl
-#> # A tibble: 44 x 7
+#> # A tibble: 164 x 7
 #>    cvd       x hex       hue chroma luminance is_rgb_limit
 #>    <chr> <dbl> <chr>   <dbl>  <dbl>     <dbl> <lgl>       
-#>  1 none    0   #FDE333  74.8   94.9      89.9 FALSE       
-#>  2 none    0.1 #C2DE34  97.5   89.4      83.9 FALSE       
-#>  3 none    0.2 #7ED357 120.    83.6      77.1 FALSE       
-#>  4 none    0.3 #00C475 142.    77.7      70.0 TRUE        
-#>  5 none    0.4 #00B28A 159.    58.1      64.7 TRUE        
-#>  6 none    0.5 #009B95 186.    45.5      57.7 TRUE        
-#>  7 none    0.6 #008298 217.    45.1      49.8 TRUE        
-#>  8 none    0.7 #006791 237.    50.1      40.8 TRUE        
-#>  9 none    0.8 #274983 255.    51.1      31.4 FALSE       
-#> 10 none    0.9 #44286E 277.    45.8      23.2 FALSE       
-#> # … with 34 more rows
+#>  1 none  0     #FDE333  74.8   94.9      89.9 FALSE       
+#>  2 none  0.025 #EFE32D  80.8   93.6      88.7 FALSE       
+#>  3 none  0.05  #E1E22B  86.3   92.4      87.3 FALSE       
+#>  4 none  0.075 #D2E02E  91.7   90.8      85.6 FALSE       
+#>  5 none  0.1   #C2DE34  97.5   89.4      83.9 FALSE       
+#>  6 none  0.125 #B2DC3C 103.    88.2      82.4 FALSE       
+#>  7 none  0.15  #A2D945 109.    86.5      80.6 FALSE       
+#>  8 none  0.175 #90D74E 115.    85.7      79.1 FALSE       
+#>  9 none  0.2   #7ED357 120.    83.6      77.1 FALSE       
+#> 10 none  0.225 #6AD05F 126.    82.6      75.5 FALSE       
+#> # … with 154 more rows
 
-pev_gg_hcl_bloom(data_hcl)
+data_hcl_ref <- pev_data_hcl_ref("Viridis", pev_fcont("Viridis")(0.55))
+
+pev_gg_hcl_bloom(data_hcl, data_hcl_ref)
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
@@ -262,6 +264,18 @@ pev_data_hcl("Dynamic", n = 12) %>% pev_gg_hcl_bloom()
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+
+``` r
+pev_gg_hcl_plane(data_hcl, data_hcl_ref)
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+
+``` r
+pev_gg_hcl_spectrum(data_hcl, data_hcl_ref)
+```
+
+<img src="man/figures/README-unnamed-chunk-7-2.png" width="100%" />
 
 ## Code of Conduct
 

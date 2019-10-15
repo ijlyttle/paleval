@@ -88,8 +88,8 @@ Other functions:
 * `pev_data_hcl()`: given `hex`, return `cvd`, `x`, `hex`, `hue`, `chroma`, `luminance`, `is_boundary`
 * `pev_data_hcl_ref()`: given `fpal`, `hex_ref`, return `cvd`, `x_nearest`, `distance_nearest`, `hex`, `chroma`, `luminance`
 * `pev_gg_hcl_bloom()`: given `data_hcl`, `data_hcl_ref`
-- `pev_gg_hcl_plane()`: given `data_hcl`, `data_hcl_ref`
-- `pev_gg_hcl_spectrum()`: given `data_hcl`, `data_hcl_ref`
+* `pev_gg_hcl_plane()`: given `data_hcl`, `data_hcl_ref`
+* `pev_gg_hcl_spectrum()`: given `data_hcl`, `data_hcl_ref`
 
 Here's a [reference on delta E](http://zschuessler.github.io/DeltaE/learn/) - can we find something more definitive?
  
@@ -140,14 +140,21 @@ pev_gg_distance(data_dist)
 
 
 ```{r}
-data_hcl <- pev_data_hcl("Viridis")
+data_hcl <- pev_data_hcl("Viridis", n = 41)
 data_hcl
 
-pev_gg_hcl_bloom(data_hcl)
+data_hcl_ref <- pev_data_hcl_ref("Viridis", pev_fcont("Viridis")(0.55))
+
+pev_gg_hcl_bloom(data_hcl, data_hcl_ref)
 ```
 
 ```{r}
 pev_data_hcl("Dynamic", n = 12) %>% pev_gg_hcl_bloom()
+```
+
+```{r}
+pev_gg_hcl_plane(data_hcl, data_hcl_ref)
+pev_gg_hcl_spectrum(data_hcl, data_hcl_ref)
 ```
 
 ## Code of Conduct
