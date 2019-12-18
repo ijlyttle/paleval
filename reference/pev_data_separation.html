@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">paleval</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9001</span>
       </span>
     </div>
 
@@ -136,8 +136,9 @@ is to be discretized, can be <code>"post"</code> or <code>"panel"</code> (using 
     </tr>
     <tr>
       <th>include_cvd</th>
-      <td><p><code>logical</code>, indicates to include data for
-for color-vision deficiency</p></td>
+      <td><p><code>logical</code> or <code>character</code>, indicates to include data for
+for color-vision deficiency. Possible character values: <code>"none"</code>, <code>"protan"</code>,
+<code>"deutan"</code>, <code>"tritan"</code>.</p></td>
     </tr>
     </table>
 
@@ -151,19 +152,19 @@ for color-vision deficiency</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>  <span class='fu'><a href='pev_fcont.html'>pev_fcont</a></span>(<span class='st'>"Dynamic"</span>) <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='pev_fdisc.html'>pev_fdisc</a></span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"panel"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>pev_data_separation</span>()</div><div class='output co'>#&gt; # A tibble: 484 x 5
-#&gt;    cvd       i hex     hex_ref distance
-#&gt;    &lt;chr&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;
-#&gt;  1 none      1 #E19896 #E19896      0  
-#&gt;  2 none      1 #E19896 #E393B8     12.5
-#&gt;  3 none      1 #E19896 #D497D3     19.4
-#&gt;  4 none      1 #E19896 #B3A2E1     24.8
-#&gt;  5 none      1 #E19896 #82AFDE     34.7
-#&gt;  6 none      1 #E19896 #4CB9CC     52.4
-#&gt;  7 none      1 #E19896 #3BBEAE     48.8
-#&gt;  8 none      1 #E19896 #64BC8C     49.0
-#&gt;  9 none      1 #E19896 #91B66F     42.9
-#&gt; 10 none      1 #E19896 #B6AD65     32.7
+    <span class='fu'>pev_data_separation</span>()</div><div class='output co'>#&gt; # A tibble: 484 x 6
+#&gt;    cvd       i i_ref hex     hex_ref distance
+#&gt;    &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;      &lt;dbl&gt;
+#&gt;  1 none      1     1 #E19896 #E19896      0  
+#&gt;  2 none      1     2 #E19896 #E393B8     12.5
+#&gt;  3 none      1     3 #E19896 #D497D3     19.4
+#&gt;  4 none      1     4 #E19896 #B3A2E1     24.8
+#&gt;  5 none      1     5 #E19896 #82AFDE     34.7
+#&gt;  6 none      1     6 #E19896 #4CB9CC     52.4
+#&gt;  7 none      1     7 #E19896 #3BBEAE     48.8
+#&gt;  8 none      1     8 #E19896 #64BC8C     49.0
+#&gt;  9 none      1     9 #E19896 #91B66F     42.9
+#&gt; 10 none      1    10 #E19896 #B6AD65     32.7
 #&gt; # … with 474 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
