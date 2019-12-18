@@ -28,8 +28,9 @@ pev_data_hcl(hex, ...)
 
 \item{n}{\code{integer} number of colors to use for unbounded palette-functions}
 
-\item{include_cvd}{\code{logical}, indicates to include data for
-for color-vision deficiency}
+\item{include_cvd}{\code{logical} or \code{character}, indicates to include data for
+for color-vision deficiency. Possible character values: \code{"none"}, \code{"protan"},
+\code{"deutan"}, \code{"tritan"}.}
 }
 \value{
 \code{data.frame} with variables \code{cvd}, \code{x}, \code{hex},

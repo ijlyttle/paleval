@@ -39,8 +39,9 @@ of the palette-function to determine the minimum perceptual-distance.}
 passed to \code{farver::compare_color()}.
 One of: \code{"euclidean"}, \code{"cie1976"}, \code{"cie94"}, \code{"cie2000"}, or \code{"cmc"}.}
 
-\item{include_cvd}{\code{logical}, indicates to include data for
-for color-vision deficiency}
+\item{include_cvd}{\code{logical} or \code{character}, indicates to include data for
+for color-vision deficiency. Possible character values: \code{"none"}, \code{"protan"},
+\code{"deutan"}, \code{"tritan"}.}
 
 \item{...}{other args (not used)}
 }

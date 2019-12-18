@@ -3,8 +3,9 @@
 #' @inherit pev_fdisc params
 #' @inherit pev_hex_distance params
 #' @param n `integer` number of colors to use for unbounded palette-functions
-#' @param include_cvd `logical`, indicates to include data for
-#'   for color-vision deficiency
+#' @param include_cvd `logical` or `character`, indicates to include data for
+#'   for color-vision deficiency. Possible character values: `"none"`, `"protan"`,
+#'   `"deutan"`, `"tritan"`.
 #'
 #' @seealso pev_gg_separation
 #'
@@ -44,10 +45,11 @@ pev_data_separation <- function(.fdisc, n = NULL, method = "cie2000", include_cv
   data <- tidyr::expand_grid(hex = hex, hex_ref = hex)
 
   data$i <- as.integer(factor(data$hex, levels = hex))
+  data$i_ref <- as.integer(factor(data$hex_ref, levels = hex))
   data$distance <-
     purrr::map2_dbl(data$hex, data$hex_ref, pev_hex_distance, method = method)
 
-  data[, c("i", "hex", "hex_ref", "distance")]
+  data[, c("i", "i_ref", "hex", "hex_ref", "distance")]
 }
 
 #' ggplot for perceptual-distance within discrete-palette
@@ -80,7 +82,7 @@ pev_gg_separation <- function(data_sep, ncol = 2, height_tick = 1) {
       ggplot2::aes_string(x = "i", y = Inf, fill = "hex"),
       stat = "identity",
       position = "identity",
-      width = 0.3
+      width = 0.15
     ) +
     ggplot2::geom_tile(
       ggplot2::aes_string(x = "i", y = "distance", fill = "hex_ref"),

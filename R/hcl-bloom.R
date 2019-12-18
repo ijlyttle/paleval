@@ -5,7 +5,7 @@
 #' @param data_hcl `data.frame` created using `pev_data_hcl`.
 #' @param data_hcl_ref `data.frame` created using `pev_data_hcl_ref`.
 #' @param label `logical` indicates to use axes labels, titles, etc.
-#' @param max_chroma `numeric` upper-limit for the chroma scale
+#' @param max_chroma `numeric` upper-limit for the chroma scale.
 #'
 #' @return Object with S3 class `gg` (ggplot).
 #'

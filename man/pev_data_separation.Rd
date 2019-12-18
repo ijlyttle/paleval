@@ -16,8 +16,9 @@ when called with an integer, returns the corresponding (hex-code) values.}
 \item{method}{\code{character}, describes how the domain of the continuous palette
 is to be discretized, can be \code{"post"} or \code{"panel"} (using a fencing analogy).}
 
-\item{include_cvd}{\code{logical}, indicates to include data for
-for color-vision deficiency}
+\item{include_cvd}{\code{logical} or \code{character}, indicates to include data for
+for color-vision deficiency. Possible character values: \code{"none"}, \code{"protan"},
+\code{"deutan"}, \code{"tritan"}.}
 }
 \value{
 \code{tbl_df} with variables \code{cvd}, \code{hex_a}, \code{hex_b}, \code{distance}

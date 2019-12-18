@@ -10,7 +10,7 @@ test_that("separation data works", {
 
   expect_identical(
     names(test_good),
-    c("cvd", "i", "hex", "hex_ref", "distance")
+    c("cvd", "i", "i_ref", "hex", "hex_ref", "distance")
   )
 
   expect_equal(

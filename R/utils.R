@@ -14,13 +14,17 @@ NULL
 
 get_cvd <- function(include_cvd = TRUE) {
   # set up cvd
-  cvd <- c("none", "deutan", "protan", "tritan")
+  cvd_available <- c("none", "deutan", "protan", "tritan")
 
-  if (!include_cvd) {
-    cvd <- "none"
+  if (identical(include_cvd, TRUE)) {
+    return(cvd_available)
   }
 
-  cvd
+  if (identical(include_cvd, FALSE)) {
+    return("none")
+  }
+
+  cvd_available[cvd_available %in% include_cvd]
 }
 
 pev_nmax_display <- function(.fpal) {

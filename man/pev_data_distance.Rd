@@ -18,8 +18,9 @@ is the beginning of the range of the continuous-palette, i.e. at \code{x = 0}.}
 \item{n_panel}{\code{numeric} number of panels into which to discretize the
 domain (0 to 1) of the continous-palette.}
 
-\item{include_cvd}{\code{logical}, indicates to include data for
-for color-vision deficiency}
+\item{include_cvd}{\code{logical} or \code{character}, indicates to include data for
+for color-vision deficiency. Possible character values: \code{"none"}, \code{"protan"},
+\code{"deutan"}, \code{"tritan"}.}
 }
 \value{
 \code{data.frame} with variables \code{cvd}, \code{x}, \code{hex}, \code{hex_ref}, \code{distance}

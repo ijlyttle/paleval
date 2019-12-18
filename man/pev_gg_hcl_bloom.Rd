@@ -21,7 +21,7 @@ pev_gg_hcl_bloom_lum(data_hcl, data_hcl_ref = NULL, label = FALSE)
 
 \item{label}{\code{logical} indicates to use axes labels, titles, etc.}
 
-\item{max_chroma}{\code{numeric} upper-limit for the chroma scale}
+\item{max_chroma}{\code{numeric} upper-limit for the chroma scale.}
 }
 \value{
 Object with S3 class \code{gg} (ggplot).
